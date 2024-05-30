@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerPunctuationCheckCapitalizationOfInitialsSeverityEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerPunctuationCheckCapitalizationOfInitialsSeverityEnum
+
+> **ProjectTemplateVerificationQaCheckerPunctuationCheckCapitalizationOfInitialsSeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerPunctuationCheckCapitalizationOfInitialsSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerPunctuationCheckCapitalizationOfInitialsSeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerPunctuationCheckCapitalizationOfInitialsSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerPunctuationCheckCapitalizationOfInitialsSeverityEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:5032

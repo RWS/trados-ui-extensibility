@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerSegmentsVerificationForgottenTranslationSeverityEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerSegmentsVerificationForgottenTranslationSeverityEnum
+
+> **ProjectTemplateVerificationQaCheckerSegmentsVerificationForgottenTranslationSeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerSegmentsVerificationForgottenTranslationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerSegmentsVerificationForgottenTranslationSeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerSegmentsVerificationForgottenTranslationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerSegmentsVerificationForgottenTranslationSeverityEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:5342

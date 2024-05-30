@@ -1,0 +1,11 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "name": "Trados User Interface Extensibility",
+  "hideGenerator": true,
+  "plugin": ["typedoc-plugin-markdown", "typedoc-github-wiki-theme"],
+  "includeVersion": true,
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true
+}
