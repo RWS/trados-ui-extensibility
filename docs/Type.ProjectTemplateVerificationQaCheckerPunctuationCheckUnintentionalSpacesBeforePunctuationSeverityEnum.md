@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerPunctuationCheckUnintentionalSpacesBeforePunctuationSeverityEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerPunctuationCheckUnintentionalSpacesBeforePunctuationSeverityEnum
+
+> **ProjectTemplateVerificationQaCheckerPunctuationCheckUnintentionalSpacesBeforePunctuationSeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerPunctuationCheckUnintentionalSpacesBeforePunctuationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerPunctuationCheckUnintentionalSpacesBeforePunctuationSeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerPunctuationCheckUnintentionalSpacesBeforePunctuationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerPunctuationCheckUnintentionalSpacesBeforePunctuationSeverityEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:4992

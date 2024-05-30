@@ -1,0 +1,29 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ListTermbaseLocationStrategyEnum
+
+# Variable: ListTermbaseLocationStrategyEnum
+
+> `const` **ListTermbaseLocationStrategyEnum**: `object`
+
+## Export
+
+## Type declaration
+
+### Bloodline
+
+> `readonly` **Bloodline**: `"bloodline"` = `'bloodline'`
+
+### Genealogy
+
+> `readonly` **Genealogy**: `"genealogy"` = `'genealogy'`
+
+### Lineage
+
+> `readonly` **Lineage**: `"lineage"` = `'lineage'`
+
+### Location
+
+> `readonly` **Location**: `"location"` = `'location'`
+
+## Source
+
+lc-public-api/apis/TermbaseApi.ts:912

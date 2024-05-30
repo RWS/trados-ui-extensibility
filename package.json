@@ -1,0 +1,69 @@
+{
+  "name": "@rws/trados-ui-extensibility",
+  "version": "1.0.0",
+  "description": "Trados UI extensibility",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "author": "RWS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RWS/trados-ui-extensibility.git"
+  },
+  "publishConfig-ignored-NEXUS": {
+    "registry": "https://nexus.sdl.com/repository/npm-internal/"
+  },
+  "scripts": {
+    "how-to-api-generation+pkg-build": "yarn clean-install, then generate-3.0.1, then build which generates index.js in dist/lib",
+    "tip0": "this is work in progress; these tips act as comments for this package.json",
+    "tip1": "typescriptThreePlus=true additional-property so global fetch is not overwritten; typescriptThreePlus available in generator 5.1.1, but not in 6.2.1 (latest stable 20221208)",
+    "tip2": "--global-property debugOpenAPI=true",
+    "tip3": "withoutRuntimeChecks=true in additional properties to not generate ToJSON, FromJSON",
+    "tip4": "stringsEnum additional property - noticed no difference",
+    "tip5": "debugging (debugModels & debugOperations print out huge, unusable json in the terminal): --global-property debugOpenAPI (Prints out the JSON model of the OpenAPI Document, as seen by OpenAPI Generator); debugModels (Prints out the JSON model passed to model templates); debugOperations (Prints out the JSON model passed to operation (api) templates); debugSupportingFiles (Prints out the JSON model passed to supporting files)",
+    "tip6": "import type statement starting with TypeScript 3.8",
+    "tip7": "override keyword starting with TypeScript 4.3",
+    "tip8": "// @ts-nocheck in .ts files added in typescript 3.7beta https://devblogs.microsoft.com/typescript/announcing-typescript-3-7-beta/#ts-nocheck-in-typescript-files -> use 3.7.2?",
+    "tip9": "live Public-API.v1.json uses openapi 3.1.0, which is not yet supported by openapi generator; local uses openapi 3.0.1",
+    "tip10": "todo: should we update openapitools.js to use generator-cli version 5.3.0 instead of 5.1.1? it adds an optional initRequest arg to API call functions in the generated code",
+    "tip11": "openapi specs url: https://stoplight.io/api/v1/projects/sdl-language-tech/lcpublicapi/nodes/reference/Public-API.v1.json; see also https://dev.azure.com/sdl/Stoplight/_git/LCPublicAPI?path=/reference/Public-API.v1.json",
+    "tip12": "version update: @openapitools/openapi-generator-cli devDependency version: https://www.npmjs.com/package/@openapitools/openapi-generator-cli",
+    "tip13": "version update: generator-cli version in openapitools.json: https://github.com/OpenAPITools/openapi-generator/releases",
+    "tip14": "DON'T PUBLISH from public-packages/extensibility, but from public-packages/extensibility/dist",
+    "tscv": "tsc -v",
+    "tsc-build-not-used": "rimraf dist/lib && yarn tsc",
+    "preversion": "rimraf ./.yarn-metadata.json && git fetch --tags -f",
+    "postversion": "git push --tags && yarn build && npm publish && git push origin HEAD:master && echo \"Successfully released version $npm_package_version!\"",
+    "v": "yarn version --minor",
+    "build": "rimraf dist/lib && webpack --config webpack.prod.js --progress",
+    "build-dev": "rimraf dist/lib && webpack --config webpack.dev.js --progress",
+    "clean-install": "rimraf node_modules && rimraf package-lock.json && rimraf yarn.lock && yarn install",
+    "validate": "openapi-generator-cli validate -i https://stoplight.io/api/v1/projects/sdl-language-tech/lcpublicapi/nodes/reference/Public-API.v1.json",
+    "generate": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api",
+    "get-generator-templates": "rimraf templates && openapi-generator-cli author template -o templates -g typescript-fetch",
+    "generate-with-templates": "rimraf src/generatedlc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-with-templates",
+    "removeErrorResponseImportFromApis": "node remove-error-response-import-from-apis",
+    "todo-ts-nocheck": "investigate ts errors in browser on projects/task-inbox hot reload, and remove ts-nocheck statement added in api files handling Blobs",
+    "add-ts-nocheck": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./add-ts-nocheck.ps1 -path ./src/lc-public-api",
+    "todo": "remove local Public-API-v1.json, 3.0.1 generator in openapitools.json and 3.0.1 scripts in package.json when openapitools supports OpenApi v3.1.0",
+    "validate-3.0.1": "openapi-generator-cli validate -i Public-API.v1.json",
+    "config-help": "openapi-generator-cli config-help -g typescript-fetch",
+    "generate-3.0.1": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1 && yarn removeErrorResponseImportFromApis",
+    "generate-3.0.1-withStringEnums": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1-withStringEnums && yarn removeErrorResponseImportFromApis",
+    "generate-docs": "typedoc"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "2.13.1",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-merge": "^5.8.0",
+    "typedoc": "0.25.13",
+    "typedoc-plugin-markdown": "4.0.2",
+    "typedoc-github-wiki-theme": "2.0.0"
+  }
+}

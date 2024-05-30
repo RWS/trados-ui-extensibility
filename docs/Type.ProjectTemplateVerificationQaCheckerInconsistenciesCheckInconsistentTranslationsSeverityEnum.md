@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerInconsistenciesCheckInconsistentTranslationsSeverityEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerInconsistenciesCheckInconsistentTranslationsSeverityEnum
+
+> **ProjectTemplateVerificationQaCheckerInconsistenciesCheckInconsistentTranslationsSeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerInconsistenciesCheckInconsistentTranslationsSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerInconsistenciesCheckInconsistentTranslationsSeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerInconsistenciesCheckInconsistentTranslationsSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerInconsistenciesCheckInconsistentTranslationsSeverityEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:4621

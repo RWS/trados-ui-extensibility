@@ -1,0 +1,62 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OpenAPITools/openapi-generator-cli/master/apps/generator-cli/src/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.4.0",
+    "generators": {
+      "lc-public-api-3.0.1-withStringEnums": {
+        "generatorName": "typescript-fetch",
+        "inputSpec": "Public-API.v1.json",
+        "output": "src/lc-public-api",
+        "skipValidateSpec": true,
+        "globalProperty": {
+          "skipFormModel": true,
+          "stringEnums": true
+        },
+        "typeMappings": {
+          "DateTime": "Date"
+        },
+        "additionalProperties": {
+          "withoutRuntimeChecks": true
+        }
+      },
+      "lc-public-api-3.0.1": {
+        "generatorName": "typescript-fetch",
+        "inputSpec": "Public-API.v1.json",
+        "output": "src/lc-public-api",
+        "globalProperty": {
+          "skipFormModel": false
+        },
+        "additionalProperties": {
+          "typescriptThreePlus": true,
+          "withoutRuntimeChecks": true
+        }
+      },
+      "lc-public-api": {
+        "generatorName": "typescript-fetch",
+        "inputSpec": "https://stoplight.io/api/v1/projects/sdl-language-tech/lcpublicapi/nodes/reference/Public-API.v1.json",
+        "output": "src/lc-public-api",
+        "globalProperty": {
+          "skipFormModel": false
+        },
+        "additionalProperties": {
+          "typescriptThreePlus": false,
+          "withoutRuntimeChecks": true
+        }
+      },
+      "lc-public-api-with-templates": {
+        "generatorName": "typescript-fetch",
+        "inputSpec": "https://stoplight.io/api/v1/projects/sdl-language-tech/lcpublicapi/nodes/reference/Public-API.v1.json",
+        "output": "src/lc-public-api",
+        "templateDir": "templates",
+        "globalProperty": {
+          "skipFormModel": false
+        },
+        "additionalProperties": {
+          "typescriptThreePlus": false,
+          "withoutRuntimeChecks": true
+        }
+      }
+    }
+  }
+}

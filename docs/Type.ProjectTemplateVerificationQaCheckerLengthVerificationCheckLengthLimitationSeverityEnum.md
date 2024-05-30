@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerLengthVerificationCheckLengthLimitationSeverityEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerLengthVerificationCheckLengthLimitationSeverityEnum
+
+> **ProjectTemplateVerificationQaCheckerLengthVerificationCheckLengthLimitationSeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerLengthVerificationCheckLengthLimitationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerLengthVerificationCheckLengthLimitationSeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerLengthVerificationCheckLengthLimitationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerLengthVerificationCheckLengthLimitationSeverityEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:4684
