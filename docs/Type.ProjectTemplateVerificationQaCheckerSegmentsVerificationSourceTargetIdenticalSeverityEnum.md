@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerSegmentsVerificationSourceTargetIdenticalSeverityEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerSegmentsVerificationSourceTargetIdenticalSeverityEnum
+
+> **ProjectTemplateVerificationQaCheckerSegmentsVerificationSourceTargetIdenticalSeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerSegmentsVerificationSourceTargetIdenticalSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerSegmentsVerificationSourceTargetIdenticalSeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerSegmentsVerificationSourceTargetIdenticalSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerSegmentsVerificationSourceTargetIdenticalSeverityEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:5352

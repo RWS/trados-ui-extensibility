@@ -36,7 +36,7 @@ trados.onReady(elements, () => {
 });
 ```
 
-**todo: change \@sdl scope to \@rws**
+**todo: change @sdl scope to @rws**
 
 ## License
 

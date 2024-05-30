@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerLengthVerificationTargetSegmentsVerificationTypeEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerLengthVerificationTargetSegmentsVerificationTypeEnum
+
+> **ProjectTemplateVerificationQaCheckerLengthVerificationTargetSegmentsVerificationTypeEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerLengthVerificationTargetSegmentsVerificationTypeEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerLengthVerificationTargetSegmentsVerificationTypeEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerLengthVerificationTargetSegmentsVerificationTypeEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerLengthVerificationTargetSegmentsVerificationTypeEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:4694

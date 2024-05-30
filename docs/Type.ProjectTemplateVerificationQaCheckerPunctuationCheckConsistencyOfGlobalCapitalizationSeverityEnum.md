@@ -1,0 +1,9 @@
+[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerPunctuationCheckConsistencyOfGlobalCapitalizationSeverityEnum
+
+# Type alias: ProjectTemplateVerificationQaCheckerPunctuationCheckConsistencyOfGlobalCapitalizationSeverityEnum
+
+> **ProjectTemplateVerificationQaCheckerPunctuationCheckConsistencyOfGlobalCapitalizationSeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerPunctuationCheckConsistencyOfGlobalCapitalizationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerPunctuationCheckConsistencyOfGlobalCapitalizationSeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerPunctuationCheckConsistencyOfGlobalCapitalizationSeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerPunctuationCheckConsistencyOfGlobalCapitalizationSeverityEnum)\]
+
+## Source
+
+lc-public-api/models/index.ts:5042
