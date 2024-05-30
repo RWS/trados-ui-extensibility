@@ -1,9 +1,0 @@
-[Trados User Interface Extensibility v1.0.0](../wiki/globals) / ProjectTemplateVerificationQaCheckerInconsistenciesCheckUneditedSegmentsFuzzySeverityEnum
-
-# Type alias: ProjectTemplateVerificationQaCheckerInconsistenciesCheckUneditedSegmentsFuzzySeverityEnum
-
-> **ProjectTemplateVerificationQaCheckerInconsistenciesCheckUneditedSegmentsFuzzySeverityEnum**: *typeof* [`ProjectTemplateVerificationQaCheckerInconsistenciesCheckUneditedSegmentsFuzzySeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerInconsistenciesCheckUneditedSegmentsFuzzySeverityEnum)\[keyof *typeof* [`ProjectTemplateVerificationQaCheckerInconsistenciesCheckUneditedSegmentsFuzzySeverityEnum`](../wiki/Variable.ProjectTemplateVerificationQaCheckerInconsistenciesCheckUneditedSegmentsFuzzySeverityEnum)\]
-
-## Source
-
-lc-public-api/models/index.ts:4641
