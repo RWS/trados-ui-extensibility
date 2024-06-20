@@ -27,7 +27,7 @@
     "@rws:registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "how-to-api-generation+pkg-build": "yarn clean-install, then generate-3.0.1, then build which generates index.js in dist/lib",
+    "how-to-api-generation+pkg-build": "npm run clean-install, then generate-3.0.1, then build which generates index.js in dist/lib",
     "tip0": "this is work in progress; these tips act as comments for this package.json",
     "tip1": "typescriptThreePlus=true additional-property so global fetch is not overwritten; typescriptThreePlus available in generator 5.1.1, but not in 6.2.1 (latest stable 20221208)",
     "tip2": "--global-property debugOpenAPI=true",
@@ -44,14 +44,14 @@
     "tip13": "version update: generator-cli version in openapitools.json: https://github.com/OpenAPITools/openapi-generator/releases",
     "tip14": "DON'T PUBLISH from public-packages/extensibility, but from public-packages/extensibility/dist",
     "tscv": "tsc -v",
-    "tsc-build-not-used": "rimraf dist/lib && yarn tsc",
-    "preversion": "rimraf ./.yarn-metadata.json && git fetch --tags -f",
-    "postversion": "git push --tags && yarn build && npm publish && git push origin HEAD:main && echo \"Successfully released version $npm_package_version!\"",
-    "version-minor": "yarn version --minor",
-    "version-patch": "yarn version --patch",
+    "tsc-build-not-used": "rimraf dist/lib && npm run tsc",
+    "preversion": "git fetch --tags -f",
+    "postversion": "git push --tags && npm run build && npm publish && git push origin HEAD:main && echo \"Successfully released version $npm_package_version!\"",
+    "version-minor": "npm version --minor",
+    "version-patch": "npm version --patch",
     "build-prod": "rimraf dist/lib && webpack --config webpack.prod.js --progress",
     "build-dev": "rimraf dist/lib && webpack --config webpack.dev.js --progress",
-    "clean-install": "rimraf node_modules && rimraf package-lock.json && rimraf yarn.lock && yarn install",
+    "clean-install": "rimraf node_modules && rimraf package-lock.json && rimraf package-lock.json && npm install",
     "validate": "openapi-generator-cli validate -i https://stoplight.io/api/v1/projects/sdl-language-tech/lcpublicapi/nodes/reference/Public-API.v1.json",
     "generate": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api",
     "get-generator-templates": "rimraf templates && openapi-generator-cli author template -o templates -g typescript-fetch",
@@ -62,12 +62,12 @@
     "todo": "remove local Public-API-v1.json, 3.0.1 generator in openapitools.json and 3.0.1 scripts in package.json when openapitools supports OpenApi v3.1.0",
     "validate-3.0.1": "openapi-generator-cli validate -i Public-API.v1.json",
     "config-help": "openapi-generator-cli config-help -g typescript-fetch",
-    "generate-3.0.1": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1 && yarn removeErrorResponseImportFromApis",
-    "generate-3.0.1-withStringEnums": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1-withStringEnums && yarn removeErrorResponseImportFromApis",
+    "generate-3.0.1": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1 && npm run removeErrorResponseImportFromApis",
+    "generate-3.0.1-withStringEnums": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1-withStringEnums && npm run removeErrorResponseImportFromApis",
     "generate-docs": "typedoc",
     "test": "exit 0",
-    "build": "yarn clean-install && yarn generate-3.0.1-withStringEnums && yarn build-prod",
-    "publish": "yarn preversion && yarn version-patch && yarn postversion",
+    "build": "npm run clean-install && npm run generate-3.0.1-withStringEnums && npm run build-prod",
+    "publish": "npm run preversion && npm run version-patch && npm run postversion",
     "publish-dry-run": "npm publish --dry-run"
   },
   "devDependencies": {
@@ -80,7 +80,6 @@
     "typescript": "5.0.2",
     "webpack": "5.76.3",
     "webpack-cli": "5.1.4",
-    "webpack-merge": "5.8.0",
-    "yarn": "1.22.22"
+    "webpack-merge": "5.8.0"
   }
 }
