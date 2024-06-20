@@ -12,7 +12,7 @@ import {
   GetLocalDataEventDetailExtended,
   DataSelector,
   CallApiEventDetail,
-  CallApiEventDetailExtended
+  CallApiEventDetailExtended,
 } from "../models";
 import { navigationTypes, notificationTypes } from "../utils";
 
@@ -20,7 +20,7 @@ let currentRegistrationResult: RegistrationResult;
 
 // todo: clean-install and generate LC Public API TypeScript client before continuing work on this
 // use scripts with 3.0.1! the live Public-API.v1.json uses OpenAPI v3.1.0 which is not yet supported by openapi generator
-// yarn clean-install && yarn generate-3.0.1
+// npm run clean-install && npm run generate-3.0.1
 
 // internally used to publish events listened by the core LC
 function publish<T extends EventsTypes>(
@@ -52,7 +52,7 @@ export function onReady(elements: ExtensionElement[], callback: () => void) {
     callback: (registrationResult: RegistrationResult) => {
       currentRegistrationResult = registrationResult;
       callback();
-    }
+    },
   });
 }
 
@@ -70,7 +70,7 @@ export function getLocalData(context: Context, selector?: DataSelector) {
       selector,
       ...getRegistrationResult(),
       resolve,
-      reject
+      reject,
     };
     publish("getLocalData", getLocalDataEvent);
   });
@@ -105,7 +105,7 @@ export function updateElement(
       update,
       ...getRegistrationResult(),
       resolve,
-      reject
+      reject,
     };
     publish("updateElement", updateElementEvent);
   });
@@ -125,7 +125,7 @@ export function navigate(path: string, type?: NavigationType) {
       path,
       ...getRegistrationResult(),
       resolve,
-      reject
+      reject,
     };
     publish("navigate", navigateEvent);
   });
@@ -151,7 +151,7 @@ export function showNotification(
       text,
       ...getRegistrationResult(),
       resolve,
-      reject
+      reject,
     };
     publish("showNotification", showNotificationEvent);
   });
@@ -169,7 +169,7 @@ export function callApi(requestConfiguration: CallApiEventDetail) {
       ...requestConfiguration,
       ...getRegistrationResult(),
       resolve,
-      reject
+      reject,
     };
     publish("callApi", callApiEvent);
   });
@@ -187,7 +187,7 @@ export function callAddonApi(requestConfiguration: CallApiEventDetail) {
       ...requestConfiguration,
       ...getRegistrationResult(),
       resolve,
-      reject
+      reject,
     };
     publish("callAddonApi", callApiEvent);
   });
