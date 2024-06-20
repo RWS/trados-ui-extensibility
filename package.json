@@ -2,20 +2,29 @@
   "name": "@rws/trados-ui-extensibility",
   "version": "1.0.0",
   "description": "Trados UI extensibility",
-  "main": "dist/lib/index.js",
+  "main": "./dist/lib/index.js",
+  "module": "./dist/lib/index.js",
+  "exports": {
+    ".": "./dist/lib/index.js"
+  },
   "types": "dist/lib/index.d.ts",
   "files": [
-    "dist"
+    "dist/lib"
   ],
   "sideEffects": false,
   "author": "RWS",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RWS/trados-ui-extensibility.git"
+    "url": "git+https://github.com/RWS/trados-ui-extensibility.git"
   },
-  "publishConfig-ignored-NEXUS": {
-    "registry": "https://nexus.sdl.com/repository/npm-internal/"
+  "homepage": "https://github.com/RWS/trados-ui-extensibility#readme",
+  "keywords": [
+    "trados",
+    "extensibility"
+  ],
+  "publishConfig": {
+    "@rws:registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "how-to-api-generation+pkg-build": "yarn clean-install, then generate-3.0.1, then build which generates index.js in dist/lib",
@@ -37,9 +46,10 @@
     "tscv": "tsc -v",
     "tsc-build-not-used": "rimraf dist/lib && yarn tsc",
     "preversion": "rimraf ./.yarn-metadata.json && git fetch --tags -f",
-    "postversion": "git push --tags && yarn build && npm publish && git push origin HEAD:master && echo \"Successfully released version $npm_package_version!\"",
-    "v": "yarn version --minor",
-    "build": "rimraf dist/lib && webpack --config webpack.prod.js --progress",
+    "postversion": "git push --tags && yarn build && npm publish && git push origin HEAD:main && echo \"Successfully released version $npm_package_version!\"",
+    "version-minor": "yarn version --minor",
+    "version-patch": "yarn version --patch",
+    "build-prod": "rimraf dist/lib && webpack --config webpack.prod.js --progress",
     "build-dev": "rimraf dist/lib && webpack --config webpack.dev.js --progress",
     "clean-install": "rimraf node_modules && rimraf package-lock.json && rimraf yarn.lock && yarn install",
     "validate": "openapi-generator-cli validate -i https://stoplight.io/api/v1/projects/sdl-language-tech/lcpublicapi/nodes/reference/Public-API.v1.json",
@@ -54,16 +64,23 @@
     "config-help": "openapi-generator-cli config-help -g typescript-fetch",
     "generate-3.0.1": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1 && yarn removeErrorResponseImportFromApis",
     "generate-3.0.1-withStringEnums": "rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1-withStringEnums && yarn removeErrorResponseImportFromApis",
-    "generate-docs": "typedoc"
+    "generate-docs": "typedoc",
+    "test": "exit 0",
+    "build": "yarn clean-install && yarn generate-3.0.1-withStringEnums && yarn build-prod",
+    "publish": "yarn preversion && yarn version-patch && yarn postversion",
+    "publish-dry-run": "npm publish --dry-run"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "2.13.1",
-    "typescript": "^5.0.2",
-    "webpack": "^5.76.3",
-    "webpack-cli": "^5.1.4",
-    "webpack-merge": "^5.8.0",
+    "rimraf": "5.0.7",
+    "ts-loader": "9.5.1",
     "typedoc": "0.25.13",
+    "typedoc-github-wiki-theme": "2.0.0",
     "typedoc-plugin-markdown": "4.0.2",
-    "typedoc-github-wiki-theme": "2.0.0"
+    "typescript": "5.0.2",
+    "webpack": "5.76.3",
+    "webpack-cli": "5.1.4",
+    "webpack-merge": "5.8.0",
+    "yarn": "1.22.22"
   }
 }
