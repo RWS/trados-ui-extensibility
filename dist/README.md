@@ -1,11 +1,11 @@
-# RWS Trados extensibility functionality
+# Trados UI extensibility
 
-Functionality for [RWS Trados / RWS Language Cloud](https://www.rws.com/localization/language-cloud/) platform extensibility.
+Functionality for [Trados](https://www.trados.com/) user interface extensibility.
 
 ## Usage
 
 ```javascript
-import { trados } from "@sdl/extensibility";
+import { trados } from "@rws/trados-ui-extensibility";
 ```
 
 ## License

@@ -1,11 +1,6 @@
 # Trados UI extensibility
 
-Repository for [Trados](https://www.trados.com/) user interface extensibility.
-
-## Installation
-```
-npm install @rws/trados-ui-extensibility
-```
+Functionality for [Trados](https://www.trados.com/) user interface extensibility.
 
 ## Usage
 
@@ -13,7 +8,7 @@ npm install @rws/trados-ui-extensibility
 import {
   trados,
   ExtensionElement,
-  ExtensibilityEventDetail
+  ExtensibilityEventDetail,
 } from "@rws/trados-ui-extensibility";
 
 // define custom elements
@@ -29,10 +24,10 @@ const elements: ExtensionElement[] = [
         eventHandler: (detail: ExtensibilityEventDetail) => {
           console.log("My custom button was clicked", detail.project);
         },
-        payload: ["project"]
-      }
-    ]
-  }
+        payload: ["project"],
+      },
+    ],
+  },
 ];
 
 // register extension with Trados
@@ -41,10 +36,6 @@ trados.onReady(elements, () => {
 });
 ```
 
-
 ## License
 
 The functionality is available with a [MIT license](https://choosealicense.com/licenses/mit/).
-**todo: change license type?**
-
-
