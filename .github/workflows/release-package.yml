@@ -24,7 +24,7 @@ jobs:
     runs-on: windows-latest
     permissions:
       packages: write
-      contents: read
+      contents: read|write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
