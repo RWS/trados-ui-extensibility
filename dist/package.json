@@ -35,9 +35,9 @@
     "README.md"
   ],
   "scripts": {
-    "preversion": "rimraf ./.yarn-metadata.json && git fetch --tags -f",
+    "preversion": "git fetch --tags -f",
     "publish-dry-run": "npm publish --dry-run",
     "postversion": "git push --tags && npm publish && git push origin HEAD:master && echo \"Successfully released version $npm_package_version!\"",
-    "v": "yarn version --minor"
+    "v": "npm version --patch"
   }
 }
