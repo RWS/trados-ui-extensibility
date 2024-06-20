@@ -1,5 +1,5 @@
 {
-  "name": "@sdl/extensibility",
+  "name": "@rws/trados-ui-extensibility",
   "version": "1.0.0",
   "description": "Trados UI extensibility",
   "main": "./lib/index.js",
