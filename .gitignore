@@ -21,6 +21,3 @@
 
 # Others
 *.iml
-.yarn-metadata.json
-package-lock.json
-yarn.lock
