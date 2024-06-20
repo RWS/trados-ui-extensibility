@@ -46,7 +46,7 @@
     "tscv": "tsc -v",
     "tsc-build-not-used": "npx rimraf dist/lib && npm run tsc",
     "preversion": "git fetch --tags -f",
-    "postversion": "git push --tags && npm run build && npm publish && git push origin HEAD:main && echo \"Successfully released version $npm_package_version!\"",
+    "postversion": "git push --tags && npm publish && git push origin HEAD:main",
     "version-minor": "npm version --minor",
     "version-patch": "npm version --patch",
     "build-prod": "npx rimraf dist/lib && webpack --config webpack.prod.js --progress",
@@ -66,7 +66,7 @@
     "generate-3.0.1-withStringEnums": "npx rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api-3.0.1-withStringEnums && npm run removeErrorResponseImportFromApis",
     "generate-docs": "typedoc",
     "test": "exit 0",
-    "build": "npm run clean-install && npm run generate-3.0.1-withStringEnums && npm run build-prod",
+    "build": "npm run generate-3.0.1-withStringEnums && npm run build-prod",
     "publish": "npm run preversion && npm run version-patch && npm run postversion",
     "publish-dry-run": "npm publish --dry-run"
   },
