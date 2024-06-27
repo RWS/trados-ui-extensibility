@@ -19,7 +19,7 @@ module.exports = {
   },
   output: {
     filename: "index.js",
-    path: path.resolve(__dirname, "dist/lib"),
+    path: path.resolve(__dirname, "dist"),
     clean: true,
     globalObject: "this",
     library: {
