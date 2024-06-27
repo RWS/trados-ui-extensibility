@@ -5,8 +5,8 @@
 **/logs
 *.log
 
-# Ignore the build directory (but only the lib subdir; there are other files which shouldn't be ignored, like package.json, .npmrc)
-**/dist/lib
+# Ignore the build directory
+**/dist
 
 # Ignore the docs directory (use the separate rws/trados-ui-extensibility.wiki repository)
 **/docs
