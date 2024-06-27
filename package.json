@@ -1,15 +1,15 @@
 {
   "name": "@rws/trados-ui-extensibility",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Trados UI extensibility",
-  "main": "./dist/lib/index.js",
-  "module": "./dist/lib/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "exports": {
-    ".": "./dist/lib/index.js"
+    ".": "./dist/index.js"
   },
-  "types": "dist/lib/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist/lib"
+    "dist"
   ],
   "sideEffects": false,
   "author": "RWS",
@@ -27,7 +27,7 @@
     "@rws:registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "how-to-api-generation+pkg-build": "npm run clean-install, then generate-3.0.1, then build which generates index.js in dist/lib",
+    "how-to-api-generation+pkg-build": "npm run clean-install, then generate-3.0.1, then build which generates index.js in dist",
     "tip0": "this is work in progress; these tips act as comments for this package.json",
     "tip1": "typescriptThreePlus=true additional-property so global fetch is not overwritten; typescriptThreePlus available in generator 5.1.1, but not in 6.2.1 (latest stable 20221208)",
     "tip2": "--global-property debugOpenAPI=true",
@@ -44,13 +44,13 @@
     "tip13": "version update: generator-cli version in openapitools.json: https://github.com/OpenAPITools/openapi-generator/releases",
     "tip14": "DON'T PUBLISH from public-packages/extensibility, but from public-packages/extensibility/dist",
     "tscv": "tsc -v",
-    "tsc-build-not-used": "npx rimraf dist/lib && npm run tsc",
+    "tsc-build-not-used": "npx rimraf dist && npm run tsc",
     "preversion": "git fetch --tags -f",
     "postversion": "git push --tags && npm publish && git push origin HEAD:main",
     "version-minor": "npm version --minor",
     "version-patch": "npm version --patch",
-    "build-prod": "npx rimraf dist/lib && webpack --config webpack.prod.js --progress",
-    "build-dev": "npx rimraf dist/lib && webpack --config webpack.dev.js --progress",
+    "build-prod": "npx rimraf dist && webpack --config webpack.prod.js --progress",
+    "build-dev": "npx rimraf dist && webpack --config webpack.dev.js --progress",
     "clean-install": "npx rimraf node_modules && npx rimraf package-lock.json && npm install",
     "validate": "openapi-generator-cli validate -i https://stoplight.io/api/v1/projects/sdl-language-tech/lcpublicapi/nodes/reference/Public-API.v1.json",
     "generate": "npx rimraf src/lc-public-api && openapi-generator-cli generate --generator-key=lc-public-api",
