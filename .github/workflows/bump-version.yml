@@ -33,10 +33,7 @@ jobs:
       - name: Bump version
         id: bump-version
         # store new version variable, strip new line character and add to step output
-        run: |
-          new_version = $(npm version ${{ github.event.inputs.newVersionType }} -m "Bump version to %s")
-          new_version_strip = $(echo $new_version | tr -d '\n')
-          echo "NEW_VERSION = $new_version_strip" >> "$GITHUB_OUTPUT"
+        run: echo "NEW_VERSION = $(echo $(npm version ${{ github.event.inputs.newVersionType }} -m "Bump version to %s") | tr -d '\n')" >> "$GITHUB_OUTPUT"
       - name: Push latest version
         run: git push origin HEAD:main --follow-tags
       - name: Run publish and release workflow
