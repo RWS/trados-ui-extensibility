@@ -33,14 +33,14 @@ jobs:
       - name: Bump version
         id: bump-version
         # store new version variable, strip new line character and add to step output
-        run: echo "NEW_VERSION = $(echo $(npm version ${{ github.event.inputs.newVersionType }} -m "Bump version to %s") | tr -d '\n')" >> "$GITHUB_OUTPUT"
+        #run: echo "NEW_VERSION = $(echo $(npm version ${{ github.event.inputs.newVersionType }} -m "Bump version to %s") | tr -d '\n')" >> "$GITHUB_OUTPUT"
+        run: echo "NEW_VERSION=$(npm version ${{ github.event.inputs.newVersionType }} -m "Bump version to %s" | tr -d '\n') >> "$GITHUB_OUTPUT"
       - name: Push latest version
         run: git push origin HEAD:main --follow-tags
       - name: Run publish and release workflow
         env:
-          NEW_VERSION: ${{ steps.bump-version.outputs.NEW_VERSION }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run publish-and-release.yml --ref main -f version=$NEW_VERSION
+        run: gh workflow run publish-and-release.yml --ref main -f version=${{ steps.bump-version.outputs.NEW_VERSION }}
         #run: |
         #  curl -L \
         #    -X POST \
