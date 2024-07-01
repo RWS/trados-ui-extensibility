@@ -16,7 +16,7 @@ on:
 jobs:
   bump-version:
     name: Bump version
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check out source
         uses: actions/checkout@v4
