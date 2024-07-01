@@ -24,7 +24,8 @@
     "extensibility"
   ],
   "publishConfig": {
-    "@rws:registry": "https://npm.pkg.github.com"
+    "@rws:registry": "https://npm.pkg.github.com",
+    "access": "public"
   },
   "scripts": {
     "how-to-api-generation+pkg-build": "npm run clean-install, then generate-3.0.1, then build which generates index.js in dist",
