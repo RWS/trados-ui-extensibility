@@ -21,12 +21,9 @@ jobs:
     permissions:
       contents: read
       packages: write
-      # id-token: write # required for npm publish --provenance
     steps:
       - name: Check out source
         uses: actions/checkout@v4
-        #with:
-        #  token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -41,8 +38,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Publish npm package
-        # provenance requires id-token: write; works for public access packages only
-        run: npm publish # --provenance --access public
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
