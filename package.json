@@ -1,6 +1,6 @@
 {
   "name": "@rws/trados-ui-extensibility",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Trados UI extensibility",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
