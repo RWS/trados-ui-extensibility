@@ -1,31 +1,23 @@
-//import { apiClient } from "./api/apiClient";
-// re-export apis
-export * from "./api/apiClient";
-
+import {
+  onReady,
+  getLocalData,
+  callAppApi,
+  updateElement,
+  navigate,
+  showNotification,
+  getRegistrationResult
+} from "./events";
 import {
   contexts,
   notificationTypes,
   navigationTypes,
   dataSelectors
 } from "./utils";
-import {
-  onReady,
-  getLocalData,
-  callApi,
-  callAddonApi,
-  updateElement,
-  navigate,
-  showNotification,
-  getRegistrationResult
-} from "./events";
 
 export const trados = {
-  // httpClient for Public API
-  //apiClient,
   onReady,
   getLocalData,
-  callApi,
-  callAddonApi,
+  callAppApi,
   updateElement,
   navigate,
   showNotification,
@@ -38,7 +30,10 @@ export const trados = {
   navigationTypes
 };
 
-// re-export apis
+// re-export individual public apis
+export * from "./api/apiClient";
+
+// re-export generated apis
 export * from "./lc-public-api/apis";
 // models
 export * from "./lc-public-api/models";

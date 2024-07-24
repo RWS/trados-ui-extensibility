@@ -10,6 +10,9 @@ import type {
   Task
 } from "../lc-public-api/models/index";
 
+export * from "./projects";
+export * from "./task-inbox";
+
 // properties names must be the same as the projects appExtensibilityConfig.selectors names
 /** The type describing supported data portion selectors for the "projects" context. */
 type ProjectSelectors = Partial<{
@@ -130,6 +133,8 @@ export type RegistrationResult = {
    * @remark The user is the currently logged in user who is using the Trados user interface extension.
    */
   authorization: string;
+  /** The Public API URL. */
+  publicApiUrl: string;
 };
 
 /**
@@ -286,8 +291,7 @@ export type EventsDefinition = {
   showNotification: ShowNotificationEventDetailExtended;
   navigate: NavigateEventDetailExtended;
   updateElement: UpdateElementEventDetailExtended;
-  callApi: CallApiEventDetailExtended;
-  callAddonApi: CallApiEventDetailExtended;
+  callAppApi: CallApiEventDetailExtended;
 };
 
 // event types
