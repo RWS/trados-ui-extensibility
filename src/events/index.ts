@@ -12,7 +12,7 @@ import {
   GetLocalDataEventDetailExtended,
   DataSelector,
   CallApiEventDetail,
-  CallApiEventDetailExtended,
+  CallApiEventDetailExtended
 } from "../models";
 import { navigationTypes, notificationTypes } from "../utils";
 
@@ -52,7 +52,7 @@ export function onReady(elements: ExtensionElement[], callback: () => void) {
     callback: (registrationResult: RegistrationResult) => {
       currentRegistrationResult = registrationResult;
       callback();
-    },
+    }
   });
 }
 
@@ -70,7 +70,7 @@ export function getLocalData(context: Context, selector?: DataSelector) {
       selector,
       ...getRegistrationResult(),
       resolve,
-      reject,
+      reject
     };
     publish("getLocalData", getLocalDataEvent);
   });
@@ -105,7 +105,7 @@ export function updateElement(
       update,
       ...getRegistrationResult(),
       resolve,
-      reject,
+      reject
     };
     publish("updateElement", updateElementEvent);
   });
@@ -125,7 +125,7 @@ export function navigate(path: string, type?: NavigationType) {
       path,
       ...getRegistrationResult(),
       resolve,
-      reject,
+      reject
     };
     publish("navigate", navigateEvent);
   });
@@ -151,27 +151,9 @@ export function showNotification(
       text,
       ...getRegistrationResult(),
       resolve,
-      reject,
+      reject
     };
     publish("showNotification", showNotificationEvent);
-  });
-}
-
-/**
- * Performs a call to the Public API.
- *
- * @param requestConfiguration The request configuration object.
- * @returns A promise which resolves when the call has been completed.
- */
-export function callApi(requestConfiguration: CallApiEventDetail) {
-  return new Promise((resolve: (value: any) => void, reject) => {
-    const callApiEvent: CallApiEventDetailExtended = {
-      ...requestConfiguration,
-      ...getRegistrationResult(),
-      resolve,
-      reject,
-    };
-    publish("callApi", callApiEvent);
   });
 }
 
@@ -181,14 +163,14 @@ export function callApi(requestConfiguration: CallApiEventDetail) {
  * @param requestConfiguration The request configuration object.
  * @returns A promise which resolves when the call has been completed.
  */
-export function callAddonApi(requestConfiguration: CallApiEventDetail) {
+export function callAppApi(requestConfiguration: CallApiEventDetail) {
   return new Promise((resolve: (value: any) => void, reject) => {
     const callApiEvent: CallApiEventDetailExtended = {
       ...requestConfiguration,
       ...getRegistrationResult(),
       resolve,
-      reject,
+      reject
     };
-    publish("callAddonApi", callApiEvent);
+    publish("callAppApi", callApiEvent);
   });
 }
