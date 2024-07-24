@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "***REMOVED***"
+      "url": "https://lc-api.sdl.com/public-api/v1"
     }
   ],
   "tags": [
