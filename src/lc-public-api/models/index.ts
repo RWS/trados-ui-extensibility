@@ -4206,7 +4206,8 @@ export interface ProjectTemplateSettingsRequest {
 }
 /**
  * Project Template settings. See detailed description of options on the <a href="https://docs.rws.com/791595/1054430/trados-enterprise---accelerate/creating-project-templates/procedure">Official Documentation</a> page. 
- *  (Not available for List Projects/ProjectTemplates endpoint)
+ * 
+ (Not available for List Projects/ProjectTemplates endpoint)
  * @export
  * @interface ProjectTemplateSettingsResponse
  */
@@ -10638,7 +10639,8 @@ export interface UpdateTranslationMemory {
 export interface UpdateTranslationMemorySettings {
     /**
      * Default values are: 
-     *  [`translated`, `approvedTranslation`, `approvedSignOff`].
+     * 
+ [`translated`, `approvedTranslation`, `approvedSignOff`].
      * @type {Array<string>}
      * @memberof UpdateTranslationMemorySettings
      */
