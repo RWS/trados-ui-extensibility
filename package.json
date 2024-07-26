@@ -24,7 +24,7 @@
     "extensibility"
   ],
   "publishConfig": {
-    "@rws:registry": "https://npm.pkg.github.com",
+    "@rws:registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "scripts": {
