@@ -8,8 +8,8 @@ Functionality for [Trados](https://www.trados.com/) user interface extensibility
 import {
   trados,
   ExtensionElement,
-  ExtensibilityEventDetail,
-} from "@rws/trados-ui-extensibility";
+  ExtensibilityEventDetail
+} from "@trados/trados-ui-extensibility";
 
 // define custom elements
 const elements: ExtensionElement[] = [
@@ -24,10 +24,10 @@ const elements: ExtensionElement[] = [
         eventHandler: (detail: ExtensibilityEventDetail) => {
           console.log("My custom button was clicked", detail.project);
         },
-        payload: ["project"],
-      },
-    ],
-  },
+        payload: ["project"]
+      }
+    ]
+  }
 ];
 
 // register extension with Trados
