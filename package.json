@@ -1,6 +1,6 @@
 {
-  "name": "@rws/trados-ui-extensibility",
-  "version": "0.1.15",
+  "name": "@trados/trados-ui-extensibility",
+  "version": "0.1.14",
   "description": "Trados UI extensibility",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -24,7 +24,7 @@
     "extensibility"
   ],
   "publishConfig": {
-    "@rws:registry": "https://registry.npmjs.org",
+    "@trados:registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "scripts": {
