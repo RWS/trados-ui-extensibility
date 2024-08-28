@@ -9,7 +9,8 @@
   },
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "!dist/*.js.map"
   ],
   "sideEffects": false,
   "author": "RWS",
