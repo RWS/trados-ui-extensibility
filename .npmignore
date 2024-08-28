@@ -1,3 +1,22 @@
+# Ignore the node_modules directory
+**/node_modules/
+
+# Ignore Logs
+**/logs
+*.log
+
+# Ignore the docs directory (use the separate rws/trados-ui-extensibility.wiki repository)
+**/docs
+
+# The file containing environment variables 
+.env
+
+# Ignore IDE specific files
 .idea/
-*.iml
+.vscode/
+*.sw*
 /.vs/
+
+# Others
+*.iml
+*.js.map

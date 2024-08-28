@@ -32,7 +32,7 @@ export interface ExportQuoteReportRequest {
     authorization: string;
     xLCTenant: string;
     format?: ExportQuoteReportFormatEnum;
-    languageId?: ExportQuoteReportLanguageIdEnum;
+    languageId?: string;
 }
 
 export interface PollQuoteReportExportRequest {
@@ -114,7 +114,7 @@ export class QuoteApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  
+     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  <br><br> Built-in quotes are only available in the same languages as the user interface. See [this page](https://docs.rws.com/791595/1084405/trados-enterprise---accelerate/ui-languages) for more information. <br> Customers who use non-default quote templates are responsible for the implementation of a suitable localization approach.
      * Export Quote Report
      */
     async exportQuoteReportRaw(requestParameters: ExportQuoteReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ExportQuoteReportResponse>> {
@@ -170,7 +170,7 @@ export class QuoteApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  
+     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  <br><br> Built-in quotes are only available in the same languages as the user interface. See [this page](https://docs.rws.com/791595/1084405/trados-enterprise---accelerate/ui-languages) for more information. <br> Customers who use non-default quote templates are responsible for the implementation of a suitable localization approach.
      * Export Quote Report
      */
     async exportQuoteReport(requestParameters: ExportQuoteReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ExportQuoteReportResponse> {
@@ -261,21 +261,6 @@ export const ExportQuoteReportFormatEnum = {
     Excel: 'excel'
 } as const;
 export type ExportQuoteReportFormatEnum = typeof ExportQuoteReportFormatEnum[keyof typeof ExportQuoteReportFormatEnum];
-/**
- * @export
- */
-export const ExportQuoteReportLanguageIdEnum = {
-    En: 'en',
-    De: 'de',
-    Fr: 'fr',
-    FrCa: 'fr-CA',
-    Ja: 'ja',
-    Es: 'es',
-    ZhCn: 'zh-CN',
-    Nl: 'nl',
-    It: 'it'
-} as const;
-export type ExportQuoteReportLanguageIdEnum = typeof ExportQuoteReportLanguageIdEnum[keyof typeof ExportQuoteReportLanguageIdEnum];
 /**
  * @export
  */
