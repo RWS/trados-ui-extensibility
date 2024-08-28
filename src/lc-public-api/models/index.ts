@@ -643,6 +643,69 @@ export const AsynchronousResultStatusEnum = {
 export type AsynchronousResultStatusEnum = typeof AsynchronousResultStatusEnum[keyof typeof AsynchronousResultStatusEnum];
 
 /**
+ * Completion configuration properties.
+ * @export
+ * @interface CompletionConfigRequest
+ */
+export interface CompletionConfigRequest {
+    /**
+     * Number of days until automatic completion of the project. Starting from project creation date.
+     * @type {number}
+     * @memberof CompletionConfigRequest
+     */
+    completeDays?: number;
+    /**
+     * Number of days after project completion when the project will be 
+     * archived..
+     * @type {number}
+     * @memberof CompletionConfigRequest
+     */
+    archiveDays?: number;
+    /**
+     * Number of days before archiving when a reminder will be sent.
+     * @type {number}
+     * @memberof CompletionConfigRequest
+     */
+    archiveReminderDays?: number;
+}
+/**
+ * Completion configuration properties.
+ * @export
+ * @interface CompletionConfigResponse
+ */
+export interface CompletionConfigResponse {
+    /**
+     * UTC Timezone  <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ"
+     * @type {Date}
+     * @memberof CompletionConfigResponse
+     */
+    completeDate?: Date;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of days until automatic completion of the project. Starting from project creation date.</div>
+     * @type {number}
+     * @memberof CompletionConfigResponse
+     */
+    completeDays?: number;
+    /**
+     * UTC Timezone  <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ"
+     * @type {Date}
+     * @memberof CompletionConfigResponse
+     */
+    archiveDate?: Date;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of days after project completion when the workflow will be stopped and the project will enter *archived* state. </div>
+     * @type {number}
+     * @memberof CompletionConfigResponse
+     */
+    archiveDays?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of days before workflow stoppage when a reminder will be sent.</div>
+     * @type {number}
+     * @memberof CompletionConfigResponse
+     */
+    archiveReminderDays?: number;
+}
+/**
  * Resource configuration properties.
  * @export
  * @interface ConfigurationResourceRequest
@@ -1101,10 +1164,6 @@ export interface ErrorResponse {
 }
 /**
  * Export quote report response.
- * 
- * The field is optional and will be returned only if a custom quote template is associated with the project.
- * 
- * We currently have this known issue: when the export is not using a Quote Template, the response for this call will be empty. It will be addressed in the future.
  * @export
  * @interface ExportQuoteReportResponse
  */
@@ -1493,13 +1552,6 @@ export interface Folder {
      * @memberof Folder
      */
     hasParent?: boolean;
-    /**
-     * 
-     * @type {ResourceFolder}
-     * @memberof Folder
-     * @deprecated
-     */
-    location?: ResourceFolder;
     /**
      * The hierarchical path. It consists of all the items of the path in reverse order, the parent of the current folder being the first in the list, and the root of the account being the last.
      * @type {Array<FolderPath>}
@@ -3078,6 +3130,12 @@ export interface Project {
      * @memberof Project
      */
     scheduleTemplate?: ScheduleTemplate;
+    /**
+     * 
+     * @type {ProjectSettingsResponse}
+     * @memberof Project
+     */
+    settings?: ProjectSettingsResponse;
 }
 
 
@@ -3231,6 +3289,12 @@ export interface ProjectCreateRequest {
      * @memberof ProjectCreateRequest
      */
     scheduleTemplate?: ConfigurationResourceRequest;
+    /**
+     * 
+     * @type {ProjectSettingsRequest}
+     * @memberof ProjectCreateRequest
+     */
+    settings?: ProjectSettingsRequest;
 }
 /**
  * Project Group resource. (Not available for List Projects endpoint)
@@ -3645,13 +3709,15 @@ export interface ProjectPlanTaskConfigurationRequest {
     taskTemplate: ObjectIdRequest;
     /**
      * Specifies if the task will be skipped. 
-     * If you want to skip all the target languages for the given task, set the scope as "global".
+     *  If you want to skip all the target languages for the given task, set the scope as "global".
      * @type {boolean}
      * @memberof ProjectPlanTaskConfigurationRequest
      */
     isSkipped: boolean;
     /**
-     * Specifies the list of assignees for the future task. When the 'isSkipped' field is set to 'true', an empty list of assignees should be specified.
+     * Specifies the list of assignees for the future task. 
+     * <br>  When the 'isSkipped' field is set to 'true', an empty list of assignees should be specified.
+     *  <br> Total assignee count  is limited. See more at [Assigning users and groups to workflow tasks](https://docs.rws.com/791595/743481/trados-enterprise---accelerate/assigning-users-and-groups-to-workflow-tasks) point 5e.
      * @type {Array<ProjectPlanTaskAssigneeRequest>}
      * @memberof ProjectPlanTaskConfigurationRequest
      */
@@ -3744,6 +3810,58 @@ export interface ProjectQuoteTemplateDeprecated {
      * @memberof ProjectQuoteTemplateDeprecated
      */
     location?: FolderV2;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectSettingsGeneralRequest
+ */
+export interface ProjectSettingsGeneralRequest {
+    /**
+     * 
+     * @type {CompletionConfigRequest}
+     * @memberof ProjectSettingsGeneralRequest
+     */
+    completionConfiguration?: CompletionConfigRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectSettingsGeneralResponse
+ */
+export interface ProjectSettingsGeneralResponse {
+    /**
+     * 
+     * @type {CompletionConfigResponse}
+     * @memberof ProjectSettingsGeneralResponse
+     */
+    completionConfiguration?: CompletionConfigResponse;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectSettingsRequest
+ */
+export interface ProjectSettingsRequest {
+    /**
+     * 
+     * @type {ProjectSettingsGeneralRequest}
+     * @memberof ProjectSettingsRequest
+     */
+    general?: ProjectSettingsGeneralRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectSettingsResponse
+ */
+export interface ProjectSettingsResponse {
+    /**
+     * 
+     * @type {ProjectSettingsGeneralResponse}
+     * @memberof ProjectSettingsResponse
+     */
+    general?: ProjectSettingsGeneralResponse;
 }
 /**
  * An Item which describes a change in the status of the project.
@@ -4003,6 +4121,12 @@ export interface ProjectTemplateGeneralSettingsRequest {
      * @memberof ProjectTemplateGeneralSettingsRequest
      */
     customerPortalVisibility?: boolean;
+    /**
+     * 
+     * @type {CompletionConfigRequest}
+     * @memberof ProjectTemplateGeneralSettingsRequest
+     */
+    completionConfiguration?: CompletionConfigRequest;
 }
 /**
  * General settings, are detailed in section 10.a
@@ -4034,6 +4158,12 @@ export interface ProjectTemplateGeneralSettingsResponse {
      * @memberof ProjectTemplateGeneralSettingsResponse
      */
     customerPortalVisibility?: boolean;
+    /**
+     * 
+     * @type {CompletionConfigRequest}
+     * @memberof ProjectTemplateGeneralSettingsResponse
+     */
+    completionConfiguration?: CompletionConfigRequest;
 }
 /**
  * General settings
@@ -4059,6 +4189,12 @@ export interface ProjectTemplateGeneralSettingsUpdate {
      * @memberof ProjectTemplateGeneralSettingsUpdate
      */
     customerPortalVisibility?: boolean;
+    /**
+     * 
+     * @type {CompletionConfigRequest}
+     * @memberof ProjectTemplateGeneralSettingsUpdate
+     */
+    completionConfiguration?: CompletionConfigRequest;
 }
 /**
  * 
@@ -4087,7 +4223,7 @@ export interface ProjectTemplateQualityManagementSettingsResponse {
     tqaProfile?: TqaProfile;
 }
 /**
- * Project template resource.  (Not available for the List Projects endpoint.)
+ * Project Template resource.  (Not available for List Projects endpoint)
  * @export
  * @interface ProjectTemplateResponse
  */
@@ -4206,8 +4342,7 @@ export interface ProjectTemplateSettingsRequest {
 }
 /**
  * Project Template settings. See detailed description of options on the <a href="https://docs.rws.com/791595/1054430/trados-enterprise---accelerate/creating-project-templates/procedure">Official Documentation</a> page. 
- * 
- (Not available for List Projects/ProjectTemplates endpoint)
+ *  (Not available for List Projects/ProjectTemplates endpoint)
  * @export
  * @interface ProjectTemplateSettingsResponse
  */
@@ -5730,6 +5865,12 @@ export interface ProjectUpdateRequest {
      * @memberof ProjectUpdateRequest
      */
     projectManagers?: Array<ProjectManagerRequest>;
+    /**
+     * 
+     * @type {ProjectSettingsRequest}
+     * @memberof ProjectUpdateRequest
+     */
+    settings?: ProjectSettingsRequest;
 }
 /**
  * Project quote.
@@ -7598,6 +7739,7 @@ export type TaskStatusEnum = typeof TaskStatusEnum[keyof typeof TaskStatusEnum];
 
 /**
  * Properties of task assignment.
+ *  <br> Total assignee count is limited. See more at [Maximum number of task assignees](https://docs.rws.com/791595/1137562/trados-enterprise---accelerate/maximum-number-of-task-assignees).
  * @export
  * @interface TaskAssignRequest
  */
@@ -7660,7 +7802,7 @@ export type TaskAssigneeTypeEnum = typeof TaskAssigneeTypeEnum[keyof typeof Task
  */
 export interface TaskAssigneeRequest {
     /**
-     * The identifier of the assignee that should correspond to a resource based on the “type” field. Only required for the `user`, `group`, and `vendorOrderTemplate` types.
+     * The identifier of the assignee that should correspond to a resource based on the “type” field. <br> Only required for the `user`, `group`, and `vendorOrderTemplate` types.
      * @type {string}
      * @memberof TaskAssigneeRequest
      */
@@ -10639,8 +10781,7 @@ export interface UpdateTranslationMemory {
 export interface UpdateTranslationMemorySettings {
     /**
      * Default values are: 
-     * 
- [`translated`, `approvedTranslation`, `approvedSignOff`].
+     *  [`translated`, `approvedTranslation`, `approvedSignOff`].
      * @type {Array<string>}
      * @memberof UpdateTranslationMemorySettings
      */
@@ -10910,7 +11051,7 @@ export interface WorkflowPhase {
     name?: string;
 }
 /**
- * Task assignee. Based on the "type", further details can be retrieved. For ex. for "type"="user", "user" property is available. For "projectCreator" and "projectManager" no other property is available.
+ * Task assignee. Based on the "type", further details can be retrieved. <br> For ex. for "type"="user", "user" property is available. <br> For "projectCreator" and "projectManager" no other property is available.
  * @export
  * @interface WorkflowTaskAssignee
  */
@@ -11049,7 +11190,9 @@ export interface WorkflowTaskConfigurationRequest {
      */
     isSkipped: boolean;
     /**
-     * 
+     * Specifies the list of assignees for the task template. 
+     * <br> When the 'isSkipped' field is set to 'true', an empty list of assignees should be specified.
+     *   <br> Total assignee count is limited. See more at [Assigning users and groups to workflow tasks](https://docs.rws.com/791595/743481/trados-enterprise---accelerate/assigning-users-and-groups-to-workflow-tasks) point 5e.
      * @type {Array<WorkflowTaskAssigneeRequest>}
      * @memberof WorkflowTaskConfigurationRequest
      */
