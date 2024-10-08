@@ -47,7 +47,7 @@
     "build-dev": "npm run generate-3.0.1-withStringEnums && npm run build-dev-js"
   },
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "2.13.5",
+    "@openapitools/openapi-generator-cli": "2.14.0",
     "axios": "1.7.4",
     "rimraf": "5.0.7",
     "ts-loader": "9.5.1",
