@@ -1,6 +1,9 @@
 /////////////////////////////////////////////////////////
 // extension incoming events: events dispatched by the LC Extensibility service, listened to by the extension
+// uncomment orders & reporting imports when selectors are made available
+//import {OrdersListTab} from "./orders";
 import { ProjectDetailsTab } from "./projects";
+//import { ReportsListTab } from "./reporting";
 import { TaskDetailsTab, TasksListTab } from "./task-inbox";
 
 import type {
@@ -10,7 +13,9 @@ import type {
   Task
 } from "../lc-public-api/models/index";
 
+//export * from "./orders";
 export * from "./projects";
+//export * from "./reporting";
 export * from "./task-inbox";
 
 // properties names must be the same as the projects appExtensibilityConfig.selectors names
@@ -59,10 +64,10 @@ export type ExtensibilityEventDetail = ProjectSelectors &
 // see nimbus-ui/packages/extensibility: functionality package that should also be public - the publish function should be imported in 3rd party extension code
 
 /** The type describing the context keys. */
-export type ContextKeys = "projects" | "taskInbox";
+export type ContextKeys = "orders" | "projects" | "reports" | "taskInbox";
 
 /** The type describing the contexts. */
-export type Context = "projects" | "task-inbox";
+export type Context = "orders" | "projects" | "reports" | "task-inbox";
 
 /** The type describing the notification types. */
 export type NotificationType = "success" | "fail" | "warning" | "info";
@@ -142,7 +147,7 @@ export type RegistrationResult = {
  */
 export type GetLocalDataEventDetail = {
   /** The context within Trados, e.g. "projects" (use trados.context) */
-  context: "projects" | "task-inbox";
+  context: "orders" | "projects" | "reports" | "task-inbox";
   /** The data portion selector, e.g. "selectedProjects" (use trados.dataSelectors). Optional. If no data selector specified, all available data for context is retrieved. */
   selector?:
     | "selectedProjects"
@@ -440,7 +445,8 @@ type ExtensionElementBase = {
  */
 export type ExtensionElement = ExtensionElementBase &
   // projects
-  (| ExtensionButton<"projects-list-toolbar">
+  (| ExtensionTab<"projects-list-tabpanel">
+    | ExtensionButton<"projects-list-toolbar">
     | ExtensionButton<"project-details-toolbar">
     | ExtensionTab<"project-details-tabpanel">
     | ExtensionButton<"project-details-dashboard-toolbar">
@@ -451,7 +457,11 @@ export type ExtensionElement = ExtensionElementBase &
     | ExtensionButton<"project-details-task-history-toolbar">
     | ExtensionSidebarBox<"project-details-task-history-sidebar">
 
+    // reporting
+    | ExtensionTab<"reports-list-tabpanel">
+
     // task-inbox
+    | ExtensionTab<"tasks-list-tabpanel">
     | ExtensionButton<"new-tasks-list-toolbar">
     | ExtensionButton<"active-tasks-list-toolbar">
     | ExtensionButton<"completed-tasks-list-toolbar">
@@ -464,6 +474,9 @@ export type ExtensionElement = ExtensionElementBase &
     | ExtensionButton<"task-details-toolbar">
     | ExtensionPanel<"task-details-main">
     | ExtensionButton<"task-files-toolbar">
+
+    // vendor-workplace
+    | ExtensionTab<"orders-list-tabpanel">
   );
 
 // supported element types
@@ -474,6 +487,7 @@ export type ElementType = "button" | "tab" | "panel" | "sidebarBox";
 /** The type describing the supported locations that can host custom elements. */
 export type ElementLocation =
   // projects
+  | "projects-list-tabpanel"
   | "projects-list-toolbar"
   | "project-details-toolbar"
   | "project-details-tabpanel"
@@ -484,7 +498,10 @@ export type ElementLocation =
   | "project-details-files-toolbar"
   | "project-details-task-history-toolbar"
   | "project-details-task-history-sidebar"
+  // reporting
+  | "reports-list-tabpanel"
   // task-inbox
+  | "tasks-list-tabpanel"
   | "new-tasks-list-toolbar"
   | "active-tasks-list-toolbar"
   | "completed-tasks-list-toolbar"
@@ -496,7 +513,9 @@ export type ElementLocation =
   | "task-sidebar"
   | "task-details-toolbar"
   | "task-details-main"
-  | "task-files-toolbar";
+  | "task-files-toolbar"
+  // vendor-workplace
+  | "orders-list-tabpanel";
 
 /** The type describing the supported data portion selector that can be used as payload in custom element actions. */
 export type ExtensionElementActionSelector =

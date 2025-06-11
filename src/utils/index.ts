@@ -7,7 +7,9 @@ import {
 } from "../models";
 
 export const contexts: { [key in ContextKeys]: Context } = {
+  orders: "orders",
   projects: "projects",
+  reports: "reports",
   taskInbox: "task-inbox"
 };
 
