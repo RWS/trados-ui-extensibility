@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "2.14.0",
-    "axios": "1.7.4",
+    "axios": "1.8.2",
     "rimraf": "5.0.7",
     "ts-loader": "9.5.1",
     "typedoc": "0.25.13",
