@@ -1,0 +1,8 @@
+/** The type describing the default tabs in the Trados Reports list view. */
+export type ReportsListTab =
+  | "builtinReports"
+  | "customReports"
+  | "workspaces"
+  | "reportDesigner"
+  | "dashboards"
+  | "smartReports";
