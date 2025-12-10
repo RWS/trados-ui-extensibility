@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   ListTranslationMemoryImportHistory,
+  TranslationMemoryImportPollResponse,
   TranslationMemoryImportRequest,
   TranslationMemoryImportResponse,
 } from '../models/index';
@@ -49,7 +50,7 @@ export interface PollTMImportRequest {
 export class TranslationMemoryImportApi extends runtime.BaseAPI {
 
     /**
-     * Gets the import history for a translation memory.
+     * Gets the import history for a translation memory. It returns the history of last 7 days.
      * Get Translation Memory Import History
      */
     async getTMImportHistoryRaw(requestParameters: GetTMImportHistoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListTranslationMemoryImportHistory>> {
@@ -109,7 +110,7 @@ export class TranslationMemoryImportApi extends runtime.BaseAPI {
     }
 
     /**
-     * Gets the import history for a translation memory.
+     * Gets the import history for a translation memory. It returns the history of last 7 days.
      * Get Translation Memory Import History
      */
     async getTMImportHistory(requestParameters: GetTMImportHistoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListTranslationMemoryImportHistory> {
@@ -118,7 +119,7 @@ export class TranslationMemoryImportApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous import operation.  <br> <br> Read more about prerequisites and limitations on the [official documentation center](https://docs.rws.com/791595/741139/trados-enterprise/importing-tm-content). <br> Note: The order of the multipart form parameter must be implemented as such: properties first, file second. <br> Use the Poll Translation Memory Import endpoint to poll until the import status is `done`.<br> To track the progress of the import please refer to [Poll Translation Memory Import](../reference/Public-API.v1.json/paths/~1translation-memory~1imports~1{importId}/get). 
+     * Generates an asynchronous import operation.  <br> <br> Read more about prerequisites and limitations on the [official documentation center](https://docs.rws.com/791595/741139/trados-enterprise/importing-tm-content). <br> Note: The order of the multipart form parameter must be implemented as such: properties first, file second. <br> Use the Poll Translation Memory Import endpoint to poll until the import status is `done`.<br> To track the progress of the import please refer to [Poll Translation Memory Import](../reference/Public-API.v1.json/paths/~1translation-memory~1imports~1{importId}/get).
      * Import Translation Memory
      */
     async importTranslationMemoryRaw(requestParameters: ImportTranslationMemoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TranslationMemoryImportResponse>> {
@@ -206,7 +207,7 @@ export class TranslationMemoryImportApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous import operation.  <br> <br> Read more about prerequisites and limitations on the [official documentation center](https://docs.rws.com/791595/741139/trados-enterprise/importing-tm-content). <br> Note: The order of the multipart form parameter must be implemented as such: properties first, file second. <br> Use the Poll Translation Memory Import endpoint to poll until the import status is `done`.<br> To track the progress of the import please refer to [Poll Translation Memory Import](../reference/Public-API.v1.json/paths/~1translation-memory~1imports~1{importId}/get). 
+     * Generates an asynchronous import operation.  <br> <br> Read more about prerequisites and limitations on the [official documentation center](https://docs.rws.com/791595/741139/trados-enterprise/importing-tm-content). <br> Note: The order of the multipart form parameter must be implemented as such: properties first, file second. <br> Use the Poll Translation Memory Import endpoint to poll until the import status is `done`.<br> To track the progress of the import please refer to [Poll Translation Memory Import](../reference/Public-API.v1.json/paths/~1translation-memory~1imports~1{importId}/get).
      * Import Translation Memory
      */
     async importTranslationMemory(requestParameters: ImportTranslationMemoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TranslationMemoryImportResponse> {
@@ -218,7 +219,7 @@ export class TranslationMemoryImportApi extends runtime.BaseAPI {
      * Polls a Translation Memory import operation. The import is finished when the status is `done`.
      * Poll Translation Memory Import
      */
-    async pollTMImportRaw(requestParameters: PollTMImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TranslationMemoryImportResponse>> {
+    async pollTMImportRaw(requestParameters: PollTMImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TranslationMemoryImportPollResponse>> {
         if (requestParameters['importId'] == null) {
             throw new runtime.RequiredError(
                 'importId',
@@ -266,7 +267,7 @@ export class TranslationMemoryImportApi extends runtime.BaseAPI {
      * Polls a Translation Memory import operation. The import is finished when the status is `done`.
      * Poll Translation Memory Import
      */
-    async pollTMImport(requestParameters: PollTMImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TranslationMemoryImportResponse> {
+    async pollTMImport(requestParameters: PollTMImportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TranslationMemoryImportPollResponse> {
         const response = await this.pollTMImportRaw(requestParameters, initOverrides);
         return await response.value();
     }

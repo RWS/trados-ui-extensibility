@@ -3,21 +3,27 @@ import {
   Configuration,
   ConfigurationParameters,
   // APIs
-  ProjectApi,
   AccountApi,
+  ConnectedAIApi,
   CustomerApi,
   CustomFieldApi,
   FileApi,
   FileProcessingConfigurationApi,
   FolderApi,
   GroupApi,
+  IntegrationApi,
   LanguageApi,
   LanguageProcessingApi,
+  MachineTranslationApi,
+  PerfectMatchMappingApi,
   PricingModelApi,
+  ProjectApi,
   ProjectGroupApi,
   ProjectTemplateApi,
   PublicKeysApi,
   QuoteApi,
+  RateLimitsApi,
+  ScheduleTemplateApi,
   SourceFileApi,
   TargetFileApi,
   TaskApi,
@@ -27,6 +33,8 @@ import {
   TermbaseImportApi,
   TermbaseTemplateApi,
   TQAProfileApi,
+  TranslationApi,
+  TranslationDomainApi,
   TranslationEngineApi,
   TranslationMemoryApi,
   TranslationMemoryExportApi,
@@ -54,6 +62,7 @@ const getApiConfig = () => {
 };
 
 export const tradosAccountApi = () => new AccountApi(getApiConfig());
+export const tradosConnectedAIApi = () => new ConnectedAIApi(getApiConfig());
 export const tradosCustomFieldApi = () => new CustomFieldApi(getApiConfig());
 export const tradosCustomerApi = () => new CustomerApi(getApiConfig());
 export const tradosFileApi = () => new FileApi(getApiConfig());
@@ -61,9 +70,14 @@ export const tradosFileProcessingConfigurationApi = () =>
   new FileProcessingConfigurationApi(getApiConfig());
 export const tradosFolderApi = () => new FolderApi(getApiConfig());
 export const tradosGroupApi = () => new GroupApi(getApiConfig());
+export const tradosIntegrationApi = () => new IntegrationApi(getApiConfig());
 export const tradosLanguageApi = () => new LanguageApi(getApiConfig());
 export const tradosLanguageProcessingApi = () =>
   new LanguageProcessingApi(getApiConfig());
+export const tradosMachineTranslationApi = () =>
+  new MachineTranslationApi(getApiConfig());
+export const tradosPerfectMatchMappingApi = () =>
+  new PerfectMatchMappingApi(getApiConfig());
 export const tradosPricingModelApi = () => new PricingModelApi(getApiConfig());
 export const tradosProjectApi = () => new ProjectApi(getApiConfig());
 export const tradosProjectGroupApi = () => new ProjectGroupApi(getApiConfig());
@@ -71,8 +85,14 @@ export const tradosProjectTemplateApi = () =>
   new ProjectTemplateApi(getApiConfig());
 export const tradosPublicKeysApi = () => new PublicKeysApi(getApiConfig());
 export const tradosQuoteApi = () => new QuoteApi(getApiConfig());
+export const tradosRateLimitsApi = () => new RateLimitsApi(getApiConfig());
+export const tradosScheduleTemplateApi = () =>
+  new ScheduleTemplateApi(getApiConfig());
 export const tradosSourceFileApi = () => new SourceFileApi(getApiConfig());
 export const tradosTqaProfileApi = () => new TQAProfileApi(getApiConfig());
+export const tradosTranslationApi = () => new TranslationApi(getApiConfig());
+export const tradosTranslationDomainApi = () =>
+  new TranslationDomainApi(getApiConfig());
 export const tradosTargetFileApi = () => new TargetFileApi(getApiConfig());
 export const tradosTaskApi = () => new TaskApi(getApiConfig());
 export const tradosTaskTypeApi = () => new TaskTypeApi(getApiConfig());

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -22,7 +22,11 @@ import type {
   ProjectConfiguration,
   ProjectConfigurationRequest,
   ProjectCreateRequest,
+  ProjectPricingModelUpdateRequest,
   ProjectUpdateRequest,
+  RescheduleTasksRequest,
+  ZipFileExportRequest,
+  ZipFileExportResponse,
 } from '../models/index';
 
 export interface CancelProjectFileRequest {
@@ -49,6 +53,27 @@ export interface DeleteProjectRequest {
     projectId: string;
     authorization: string;
     xLCTenant: string;
+}
+
+export interface DownloadFileRequest {
+    projectId: string;
+    exportId: string;
+    authorization: string;
+    xLCTenant: string;
+}
+
+export interface ExportProjectFilesRequest {
+    projectId: string;
+    authorization: string;
+    xLCTenant: string;
+    zipFileExportRequest?: ZipFileExportRequest;
+}
+
+export interface ExportProjectFilesStatusRequest {
+    projectId: string;
+    authorization: string;
+    xLCTenant: string;
+    exportId: string;
 }
 
 export interface GetProjectRequest {
@@ -91,6 +116,22 @@ export interface ListProjectsRequest {
     createdFrom?: Date;
     createdTo?: Date;
     createdBy?: string;
+    projectTemplateId?: string;
+    projectIds?: Array<string>;
+    sourceLanguage?: string;
+    targetLanguage?: string;
+    projectName?: string;
+    dueFrom?: string;
+    dueTo?: string;
+    lastModifiedFrom?: string;
+    lastModifiedTo?: string;
+}
+
+export interface RescheduleProjectTasksRequest {
+    projectId: string;
+    authorization: string;
+    xLCTenant: string;
+    rescheduleTasksRequest: RescheduleTasksRequest;
 }
 
 export interface StartProjectRequest {
@@ -119,13 +160,20 @@ export interface UpdateProjectConfigurationRequest {
     projectConfigurationRequest?: ProjectConfigurationRequest;
 }
 
+export interface UpdateProjectPricingModelRequest {
+    projectId: string;
+    authorization: string;
+    xLCTenant: string;
+    projectPricingModelUpdateRequest: ProjectPricingModelUpdateRequest;
+}
+
 /**
  * 
  */
 export class ProjectApi extends runtime.BaseAPI {
 
     /**
-     * Cancels a project file.
+     * Cancels a project file.  The `fileId` path parameter can be either a source file identifier or a target file identifier. Use the [List Source Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1source-files/get) endpoint to obtain source file identifiers, or the [List Target Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1target-files/get) endpoint to obtain target file identifiers.
      * Cancel Project File
      */
     async cancelProjectFileRaw(requestParameters: CancelProjectFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -180,7 +228,7 @@ export class ProjectApi extends runtime.BaseAPI {
     }
 
     /**
-     * Cancels a project file.
+     * Cancels a project file.  The `fileId` path parameter can be either a source file identifier or a target file identifier. Use the [List Source Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1source-files/get) endpoint to obtain source file identifiers, or the [List Target Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1target-files/get) endpoint to obtain target file identifiers.
      * Cancel Project File
      */
     async cancelProjectFile(requestParameters: CancelProjectFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
@@ -364,7 +412,195 @@ export class ProjectApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves a project by identifier.
+     * Downloads the generated `zip` file containing the files according to initial export operation parameters.   The final ZIP file will be named using the project name.    When the export operation is performed with `downloadFlat=true` and one target language specified, the resulting ZIP file name will be a combination of the project name and the target language code, as defined by the [Export Project Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1files~1exports/post) endpoint.
+     * Download Exported Project Files
+     */
+    async downloadFileRaw(requestParameters: DownloadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Blob>> {
+        if (requestParameters['projectId'] == null) {
+            throw new runtime.RequiredError(
+                'projectId',
+                'Required parameter "projectId" was null or undefined when calling downloadFile().'
+            );
+        }
+
+        if (requestParameters['exportId'] == null) {
+            throw new runtime.RequiredError(
+                'exportId',
+                'Required parameter "exportId" was null or undefined when calling downloadFile().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling downloadFile().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling downloadFile().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/projects/{projectId}/files/exports/{exportId}/download`.replace(`{${"projectId"}}`, encodeURIComponent(String(requestParameters['projectId']))).replace(`{${"exportId"}}`, encodeURIComponent(String(requestParameters['exportId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.BlobApiResponse(response);
+    }
+
+    /**
+     * Downloads the generated `zip` file containing the files according to initial export operation parameters.   The final ZIP file will be named using the project name.    When the export operation is performed with `downloadFlat=true` and one target language specified, the resulting ZIP file name will be a combination of the project name and the target language code, as defined by the [Export Project Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1files~1exports/post) endpoint.
+     * Download Exported Project Files
+     */
+    async downloadFile(requestParameters: DownloadFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Blob> {
+        const response = await this.downloadFileRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Generates an asynchronous export operation. To monitor the progress until completion, use the [Poll Project Files Export](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1files~1exports~1{exportId}/get)  endpoint.   This operation triggers the packaging of the project files into a `zip` format. <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when this export operation is initiated (not when the underlying async operation completes). Ensure you poll and download the export within this timeframe, or you will receive a `404 Not Found` error.
+     * Export Project Files
+     */
+    async exportProjectFilesRaw(requestParameters: ExportProjectFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ZipFileExportResponse>> {
+        if (requestParameters['projectId'] == null) {
+            throw new runtime.RequiredError(
+                'projectId',
+                'Required parameter "projectId" was null or undefined when calling exportProjectFiles().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling exportProjectFiles().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling exportProjectFiles().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/projects/{projectId}/files/exports`.replace(`{${"projectId"}}`, encodeURIComponent(String(requestParameters['projectId']))),
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['zipFileExportRequest'],
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     * Generates an asynchronous export operation. To monitor the progress until completion, use the [Poll Project Files Export](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1files~1exports~1{exportId}/get)  endpoint.   This operation triggers the packaging of the project files into a `zip` format. <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when this export operation is initiated (not when the underlying async operation completes). Ensure you poll and download the export within this timeframe, or you will receive a `404 Not Found` error.
+     * Export Project Files
+     */
+    async exportProjectFiles(requestParameters: ExportProjectFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ZipFileExportResponse> {
+        const response = await this.exportProjectFilesRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieves the state of the export operation.    Once the state is marked as `done`, you can download the generated `zip` file using the following endpoint: [Download Exported Project Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1files~1exports~1{exportId}~1download/get).  <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when the export operation was initiated (not when the underlying async operation completes). If the TTL expires, this endpoint will return a `404 Not Found` error. Ensure you poll and download the export within this timeframe.
+     * Poll Project Files Export
+     */
+    async exportProjectFilesStatusRaw(requestParameters: ExportProjectFilesStatusRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ZipFileExportResponse>> {
+        if (requestParameters['projectId'] == null) {
+            throw new runtime.RequiredError(
+                'projectId',
+                'Required parameter "projectId" was null or undefined when calling exportProjectFilesStatus().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling exportProjectFilesStatus().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling exportProjectFilesStatus().'
+            );
+        }
+
+        if (requestParameters['exportId'] == null) {
+            throw new runtime.RequiredError(
+                'exportId',
+                'Required parameter "exportId" was null or undefined when calling exportProjectFilesStatus().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/projects/{projectId}/files/exports/{exportId}`.replace(`{${"projectId"}}`, encodeURIComponent(String(requestParameters['projectId']))).replace(`{${"exportId"}}`, encodeURIComponent(String(requestParameters['exportId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     * Retrieves the state of the export operation.    Once the state is marked as `done`, you can download the generated `zip` file using the following endpoint: [Download Exported Project Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1files~1exports~1{exportId}~1download/get).  <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when the export operation was initiated (not when the underlying async operation completes). If the TTL expires, this endpoint will return a `404 Not Found` error. Ensure you poll and download the export within this timeframe.
+     * Poll Project Files Export
+     */
+    async exportProjectFilesStatus(requestParameters: ExportProjectFilesStatusRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ZipFileExportResponse> {
+        const response = await this.exportProjectFilesStatusRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Retrieves a project by identifier.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Get Project
      */
     async getProjectRaw(requestParameters: GetProjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Project>> {
@@ -416,7 +652,7 @@ export class ProjectApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves a project by identifier.
+     * Retrieves a project by identifier.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Get Project
      */
     async getProject(requestParameters: GetProjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Project> {
@@ -631,6 +867,42 @@ export class ProjectApi extends runtime.BaseAPI {
             queryParameters['createdBy'] = requestParameters['createdBy'];
         }
 
+        if (requestParameters['projectTemplateId'] != null) {
+            queryParameters['projectTemplateId'] = requestParameters['projectTemplateId'];
+        }
+
+        if (requestParameters['projectIds'] != null) {
+            queryParameters['projectIds'] = requestParameters['projectIds'];
+        }
+
+        if (requestParameters['sourceLanguage'] != null) {
+            queryParameters['sourceLanguage'] = requestParameters['sourceLanguage'];
+        }
+
+        if (requestParameters['targetLanguage'] != null) {
+            queryParameters['targetLanguage'] = requestParameters['targetLanguage'];
+        }
+
+        if (requestParameters['projectName'] != null) {
+            queryParameters['projectName'] = requestParameters['projectName'];
+        }
+
+        if (requestParameters['dueFrom'] != null) {
+            queryParameters['dueFrom'] = requestParameters['dueFrom'];
+        }
+
+        if (requestParameters['dueTo'] != null) {
+            queryParameters['dueTo'] = requestParameters['dueTo'];
+        }
+
+        if (requestParameters['lastModifiedFrom'] != null) {
+            queryParameters['lastModifiedFrom'] = requestParameters['lastModifiedFrom'];
+        }
+
+        if (requestParameters['lastModifiedTo'] != null) {
+            queryParameters['lastModifiedTo'] = requestParameters['lastModifiedTo'];
+        }
+
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (requestParameters['authorization'] != null) {
@@ -658,6 +930,72 @@ export class ProjectApi extends runtime.BaseAPI {
     async listProjects(requestParameters: ListProjectsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListProjectsResponse> {
         const response = await this.listProjectsRaw(requestParameters, initOverrides);
         return await response.value();
+    }
+
+    /**
+     * Reschedules the tasks of a specific project.
+     * Reschedule Project Tasks
+     */
+    async rescheduleProjectTasksRaw(requestParameters: RescheduleProjectTasksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['projectId'] == null) {
+            throw new runtime.RequiredError(
+                'projectId',
+                'Required parameter "projectId" was null or undefined when calling rescheduleProjectTasks().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling rescheduleProjectTasks().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling rescheduleProjectTasks().'
+            );
+        }
+
+        if (requestParameters['rescheduleTasksRequest'] == null) {
+            throw new runtime.RequiredError(
+                'rescheduleTasksRequest',
+                'Required parameter "rescheduleTasksRequest" was null or undefined when calling rescheduleProjectTasks().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/projects/{projectId}/tasks/reschedule`.replace(`{${"projectId"}}`, encodeURIComponent(String(requestParameters['projectId']))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['rescheduleTasksRequest'],
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Reschedules the tasks of a specific project.
+     * Reschedule Project Tasks
+     */
+    async rescheduleProjectTasks(requestParameters: RescheduleProjectTasksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.rescheduleProjectTasksRaw(requestParameters, initOverrides);
     }
 
     /**
@@ -761,7 +1099,7 @@ export class ProjectApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates the project in terms of: name, description, due date, quote, and project resources. Observe the rules of [JSON Merge Patch Semantics](https://tools.ietf.org/html/rfc7386).    Project rescheduling (updating dueBy) is permitted only if:  * there is no Customer Quote Approval task in the associated flow  * at least one Customer Quote Approval was closed(in case multiple project batches) 
+     * Updates the project in terms of: name, description, due date, quote, and project resources. Observe the rules of [JSON Merge Patch Semantics](https://tools.ietf.org/html/rfc7386).   Project rescheduling (updating dueBy) is permitted only if:  * there is no Customer Quote Approval task in the associated flow  * at least one Customer Quote Approval was closed(in case multiple project batches)   Update `projectPlan.taskConfigurations` are now permitted before project is started. Elements are now pre-populated at project creation time.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Update Project
      */
     async updateProjectRaw(requestParameters: UpdateProjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -819,7 +1157,7 @@ export class ProjectApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates the project in terms of: name, description, due date, quote, and project resources. Observe the rules of [JSON Merge Patch Semantics](https://tools.ietf.org/html/rfc7386).    Project rescheduling (updating dueBy) is permitted only if:  * there is no Customer Quote Approval task in the associated flow  * at least one Customer Quote Approval was closed(in case multiple project batches) 
+     * Updates the project in terms of: name, description, due date, quote, and project resources. Observe the rules of [JSON Merge Patch Semantics](https://tools.ietf.org/html/rfc7386).   Project rescheduling (updating dueBy) is permitted only if:  * there is no Customer Quote Approval task in the associated flow  * at least one Customer Quote Approval was closed(in case multiple project batches)   Update `projectPlan.taskConfigurations` are now permitted before project is started. Elements are now pre-populated at project creation time.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Update Project
      */
     async updateProject(requestParameters: UpdateProjectRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
@@ -883,6 +1221,72 @@ export class ProjectApi extends runtime.BaseAPI {
      */
     async updateProjectConfiguration(requestParameters: UpdateProjectConfigurationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
         await this.updateProjectConfigurationRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     * Update project pricing model only during Customer Quote Review task type.
+     * Update Project Pricing Model
+     */
+    async updateProjectPricingModelRaw(requestParameters: UpdateProjectPricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['projectId'] == null) {
+            throw new runtime.RequiredError(
+                'projectId',
+                'Required parameter "projectId" was null or undefined when calling updateProjectPricingModel().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling updateProjectPricingModel().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling updateProjectPricingModel().'
+            );
+        }
+
+        if (requestParameters['projectPricingModelUpdateRequest'] == null) {
+            throw new runtime.RequiredError(
+                'projectPricingModelUpdateRequest',
+                'Required parameter "projectPricingModelUpdateRequest" was null or undefined when calling updateProjectPricingModel().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/projects/{projectId}/pricing-model`.replace(`{${"projectId"}}`, encodeURIComponent(String(requestParameters['projectId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['projectPricingModelUpdateRequest'],
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Update project pricing model only during Customer Quote Review task type.
+     * Update Project Pricing Model
+     */
+    async updateProjectPricingModel(requestParameters: UpdateProjectPricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.updateProjectPricingModelRaw(requestParameters, initOverrides);
     }
 
 }

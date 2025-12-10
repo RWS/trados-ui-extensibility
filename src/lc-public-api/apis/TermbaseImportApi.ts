@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   ListTermbaseImportHistory,
+  TermbaseImportRequest,
   TermbaseImportResponse,
   TermbasePollImportResponse,
 } from '../models/index';
@@ -43,6 +44,7 @@ export interface ImportTermbaseRequest {
     file: Blob;
     strictImport?: boolean;
     duplicateEntriesStrategy?: ImportTermbaseDuplicateEntriesStrategyEnum;
+    properties?: TermbaseImportRequest;
 }
 
 export interface PollTermbaseImportRequest {
@@ -257,6 +259,11 @@ export class TermbaseImportApi extends runtime.BaseAPI {
             formParams = new FormData();
         } else {
             formParams = new URLSearchParams();
+        }
+
+        if (requestParameters['properties'] != null) {
+
+            formParams.append('properties', new Blob([JSON.stringify(requestParameters['properties'])], { type: "application/json", }));
         }
 
         if (requestParameters['file'] != null) {

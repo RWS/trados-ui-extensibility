@@ -7,10 +7,12 @@ import {
 } from "../models";
 
 export const contexts: { [key in ContextKeys]: Context } = {
+  customers: "customers",
   orders: "orders",
   projects: "projects",
   reports: "reports",
-  taskInbox: "task-inbox"
+  taskInbox: "task-inbox",
+  vendors: "vendors"
 };
 
 export const notificationTypes: {

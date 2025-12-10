@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -17,7 +17,22 @@ import * as runtime from '../runtime';
 import type {
   ListUsersResponse,
   User,
+  UserCreateRequest,
+  UserUpdateRequest,
 } from '../models/index';
+
+export interface CreateUserRequest {
+    xLCTenant: string;
+    authorization: string;
+    fields?: string;
+    userCreateRequest?: UserCreateRequest;
+}
+
+export interface DeleteUserRequest {
+    userId: string;
+    authorization: string;
+    xLCTenant: string;
+}
 
 export interface GetMyUserRequest {
     authorization: string;
@@ -43,10 +58,131 @@ export interface ListUsersRequest {
     fields?: string;
 }
 
+export interface UpdateUserRequest {
+    userId: string;
+    authorization: string;
+    xLCTenant: string;
+    fields?: string;
+    userUpdateRequest?: UserUpdateRequest;
+}
+
 /**
  * 
  */
 export class UserApi extends runtime.BaseAPI {
+
+    /**
+     * Creates a new user in an account.
+     * Create User
+     */
+    async createUserRaw(requestParameters: CreateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<User>> {
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling createUser().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling createUser().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['fields'] != null) {
+            queryParameters['fields'] = requestParameters['fields'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        const response = await this.request({
+            path: `/users`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['userCreateRequest'],
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     * Creates a new user in an account.
+     * Create User
+     */
+    async createUser(requestParameters: CreateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<User> {
+        const response = await this.createUserRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Deletes a user.
+     * Delete User
+     */
+    async deleteUserRaw(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling deleteUser().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling deleteUser().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling deleteUser().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Deletes a user.
+     * Delete User
+     */
+    async deleteUser(requestParameters: DeleteUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteUserRaw(requestParameters, initOverrides);
+    }
 
     /**
      * Retrieves the authenticated user.
@@ -234,6 +370,70 @@ export class UserApi extends runtime.BaseAPI {
      */
     async listUsers(requestParameters: ListUsersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListUsersResponse> {
         const response = await this.listUsersRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Updates a user within the account.    Please follow the update rules detailed on the [Updating data with PUT](../docs/Updating-data-with-PUT.md) page.    When performing an update, fields that are related to a different type of user will be ignored.
+     * Update User
+     */
+    async updateUserRaw(requestParameters: UpdateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<User>> {
+        if (requestParameters['userId'] == null) {
+            throw new runtime.RequiredError(
+                'userId',
+                'Required parameter "userId" was null or undefined when calling updateUser().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling updateUser().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling updateUser().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['fields'] != null) {
+            queryParameters['fields'] = requestParameters['fields'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/users/{userId}`.replace(`{${"userId"}}`, encodeURIComponent(String(requestParameters['userId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['userUpdateRequest'],
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     * Updates a user within the account.    Please follow the update rules detailed on the [Updating data with PUT](../docs/Updating-data-with-PUT.md) page.    When performing an update, fields that are related to a different type of user will be ignored.
+     * Update User
+     */
+    async updateUser(requestParameters: UpdateUserRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<User> {
+        const response = await this.updateUserRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

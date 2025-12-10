@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -13,7 +13,7 @@
  */
 
 
-export const BASE_PATH = "https://lc-api.sdl.com/public-api/v1".replace(/\/+$/, "");
+export const BASE_PATH = "https://api.eu.cloud.trados.com/public-api/v1".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
     basePath?: string; // override base path

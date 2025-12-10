@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -17,6 +17,7 @@ import * as runtime from '../runtime';
 import type {
   TranslationMemoryExportRequest,
   TranslationMemoryExportResponse,
+  TranslationMemoryPollExportResponse,
 } from '../models/index';
 
 export interface DownloadExportedTranslationMemoryRequest {
@@ -164,7 +165,7 @@ export class TranslationMemoryExportApi extends runtime.BaseAPI {
      * Polls a translation memory via an export operation. The exported translation memory can be downloaded once the status is `done`.
      * Poll Translation Memory Export
      */
-    async pollTranslationMemoryExportRaw(requestParameters: PollTranslationMemoryExportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TranslationMemoryExportResponse>> {
+    async pollTranslationMemoryExportRaw(requestParameters: PollTranslationMemoryExportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TranslationMemoryPollExportResponse>> {
         if (requestParameters['exportId'] == null) {
             throw new runtime.RequiredError(
                 'exportId',
@@ -212,7 +213,7 @@ export class TranslationMemoryExportApi extends runtime.BaseAPI {
      * Polls a translation memory via an export operation. The exported translation memory can be downloaded once the status is `done`.
      * Poll Translation Memory Export
      */
-    async pollTranslationMemoryExport(requestParameters: PollTranslationMemoryExportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TranslationMemoryExportResponse> {
+    async pollTranslationMemoryExport(requestParameters: PollTranslationMemoryExportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TranslationMemoryPollExportResponse> {
         const response = await this.pollTranslationMemoryExportRaw(requestParameters, initOverrides);
         return await response.value();
     }

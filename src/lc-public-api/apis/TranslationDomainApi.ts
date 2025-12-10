@@ -15,10 +15,10 @@
 
 import * as runtime from '../runtime';
 import type {
-  ListMyAccountsResponse,
+  ListTranslationServiceTypesResponse,
 } from '../models/index';
 
-export interface ListMyAccountsRequest {
+export interface ListTranslationServiceTypesRequest {
     authorization: string;
     xLCTenant: string;
 }
@@ -26,24 +26,24 @@ export interface ListMyAccountsRequest {
 /**
  * 
  */
-export class AccountApi extends runtime.BaseAPI {
+export class TranslationDomainApi extends runtime.BaseAPI {
 
     /**
-     * Retrieves the accounts the authenticated user is part of.   > For service users only the account where the user is defined is returned.
-     * List my Accounts
+     * List all available service types.
+     * List Service Types
      */
-    async listMyAccountsRaw(requestParameters: ListMyAccountsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListMyAccountsResponse>> {
+    async listTranslationServiceTypesRaw(requestParameters: ListTranslationServiceTypesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListTranslationServiceTypesResponse>> {
         if (requestParameters['authorization'] == null) {
             throw new runtime.RequiredError(
                 'authorization',
-                'Required parameter "authorization" was null or undefined when calling listMyAccounts().'
+                'Required parameter "authorization" was null or undefined when calling listTranslationServiceTypes().'
             );
         }
 
         if (requestParameters['xLCTenant'] == null) {
             throw new runtime.RequiredError(
                 'xLCTenant',
-                'Required parameter "xLCTenant" was null or undefined when calling listMyAccounts().'
+                'Required parameter "xLCTenant" was null or undefined when calling listTranslationServiceTypes().'
             );
         }
 
@@ -60,7 +60,7 @@ export class AccountApi extends runtime.BaseAPI {
         }
 
         const response = await this.request({
-            path: `/accounts`,
+            path: `/translation-domain/service-types`,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -70,11 +70,11 @@ export class AccountApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves the accounts the authenticated user is part of.   > For service users only the account where the user is defined is returned.
-     * List my Accounts
+     * List all available service types.
+     * List Service Types
      */
-    async listMyAccounts(requestParameters: ListMyAccountsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListMyAccountsResponse> {
-        const response = await this.listMyAccountsRaw(requestParameters, initOverrides);
+    async listTranslationServiceTypes(requestParameters: ListTranslationServiceTypesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListTranslationServiceTypesResponse> {
+        const response = await this.listTranslationServiceTypesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

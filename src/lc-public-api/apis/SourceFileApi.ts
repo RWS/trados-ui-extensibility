@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -121,7 +121,7 @@ export interface UpdateSourcePropertiesRequest {
 export class SourceFileApi extends runtime.BaseAPI {
 
     /**
-     * Adds a source file to the project. Files can be uploaded before starting a project or after the project has started. When adding a `translatable` file after the project started, a new start project request should be performed.  Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.  > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated.
+     * Adds a source file to the project. Files can be uploaded before starting a project or after the project has started. When adding a `translatable` file after the project started, a new start project request should be performed.  Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.  > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated.  > Note: Zip files will be added as reference files. If you want to upload zip files, please use the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) endpoint.
      * Add Source File
      */
     async addSourceFileRaw(requestParameters: AddSourceFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SourceFile>> {
@@ -209,7 +209,7 @@ export class SourceFileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Adds a source file to the project. Files can be uploaded before starting a project or after the project has started. When adding a `translatable` file after the project started, a new start project request should be performed.  Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.  > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated.
+     * Adds a source file to the project. Files can be uploaded before starting a project or after the project has started. When adding a `translatable` file after the project started, a new start project request should be performed.  Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.  > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated.  > Note: Zip files will be added as reference files. If you want to upload zip files, please use the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) endpoint.
      * Add Source File
      */
     async addSourceFile(requestParameters: AddSourceFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SourceFile> {
@@ -326,7 +326,7 @@ export class SourceFileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Adds multiple source files to the project. Files must be uploaded before attaching them to a project. When a file is attached after the project was started, a new start project request should be performed.   > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated. 
+     * This endpoint can only be used after files have been uploaded via the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) endpoint. It allows you to add multiple source files to a project.    Each file must be individually attached by setting the `fileUrl` to the `associatedFiles.id` returned by the [Poll Upload Zip File](../reference/Public-API.v1.json/paths/~1files~1{fileId}/get) endpoint, once the `unzipStatus` is `extracted`.   If a file is attached after the project has already been started, a new start project request must be made.  > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated. 
      * Attach Source Files
      */
     async addSourceFilesRaw(requestParameters: AddSourceFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SourceFileAttachmentResponse>> {
@@ -388,7 +388,7 @@ export class SourceFileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Adds multiple source files to the project. Files must be uploaded before attaching them to a project. When a file is attached after the project was started, a new start project request should be performed.   > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated. 
+     * This endpoint can only be used after files have been uploaded via the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) endpoint. It allows you to add multiple source files to a project.    Each file must be individually attached by setting the `fileUrl` to the `associatedFiles.id` returned by the [Poll Upload Zip File](../reference/Public-API.v1.json/paths/~1files~1{fileId}/get) endpoint, once the `unzipStatus` is `extracted`.   If a file is attached after the project has already been started, a new start project request must be made.  > Note: The maximum character size of the sum between the `name` and the `path` fields must not exceed 255. Otherwise the request cannot be validated. 
      * Attach Source Files
      */
     async addSourceFiles(requestParameters: AddSourceFilesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SourceFileAttachmentResponse> {

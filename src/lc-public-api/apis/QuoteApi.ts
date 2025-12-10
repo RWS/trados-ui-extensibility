@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -114,7 +114,7 @@ export class QuoteApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  <br><br> Built-in quotes are only available in the same languages as the user interface. See [this page](https://docs.rws.com/791595/1084405/trados-enterprise---accelerate/ui-languages) for more information. <br> Customers who use non-default quote templates are responsible for the implementation of a suitable localization approach.
+     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  <br><br> Built-in quotes are only available in the same languages as the user interface. See [this page](https://docs.rws.com/791595/1084405/trados-enterprise---accelerate/ui-languages) for more information. <br> Customers who use non-default quote templates are responsible for the implementation of a suitable localization approach.  <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when this export operation is initiated (not when the underlying async operation completes). Ensure you poll and download the export within this timeframe, or you will receive a `404 Not Found` error.
      * Export Quote Report
      */
     async exportQuoteReportRaw(requestParameters: ExportQuoteReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ExportQuoteReportResponse>> {
@@ -170,7 +170,7 @@ export class QuoteApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  <br><br> Built-in quotes are only available in the same languages as the user interface. See [this page](https://docs.rws.com/791595/1084405/trados-enterprise---accelerate/ui-languages) for more information. <br> Customers who use non-default quote templates are responsible for the implementation of a suitable localization approach.
+     * Generates an asynchronous quote export operation for the project in either PDF or Excel format. Use the [polling endpoint](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1export/get) to check when the export is completed.  <br><br> Built-in quotes are only available in the same languages as the user interface. See [this page](https://docs.rws.com/791595/1084405/trados-enterprise---accelerate/ui-languages) for more information. <br> Customers who use non-default quote templates are responsible for the implementation of a suitable localization approach.  <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when this export operation is initiated (not when the underlying async operation completes). Ensure you poll and download the export within this timeframe, or you will receive a `404 Not Found` error.
      * Export Quote Report
      */
     async exportQuoteReport(requestParameters: ExportQuoteReportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ExportQuoteReportResponse> {
@@ -179,7 +179,7 @@ export class QuoteApi extends runtime.BaseAPI {
     }
 
     /**
-     * Polls a quote report via an export operation. The quote report can be [downloaded](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1download/get) once the status is \"completed\". The recommended polling interval is 20 seconds. If polling does not return a success status in 20 minutes, it should be abandoned and a new export should be retried.  If the `exportId` query parameter is not provided, the polling action will return the status for the last generated export.
+     * Polls a quote report via an export operation. The quote report can be [downloaded](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1download/get) once the status is \"completed\". The recommended polling interval is 20 seconds.  If the `exportId` query parameter is not provided, the polling action will return the status for the last generated export.  <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when the export operation was initiated (not when the underlying async operation completes). If the TTL expires, this endpoint will return a `404 Not Found` error. Ensure you poll and download the export within this timeframe. 
      * Poll Quote Report Export
      */
     async pollQuoteReportExportRaw(requestParameters: PollQuoteReportExportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PollQuoteReportExport200Response>> {
@@ -235,7 +235,7 @@ export class QuoteApi extends runtime.BaseAPI {
     }
 
     /**
-     * Polls a quote report via an export operation. The quote report can be [downloaded](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1download/get) once the status is \"completed\". The recommended polling interval is 20 seconds. If polling does not return a success status in 20 minutes, it should be abandoned and a new export should be retried.  If the `exportId` query parameter is not provided, the polling action will return the status for the last generated export.
+     * Polls a quote report via an export operation. The quote report can be [downloaded](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1quote-report~1download/get) once the status is \"completed\". The recommended polling interval is 20 seconds.  If the `exportId` query parameter is not provided, the polling action will return the status for the last generated export.  <!-- theme: warning --> > The export ID has a time-to-live (TTL) of 20 minutes, starting from when the export operation was initiated (not when the underlying async operation completes). If the TTL expires, this endpoint will return a `404 Not Found` error. Ensure you poll and download the export within this timeframe. 
      * Poll Quote Report Export
      */
     async pollQuoteReportExport(requestParameters: PollQuoteReportExportRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PollQuoteReportExport200Response> {

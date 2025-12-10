@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -16,6 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   Jwk,
+  WellKnownJwksResponse,
 } from '../models/index';
 
 export interface GetPublicKeyRequest {
@@ -66,7 +67,7 @@ export class PublicKeysApi extends runtime.BaseAPI {
      * List all available Public Keys.
      * List Public Keys
      */
-    async listPublicKeysRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Jwk>>> {
+    async listPublicKeysRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<WellKnownJwksResponse>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -85,7 +86,7 @@ export class PublicKeysApi extends runtime.BaseAPI {
      * List all available Public Keys.
      * List Public Keys
      */
-    async listPublicKeys(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Jwk>> {
+    async listPublicKeys(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<WellKnownJwksResponse> {
         const response = await this.listPublicKeysRaw(initOverrides);
         return await response.value();
     }

@@ -19,6 +19,17 @@ export interface Account {
      */
     name?: string;
 }
+
+/**
+ * Type of membership of this account user.
+ * @export
+ */
+export const AccountMembershipType = {
+    Member: 'member',
+    Collaborator: 'collaborator'
+} as const;
+export type AccountMembershipType = typeof AccountMembershipType[keyof typeof AccountMembershipType];
+
 /**
  * Input for adding projects to group.
  * @export
@@ -117,254 +128,6 @@ export type AddProjectsToGroupResponseStatusEnum = typeof AddProjectsToGroupResp
 /**
  * 
  * @export
- * @interface AdditionalCost
- */
-export interface AdditionalCost {
-    /**
-     * The name of the additional cost. 
-     * @type {string}
-     * @memberof AdditionalCost
-     */
-    name: string;
-    /**
-     * The type of the additional cost.
-     * @type {string}
-     * @memberof AdditionalCost
-     */
-    type: AdditionalCostTypeEnum;
-    /**
-     * The number of the additional cost.
-     * @type {number}
-     * @memberof AdditionalCost
-     */
-    index: number;
-    /**
-     * The cost of a unit.
-     * @type {number}
-     * @memberof AdditionalCost
-     */
-    costPerUnit: number;
-    /**
-     * The number of units for which a cost is applied.
-     * @type {number}
-     * @memberof AdditionalCost
-     */
-    unitCount: number;
-    /**
-     * The unit type of the 'volume' cost, used as reference for the unit cost.
-     * @type {string}
-     * @memberof AdditionalCost
-     */
-    volumeUnitType: AdditionalCostVolumeUnitTypeEnum;
-    /**
-     * Only for the Conditional type.
-     * @type {string}
-     * @memberof AdditionalCost
-     */
-    conditionalCostType: AdditionalCostConditionalCostTypeEnum;
-    /**
-     * Only for the Conditional type.
-     * @type {string}
-     * @memberof AdditionalCost
-     */
-    costOperator: AdditionalCostCostOperatorEnum;
-    /**
-     * Only for the Conditional type.
-     * @type {string}
-     * @memberof AdditionalCost
-     */
-    costVariable: AdditionalCostCostVariableEnum;
-    /**
-     * Operand of the Conditional type cost.
-     * @type {number}
-     * @memberof AdditionalCost
-     */
-    operand: number;
-}
-
-
-/**
- * @export
- */
-export const AdditionalCostTypeEnum = {
-    Volume: 'volume',
-    PerTargetLanguage: 'perTargetLanguage',
-    PerFile: 'perFile',
-    Hourly: 'hourly',
-    Percentage: 'percentage',
-    PerPage: 'perPage',
-    Conditional: 'conditional'
-} as const;
-export type AdditionalCostTypeEnum = typeof AdditionalCostTypeEnum[keyof typeof AdditionalCostTypeEnum];
-
-/**
- * @export
- */
-export const AdditionalCostVolumeUnitTypeEnum = {
-    Words: 'words',
-    Characters: 'characters'
-} as const;
-export type AdditionalCostVolumeUnitTypeEnum = typeof AdditionalCostVolumeUnitTypeEnum[keyof typeof AdditionalCostVolumeUnitTypeEnum];
-
-/**
- * @export
- */
-export const AdditionalCostConditionalCostTypeEnum = {
-    Absolute: 'absolute',
-    Relative: 'relative',
-    Percentage: 'percentage'
-} as const;
-export type AdditionalCostConditionalCostTypeEnum = typeof AdditionalCostConditionalCostTypeEnum[keyof typeof AdditionalCostConditionalCostTypeEnum];
-
-/**
- * @export
- */
-export const AdditionalCostCostOperatorEnum = {
-    Less: 'less',
-    LessOrEqual: 'lessOrEqual',
-    Greater: 'greater',
-    GreaterOrEqual: 'greaterOrEqual'
-} as const;
-export type AdditionalCostCostOperatorEnum = typeof AdditionalCostCostOperatorEnum[keyof typeof AdditionalCostCostOperatorEnum];
-
-/**
- * @export
- */
-export const AdditionalCostCostVariableEnum = {
-    WordCount: 'wordCount',
-    RunningTotal: 'runningTotal'
-} as const;
-export type AdditionalCostCostVariableEnum = typeof AdditionalCostCostVariableEnum[keyof typeof AdditionalCostCostVariableEnum];
-
-/**
- * 
- * @export
- * @interface AdditionalCostLanguage
- */
-export interface AdditionalCostLanguage {
-    /**
-     * The name of the additional cost. 
-     * @type {string}
-     * @memberof AdditionalCostLanguage
-     */
-    name: string;
-    /**
-     * The type of the additional cost.
-     * @type {string}
-     * @memberof AdditionalCostLanguage
-     */
-    type: AdditionalCostLanguageTypeEnum;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The number of the additional cost.
-     * @type {number}
-     * @memberof AdditionalCostLanguage
-     */
-    index?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The cost of a unit.
-     * @type {number}
-     * @memberof AdditionalCostLanguage
-     */
-    costPerUnit?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The number of units for which a cost is applied.
-     * @type {number}
-     * @memberof AdditionalCostLanguage
-     */
-    unitCount?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The unit type of the 'volume' cost, used as reference for the unit cost.
-     * @type {string}
-     * @memberof AdditionalCostLanguage
-     */
-    volumeUnitType?: AdditionalCostLanguageVolumeUnitTypeEnum;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>Only for the Conditional type.
-     * @type {string}
-     * @memberof AdditionalCostLanguage
-     */
-    conditionalCostType?: AdditionalCostLanguageConditionalCostTypeEnum;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>Only for the Conditional type.
-     * @type {string}
-     * @memberof AdditionalCostLanguage
-     */
-    costOperator?: AdditionalCostLanguageCostOperatorEnum;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>Only for the Conditional type.
-     * @type {string}
-     * @memberof AdditionalCostLanguage
-     */
-    costVariable?: AdditionalCostLanguageCostVariableEnum;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>Operand of the Conditional type cost.
-     * @type {number}
-     * @memberof AdditionalCostLanguage
-     */
-    operand?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div> Array of task type identifiers where this additional cost is applied.
-     * @type {Array<string>}
-     * @memberof AdditionalCostLanguage
-     */
-    serviceTypes?: Array<string>;
-}
-
-
-/**
- * @export
- */
-export const AdditionalCostLanguageTypeEnum = {
-    Volume: 'volume',
-    Hourly: 'hourly',
-    Percentage: 'percentage',
-    PerPage: 'perPage',
-    Conditional: 'conditional'
-} as const;
-export type AdditionalCostLanguageTypeEnum = typeof AdditionalCostLanguageTypeEnum[keyof typeof AdditionalCostLanguageTypeEnum];
-
-/**
- * @export
- */
-export const AdditionalCostLanguageVolumeUnitTypeEnum = {
-    Words: 'words',
-    Characters: 'characters'
-} as const;
-export type AdditionalCostLanguageVolumeUnitTypeEnum = typeof AdditionalCostLanguageVolumeUnitTypeEnum[keyof typeof AdditionalCostLanguageVolumeUnitTypeEnum];
-
-/**
- * @export
- */
-export const AdditionalCostLanguageConditionalCostTypeEnum = {
-    Absolute: 'absolute',
-    Relative: 'relative',
-    Percentage: 'percentage'
-} as const;
-export type AdditionalCostLanguageConditionalCostTypeEnum = typeof AdditionalCostLanguageConditionalCostTypeEnum[keyof typeof AdditionalCostLanguageConditionalCostTypeEnum];
-
-/**
- * @export
- */
-export const AdditionalCostLanguageCostOperatorEnum = {
-    Less: 'less',
-    LessOrEqual: 'lessOrEqual',
-    Greater: 'greater',
-    GreaterOrEqual: 'greaterOrEqual'
-} as const;
-export type AdditionalCostLanguageCostOperatorEnum = typeof AdditionalCostLanguageCostOperatorEnum[keyof typeof AdditionalCostLanguageCostOperatorEnum];
-
-/**
- * @export
- */
-export const AdditionalCostLanguageCostVariableEnum = {
-    WordCount: 'wordCount',
-    RunningTotal: 'runningTotal'
-} as const;
-export type AdditionalCostLanguageCostVariableEnum = typeof AdditionalCostLanguageCostVariableEnum[keyof typeof AdditionalCostLanguageCostVariableEnum];
-
-/**
- * 
- * @export
  * @interface AnalysisStatistics
  */
 export interface AnalysisStatistics {
@@ -410,6 +173,12 @@ export interface AnalysisStatistics {
      * @memberof AnalysisStatistics
      */
     machineTranslation?: Count;
+    /**
+     * 
+     * @type {Count}
+     * @memberof AnalysisStatistics
+     */
+    locked?: Count;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Statistics count.</div> 
      * @type {Array<FuzzyCount>}
@@ -477,13 +246,13 @@ export interface AnalyticsOverdueStatistics {
      * @type {number}
      * @memberof AnalyticsOverdueStatistics
      */
-    overdueTasks?: number;
+    overdueTasks?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The number of tasks closed after the due date.</div> 
      * @type {number}
      * @memberof AnalyticsOverdueStatistics
      */
-    dueDateCloseTasks?: number;
+    dueDateCloseTasks?: number | null;
 }
 /**
  * Statistics for phases grouped.
@@ -502,13 +271,13 @@ export interface AnalyticsPhaseStatistics {
      * @type {number}
      * @memberof AnalyticsPhaseStatistics
      */
-    total?: number;
+    total?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
      * @type {number}
      * @memberof AnalyticsPhaseStatistics
      */
-    completed?: number;
+    completed?: number | null;
 }
 /**
  * Overall progress.
@@ -521,7 +290,7 @@ export interface AnalyticsProgress {
      * @type {number}
      * @memberof AnalyticsProgress
      */
-    overall?: number;
+    overall?: number | null;
 }
 /**
  * Source file statistics grouped by role.
@@ -534,14 +303,16 @@ export interface AnalyticsSourceFileStatistics {
      * @type {FileRole}
      * @memberof AnalyticsSourceFileStatistics
      */
-    role?: FileRole;
+    role?: FileRole | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The file count.</div> 
      * @type {number}
      * @memberof AnalyticsSourceFileStatistics
      */
-    count?: number;
+    count?: number | null;
 }
+
+
 /**
  * Task Type statistics grouped.
  * @export
@@ -565,25 +336,25 @@ export interface AnalyticsTaskTypeStatistics {
      * @type {number}
      * @memberof AnalyticsTaskTypeStatistics
      */
-    total?: number;
+    total?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
      * @type {number}
      * @memberof AnalyticsTaskTypeStatistics
      */
-    current?: number;
+    current?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
      * @type {number}
      * @memberof AnalyticsTaskTypeStatistics
      */
-    completed?: number;
+    completed?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
      * @type {number}
      * @memberof AnalyticsTaskTypeStatistics
      */
-    error?: number;
+    error?: number | null;
 }
 /**
  * Statistics on workload progress.
@@ -596,13 +367,143 @@ export interface AnalyticsWorkloadStatistics {
      * @type {number}
      * @memberof AnalyticsWorkloadStatistics
      */
-    completed?: number;
+    completed?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
      * @type {number}
      * @memberof AnalyticsWorkloadStatistics
      */
-    total?: number;
+    total?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface Application
+ */
+export interface Application {
+    /**
+     * The application identifier.
+     * @type {string}
+     * @memberof Application
+     */
+    id: string;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The application name.</div> 
+     * @type {string}
+     * @memberof Application
+     */
+    name?: string;
+    /**
+     * The application description.
+     * @type {string}
+     * @memberof Application
+     */
+    description?: string;
+    /**
+     * Is oAuth 2.0 API access enabled.
+     * @type {boolean}
+     * @memberof Application
+     */
+    enableApiAccess?: boolean;
+    /**
+     * 
+     * @type {User}
+     * @memberof Application
+     */
+    serviceUser?: User;
+    /**
+     * 
+     * @type {ApplicationApiAccess}
+     * @memberof Application
+     */
+    apiAccess?: ApplicationApiAccess;
+}
+/**
+ * API Access details.
+ * @export
+ * @interface ApplicationApiAccess
+ */
+export interface ApplicationApiAccess {
+    /**
+     * The client identifier.
+     * @type {string}
+     * @memberof ApplicationApiAccess
+     */
+    clientId: string;
+    /**
+     * The client secret.
+     * @type {string}
+     * @memberof ApplicationApiAccess
+     */
+    clientSecret?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ApplicationCreateRequest
+ */
+export interface ApplicationCreateRequest {
+    /**
+     * The application name.
+     * @type {string}
+     * @memberof ApplicationCreateRequest
+     */
+    name: string;
+    /**
+     * The application description.
+     * @type {string}
+     * @memberof ApplicationCreateRequest
+     */
+    description?: string;
+    /**
+     * Enables oAuth 2.0 API access and provides the application's client credentials.
+     * @type {boolean}
+     * @memberof ApplicationCreateRequest
+     */
+    enableApiAccess?: boolean;
+    /**
+     * The Service User identifier. Required when `enableApiAccess` is `true`.
+     * @type {string}
+     * @memberof ApplicationCreateRequest
+     */
+    serviceUserId?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ApplicationUpdateRequest
+ */
+export interface ApplicationUpdateRequest {
+    /**
+     * The application name.
+     * @type {string}
+     * @memberof ApplicationUpdateRequest
+     */
+    name?: string;
+    /**
+     * The application description.
+     * @type {string}
+     * @memberof ApplicationUpdateRequest
+     */
+    description?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ApplicationUpdateRequest
+     */
+    enableApiAccess?: boolean;
+    /**
+     * The Service user identifier. The Service User will be used to provide authorization for this application.
+     * @type {string}
+     * @memberof ApplicationUpdateRequest
+     */
+    serviceUserId?: string;
+    /**
+     * Regenerate the client secret.
+     * @type {boolean}
+     * @memberof ApplicationUpdateRequest
+     */
+    regenerateSecret?: boolean;
 }
 /**
  * Represents the result of an asynchronous operation, including status and potential error information.
@@ -679,7 +580,7 @@ export interface CompletionConfigResponse {
      * @type {Date}
      * @memberof CompletionConfigResponse
      */
-    completeDate?: Date;
+    completeDate?: Date | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of days until automatic completion of the project. Starting from project creation date.</div>
      * @type {number}
@@ -691,7 +592,7 @@ export interface CompletionConfigResponse {
      * @type {Date}
      * @memberof CompletionConfigResponse
      */
-    archiveDate?: Date;
+    archiveDate?: Date | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of days after project completion when the workflow will be stopped and the project will enter *archived* state. </div>
      * @type {number}
@@ -705,6 +606,95 @@ export interface CompletionConfigResponse {
      */
     archiveReminderDays?: number;
 }
+/**
+ * 
+ * @export
+ * @interface ConcordanceSearchSettings
+ */
+export interface ConcordanceSearchSettings {
+    /**
+     * 
+     * @type {ConcordanceSearchSettingsTm}
+     * @memberof ConcordanceSearchSettings
+     */
+    translationMemory?: ConcordanceSearchSettingsTm;
+}
+/**
+ * 
+ * @export
+ * @interface ConcordanceSearchSettingsTm
+ */
+export interface ConcordanceSearchSettingsTm {
+    /**
+     * This is the degree of match that must exist between a source document segment and a translation memory segment in order for the segment translation to be offered as a match. The default is 70%, but you can set a value between 30% and 100%.
+     * 
+     * The selected value is inclusive, meaning that matches with your exact selected value are also included in translation results.
+     * @type {number}
+     * @memberof ConcordanceSearchSettingsTm
+     */
+    minimumMatchValue?: number;
+    /**
+     * 
+     * @type {ConcordanceSearchTMPenalties}
+     * @memberof ConcordanceSearchSettingsTm
+     */
+    penalties?: ConcordanceSearchTMPenalties;
+}
+/**
+ * 
+ * @export
+ * @interface ConcordanceSearchTMPenalties
+ */
+export interface ConcordanceSearchTMPenalties {
+    /**
+     * 
+     * @type {TranslationConcordanceSearchStandardPenalties}
+     * @memberof ConcordanceSearchTMPenalties
+     */
+    standardPenalties?: TranslationConcordanceSearchStandardPenalties;
+    /**
+     * 
+     * @type {TranslationConcordanceSearchUnitStatusPenalties}
+     * @memberof ConcordanceSearchTMPenalties
+     */
+    translationUnitStatusPenalties?: TranslationConcordanceSearchUnitStatusPenalties;
+}
+
+/**
+ * 
+ * @export
+ */
+export const ConditionalCostOperator = {
+    Less: 'less',
+    LessOrEqual: 'lessOrEqual',
+    Greater: 'greater',
+    GreaterOrEqual: 'greaterOrEqual'
+} as const;
+export type ConditionalCostOperator = typeof ConditionalCostOperator[keyof typeof ConditionalCostOperator];
+
+
+/**
+ * 
+ * @export
+ */
+export const ConditionalCostType = {
+    Absolute: 'absolute',
+    Relative: 'relative',
+    Percentage: 'percentage'
+} as const;
+export type ConditionalCostType = typeof ConditionalCostType[keyof typeof ConditionalCostType];
+
+
+/**
+ * 
+ * @export
+ */
+export const ConditionalCostVariable = {
+    WordCount: 'wordCount',
+    RunningTotal: 'runningTotal'
+} as const;
+export type ConditionalCostVariable = typeof ConditionalCostVariable[keyof typeof ConditionalCostVariable];
+
 /**
  * Resource configuration properties.
  * @export
@@ -748,31 +738,31 @@ export interface Count {
      * @type {number}
      * @memberof Count
      */
-    words?: number;
+    words?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of segments.</div> 
      * @type {number}
      * @memberof Count
      */
-    segments?: number;
+    segments?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of characters.</div> 
      * @type {number}
      * @memberof Count
      */
-    characters?: number;
+    characters?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of placeables.</div> 
      * @type {number}
      * @memberof Count
      */
-    placeables?: number;
+    placeables?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Number of tags.</div> 
      * @type {number}
      * @memberof Count
      */
-    tags?: number;
+    tags?: number | null;
 }
 /**
  * A Custom Field model.
@@ -799,7 +789,7 @@ export interface CustomField {
      */
     key?: string;
     /**
-     * The value of the custom property. A date will be serialised as an ISO_8601 string.
+     * The value of the custom property. A date will be serialized as an ISO_8601 string.
      * @type {object}
      * @memberof CustomField
      */
@@ -840,7 +830,7 @@ export interface CustomFieldDefinition {
      * @type {string}
      * @memberof CustomFieldDefinition
      */
-    type?: CustomFieldDefinitionTypeEnum;
+    type?: CustomFieldDefinitionTypeEnum | null;
     /**
      * Possible values if the type selected is "picklist" or "multiSelectPicklist".
      * @type {Set<string>}
@@ -858,7 +848,7 @@ export interface CustomFieldDefinition {
      * @type {boolean}
      * @memberof CustomFieldDefinition
      */
-    isReadOnly?: boolean;
+    isReadOnly?: boolean | null;
     /**
      * Specifies a default value for this Custom Field. This is required if the "isReadOnly" field is True.
      * @type {string}
@@ -870,7 +860,7 @@ export interface CustomFieldDefinition {
      * @type {boolean}
      * @memberof CustomFieldDefinition
      */
-    isMandatory?: boolean;
+    isMandatory?: boolean | null;
     /**
      * 
      * @type {FolderV2}
@@ -937,7 +927,7 @@ export interface CustomFieldResource {
      */
     key: string;
     /**
-     * The value of the custom property. A date will be serialised as an ISO_8601 string.
+     * The value of the custom property. A date will be serialized as an ISO_8601 string.
      * @type {object}
      * @memberof CustomFieldResource
      */
@@ -1085,7 +1075,7 @@ export interface CustomerUpdateRequest {
      */
     customFieldDefinitions?: Array<CustomFieldResource>;
     /**
-     * The folder visibilty to its subfulders.
+     * The folder visibility to its subfolders.
      * @type {string}
      * @memberof CustomerUpdateRequest
      */
@@ -1233,6 +1223,133 @@ export interface FailedTask {
 /**
  * 
  * @export
+ * @interface FileAnalysisCostResponse
+ */
+export interface FileAnalysisCostResponse {
+    /**
+     * The currency code (ISO 4217).
+     * @type {string}
+     * @memberof FileAnalysisCostResponse
+     */
+    currencyCode?: string;
+    /**
+     * The total cost calculated for the provided files and language pairs. <br> 
+     * It represents the sum of the `translationCosts`, `languageCosts` and `additionalCosts`.
+     * @type {number}
+     * @memberof FileAnalysisCostResponse
+     */
+    total: number;
+    /**
+     * The base translation costs.
+     * @type {number}
+     * @memberof FileAnalysisCostResponse
+     */
+    translationCosts?: number;
+    /**
+     * The additional language costs.
+     * @type {number}
+     * @memberof FileAnalysisCostResponse
+     */
+    languageCosts?: number;
+    /**
+     * The additional translation costs.
+     * @type {number}
+     * @memberof FileAnalysisCostResponse
+     */
+    additionalCosts?: number;
+}
+/**
+ * 
+ * @export
+ * @interface FileAnalysisFileStatistics
+ */
+export interface FileAnalysisFileStatistics {
+    /**
+     * The file identifier.
+     * @type {string}
+     * @memberof FileAnalysisFileStatistics
+     */
+    fileId: string;
+    /**
+     * The number of words in this file.
+     * @type {number}
+     * @memberof FileAnalysisFileStatistics
+     */
+    wordCount: number;
+}
+/**
+ * 
+ * @export
+ * @interface FileAnalysisOperationResponse
+ */
+export interface FileAnalysisOperationResponse {
+    /**
+     * The analysis operation id. Use this to poll it's status.
+     * @type {string}
+     * @memberof FileAnalysisOperationResponse
+     */
+    id: string;
+}
+/**
+ * 
+ * @export
+ * @interface FileAnalysisResponse
+ */
+export interface FileAnalysisResponse {
+    /**
+     * The status of the file analysis operation.
+     * 
+     * `converting` - The files are being converted for analysis.<br>
+     * `analysis` - Extracting the word count from the files.<br>
+     * `costEstimation` - Estimating the cost.<br>
+     * `completed` - The file analysis is completed.<br>
+     * `error` - The file analysis was unsuccessful. See the `errorMessage` field for more details.
+     * @type {string}
+     * @memberof FileAnalysisResponse
+     */
+    status: FileAnalysisResponseStatusEnum;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The total word count of the files.</div> 
+     * @type {number}
+     * @memberof FileAnalysisResponse
+     */
+    wordCount?: number;
+    /**
+     * 
+     * @type {FileAnalysisCostResponse}
+     * @memberof FileAnalysisResponse
+     */
+    estimatedCosts?: FileAnalysisCostResponse;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The word count breakdown by files.</div> 
+     * @type {Array<FileAnalysisFileStatistics>}
+     * @memberof FileAnalysisResponse
+     */
+    fileStatistics?: Array<FileAnalysisFileStatistics>;
+    /**
+     * The cause of the error when the status is `error`.
+     * @type {string}
+     * @memberof FileAnalysisResponse
+     */
+    errorMessage?: string;
+}
+
+
+/**
+ * @export
+ */
+export const FileAnalysisResponseStatusEnum = {
+    Converting: 'converting',
+    Analysis: 'analysis',
+    CostCalculation: 'costCalculation',
+    Completed: 'completed',
+    Error: 'error'
+} as const;
+export type FileAnalysisResponseStatusEnum = typeof FileAnalysisResponseStatusEnum[keyof typeof FileAnalysisResponseStatusEnum];
+
+/**
+ * 
+ * @export
  * @interface FileExtractedResponse
  */
 export interface FileExtractedResponse {
@@ -1362,7 +1479,7 @@ export interface FileTypeSetting {
      */
     description?: string;
     /**
-     * A short string representation of the file type identifier. The ID displayed in the Language Cloud UI.
+     * A short string representation of the file type identifier. The ID displayed in the Trados Cloud Platform UI.
      * @type {string}
      * @memberof FileTypeSetting
      */
@@ -1372,23 +1489,23 @@ export interface FileTypeSetting {
      * @type {boolean}
      * @memberof FileTypeSetting
      */
-    enabled?: boolean;
+    enabled?: boolean | null;
     /**
      * Is this file type setting included in the file processing configuration. 
      * 
-     * File types will be added to a configuration as excluded = true by default and can be included by a consumer when needed (via the Language Cloud UI)
+     * File types will be added to a configuration as excluded = true by default and can be included by a consumer when needed (via the Trados Cloud Platform UI)
      * 
      * Excluded file types will not be included in operations (ex. Scan)
      * @type {boolean}
      * @memberof FileTypeSetting
      */
-    excluded?: boolean;
+    excluded?: boolean | null;
     /**
      * This file type setting is planned for deprecation and will be removed in the future.
      * @type {boolean}
      * @memberof FileTypeSetting
      */
-    deprecated?: boolean;
+    deprecated?: boolean | null;
     /**
      * The order of the setting in the file type configuration.
      * @type {number}
@@ -1551,7 +1668,7 @@ export interface Folder {
      * @type {boolean}
      * @memberof Folder
      */
-    hasParent?: boolean;
+    hasParent?: boolean | null;
     /**
      * The hierarchical path. It consists of all the items of the path in reverse order, the parent of the current folder being the first in the list, and the root of the account being the last.
      * @type {Array<FolderPath>}
@@ -1588,7 +1705,7 @@ export interface FolderPath {
      * @type {boolean}
      * @memberof FolderPath
      */
-    hasParent?: boolean;
+    hasParent?: boolean | null;
 }
 /**
  * Folder used for resource storage.
@@ -1613,7 +1730,7 @@ export interface FolderV2 {
      * @type {boolean}
      * @memberof FolderV2
      */
-    hasParent?: boolean;
+    hasParent?: boolean | null;
     /**
      * The hierarchical path. It consists of all the items of the path in reverse order, the parent of the current folder being the first in the list, and the root of the account being the last.
      * @type {Array<FolderPath>}
@@ -1632,13 +1749,13 @@ export interface FuzzyCategory {
      * @type {number}
      * @memberof FuzzyCategory
      */
-    minimum?: number;
+    minimum?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The maximum of the range.</div> 
      * @type {number}
      * @memberof FuzzyCategory
      */
-    maximum?: number;
+    maximum?: number | null;
 }
 /**
  * Statistics count for fuzzy matches.
@@ -1733,7 +1850,29 @@ export interface Group {
      * @memberof Group
      */
     users?: Array<User>;
+    /**
+     * - default : groups in the Root folder (location) provisioned by the system, automatically. Examples: Administrator, Project Manager, Engineer, Terminologist.
+     * - customer : groups provisioned by the system, automatically, for each customer location you add. Examples: Customer Requester, Customer Reviewer.
+     * - vendor : group provisioned by the system, automatically, for each vendor location you add. Examples: Vendor Project Manager.
+     * - custom : groups you can create in a location of your choice. Examples: Project Manager, Translator.
+     * @type {string}
+     * @memberof Group
+     */
+    groupType?: GroupGroupTypeEnum;
 }
+
+
+/**
+ * @export
+ */
+export const GroupGroupTypeEnum = {
+    Default: 'default',
+    Custom: 'custom',
+    Vendor: 'vendor',
+    Customer: 'customer'
+} as const;
+export type GroupGroupTypeEnum = typeof GroupGroupTypeEnum[keyof typeof GroupGroupTypeEnum];
+
 /**
  * Group of users.
  * @export
@@ -1858,8 +1997,186 @@ export interface Language {
      * @type {boolean}
      * @memberof Language
      */
-    isNeutral?: boolean;
+    isNeutral?: boolean | null;
 }
+/**
+ * 
+ * @export
+ * @interface LanguageCost
+ */
+export interface LanguageCost {
+    /**
+     * The name of the additional cost. 
+     * @type {string}
+     * @memberof LanguageCost
+     */
+    name: string;
+    /**
+     * 
+     * @type {LanguageCostType}
+     * @memberof LanguageCost
+     */
+    type: LanguageCostType;
+    /**
+     * The number of the additional cost.
+     * @type {number}
+     * @memberof LanguageCost
+     */
+    index: number;
+    /**
+     * The cost of a unit.
+     * @type {number}
+     * @memberof LanguageCost
+     */
+    costPerUnit: number;
+    /**
+     * The number of units for which a cost is applied.
+     * @type {number}
+     * @memberof LanguageCost
+     */
+    unitCount: number;
+    /**
+     * 
+     * @type {VolumeUnitType}
+     * @memberof LanguageCost
+     */
+    volumeUnitType?: VolumeUnitType;
+    /**
+     * 
+     * @type {ConditionalCostType}
+     * @memberof LanguageCost
+     */
+    conditionalCostType?: ConditionalCostType;
+    /**
+     * 
+     * @type {ConditionalCostOperator}
+     * @memberof LanguageCost
+     */
+    costOperator?: ConditionalCostOperator;
+    /**
+     * 
+     * @type {ConditionalCostVariable}
+     * @memberof LanguageCost
+     */
+    costVariable?: ConditionalCostVariable;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>Operand of the Conditional type cost.
+     * @type {number}
+     * @memberof LanguageCost
+     */
+    operand?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div> Array of Service Type identifiers where this additional cost is applied. 
+     * @type {Array<string>}
+     * @memberof LanguageCost
+     */
+    serviceTypes?: Array<string>;
+    /**
+     * The name of the custom unit.
+     * @type {string}
+     * @memberof LanguageCost
+     */
+    customUnitName?: string;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface LanguageCostRequest
+ */
+export interface LanguageCostRequest {
+    /**
+     * The name of the additional cost. 
+     * @type {string}
+     * @memberof LanguageCostRequest
+     */
+    name: string;
+    /**
+     * 
+     * @type {LanguageCostType}
+     * @memberof LanguageCostRequest
+     */
+    type: LanguageCostType;
+    /**
+     * The number of the cost.
+     * @type {number}
+     * @memberof LanguageCostRequest
+     */
+    index?: number;
+    /**
+     * The cost of a unit.
+     * @type {number}
+     * @memberof LanguageCostRequest
+     */
+    costPerUnit?: number;
+    /**
+     * The number of units for which a cost is applied.
+     * @type {number}
+     * @memberof LanguageCostRequest
+     */
+    unitCount?: number;
+    /**
+     * 
+     * @type {VolumeUnitType}
+     * @memberof LanguageCostRequest
+     */
+    volumeUnitType?: VolumeUnitType;
+    /**
+     * 
+     * @type {ConditionalCostType}
+     * @memberof LanguageCostRequest
+     */
+    conditionalCostType?: ConditionalCostType;
+    /**
+     * 
+     * @type {ConditionalCostOperator}
+     * @memberof LanguageCostRequest
+     */
+    conditionalCostOperator?: ConditionalCostOperator;
+    /**
+     * 
+     * @type {ConditionalCostVariable}
+     * @memberof LanguageCostRequest
+     */
+    conditionalCostVariable?: ConditionalCostVariable;
+    /**
+     * Operand of the Conditional type cost.
+     * @type {number}
+     * @memberof LanguageCostRequest
+     */
+    operand?: number;
+    /**
+     * Array of Service Type identifiers where this cost is applied.
+     * @type {Array<string>}
+     * @memberof LanguageCostRequest
+     */
+    serviceTypes?: Array<string>;
+    /**
+     * The name of the custom unit. Required when `volumeUnitType` is `custom`.
+     * @type {string}
+     * @memberof LanguageCostRequest
+     */
+    customUnitName?: string;
+}
+
+
+
+/**
+ * 
+ * @export
+ */
+export const LanguageCostType = {
+    Volume: 'volume',
+    Hourly: 'hourly',
+    Percentage: 'percentage',
+    PerPage: 'perPage',
+    Conditional: 'conditional',
+    Adhoc: 'adhoc',
+    AdhocVolume: 'adhocVolume'
+} as const;
+export type LanguageCostType = typeof LanguageCostType[keyof typeof LanguageCostType];
+
 /**
  * A Language Direction.
  * @export
@@ -1890,6 +2207,175 @@ export interface LanguageDirection {
      * @memberof LanguageDirection
      */
     analysisStatistics?: AnalysisStatistics;
+}
+/**
+ * 
+ * @export
+ * @interface LanguageDirectionCost
+ */
+export interface LanguageDirectionCost {
+    /**
+     * The source language code. For example: "en-US", "de-DE".
+     * @type {string}
+     * @memberof LanguageDirectionCost
+     */
+    sourceLanguage: string;
+    /**
+     * The target language code. For example: "en-US", "de-DE".
+     * @type {string}
+     * @memberof LanguageDirectionCost
+     */
+    targetLanguage: string;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of context matches.
+     * @type {number}
+     * @memberof LanguageDirectionCost
+     */
+    contextMatch?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"> The price of exact matches.
+     * @type {number}
+     * @memberof LanguageDirectionCost
+     */
+    exactMatch?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of new matches.
+     * @type {number}
+     * @memberof LanguageDirectionCost
+     */
+    _new?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of PerfectMatches.
+     * @type {number}
+     * @memberof LanguageDirectionCost
+     */
+    perfectMatch?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of repetition matches.
+     * @type {number}
+     * @memberof LanguageDirectionCost
+     */
+    repetition?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"> The price of machine translation matches.
+     * @type {number}
+     * @memberof LanguageDirectionCost
+     */
+    machineTranslation?: number;
+    /**
+     * 
+     * @type {PricingUnitType}
+     * @memberof LanguageDirectionCost
+     */
+    pricingUnit?: PricingUnitType;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">
+     * @type {Array<FuzzyMatch>}
+     * @memberof LanguageDirectionCost
+     */
+    fuzzyMatches?: Array<FuzzyMatch>;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">
+     * @type {Array<LanguageCost>}
+     * @memberof LanguageDirectionCost
+     */
+    additionalCosts?: Array<LanguageCost>;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface LanguageDirectionCostRequest
+ */
+export interface LanguageDirectionCostRequest {
+    /**
+     * The source language code. For example: "en-US", "de-DE".
+     * @type {string}
+     * @memberof LanguageDirectionCostRequest
+     */
+    sourceLanguage: string;
+    /**
+     * The target language code. For example: "en-US", "de-DE".
+     * @type {string}
+     * @memberof LanguageDirectionCostRequest
+     */
+    targetLanguage: string;
+    /**
+     * The price of context matches.
+     * @type {number}
+     * @memberof LanguageDirectionCostRequest
+     */
+    contextMatch?: number;
+    /**
+     * The price of exact matches.
+     * @type {number}
+     * @memberof LanguageDirectionCostRequest
+     */
+    exactMatch?: number;
+    /**
+     * The price of new matches.
+     * @type {number}
+     * @memberof LanguageDirectionCostRequest
+     */
+    _new?: number;
+    /**
+     * The price of PerfectMatches.
+     * @type {number}
+     * @memberof LanguageDirectionCostRequest
+     */
+    perfectMatch?: number;
+    /**
+     * The price of repetition matches.
+     * @type {number}
+     * @memberof LanguageDirectionCostRequest
+     */
+    repetition?: number;
+    /**
+     * The price of machine translation matches.
+     * @type {number}
+     * @memberof LanguageDirectionCostRequest
+     */
+    machineTranslation?: number;
+    /**
+     * 
+     * @type {PricingUnitType}
+     * @memberof LanguageDirectionCostRequest
+     */
+    pricingUnit?: PricingUnitType;
+    /**
+     * All fuzzyMatches categories should be the same for all the language directions.
+     * @type {Array<FuzzyMatch>}
+     * @memberof LanguageDirectionCostRequest
+     */
+    fuzzyMatches?: Array<FuzzyMatch>;
+    /**
+     * Additional costs applied at language level.
+     * @type {Array<LanguageCostRequest>}
+     * @memberof LanguageDirectionCostRequest
+     */
+    additionalCosts?: Array<LanguageCostRequest>;
+}
+
+
+/**
+ * The language directions model used for creating or updating a resource.
+ * @export
+ * @interface LanguageDirectionGeneralRequest
+ */
+export interface LanguageDirectionGeneralRequest {
+    /**
+     * 
+     * @type {SourceLanguageRequest}
+     * @memberof LanguageDirectionGeneralRequest
+     */
+    sourceLanguage?: SourceLanguageRequest;
+    /**
+     * 
+     * @type {TargetLanguageRequest}
+     * @memberof LanguageDirectionGeneralRequest
+     */
+    targetLanguage?: TargetLanguageRequest;
 }
 /**
  * 
@@ -1974,11 +2460,17 @@ export interface LanguagePair {
  */
 export interface LanguagePairResource {
     /**
-     * The identifier of the Translation Memory, the Termbase or the Machine Translation.
+     * The identifier of the Translation Memory, Termbase, Machine Translation or LLM.
      * @type {string}
      * @memberof LanguagePairResource
      */
     id: string;
+    /**
+     * Required only for neural Machine Translation resources.
+     * @type {string}
+     * @memberof LanguagePairResource
+     */
+    systemId?: string;
     /**
      * The resource type. 
      * @type {string}
@@ -1986,35 +2478,41 @@ export interface LanguagePairResource {
      */
     type: LanguagePairResourceTypeEnum;
     /**
-     * 
+     * Only for TM
      * @type {number}
      * @memberof LanguagePairResource
      */
     penalty?: number;
     /**
-     * 
+     * Only for TM, TB
      * @type {boolean}
      * @memberof LanguagePairResource
      */
     lookup?: boolean;
     /**
-     * 
+     * Only for TM
      * @type {boolean}
      * @memberof LanguagePairResource
      */
     concordance?: boolean;
     /**
-     * 
+     * Only for TM, TB
      * @type {boolean}
      * @memberof LanguagePairResource
      */
     update?: boolean;
     /**
-     * Required only for neural Machine Translation resources.
-     * @type {string}
+     * Only for LLM
+     * @type {boolean}
      * @memberof LanguagePairResource
      */
-    systemId?: string;
+    generativeTranslation?: boolean;
+    /**
+     * Only for LLM
+     * @type {boolean}
+     * @memberof LanguagePairResource
+     */
+    smartReview?: boolean;
 }
 
 
@@ -2024,93 +2522,10 @@ export interface LanguagePairResource {
 export const LanguagePairResourceTypeEnum = {
     Tm: 'TM',
     Mt: 'MT',
-    Tb: 'TB'
+    Tb: 'TB',
+    Llm: 'LLM'
 } as const;
 export type LanguagePairResourceTypeEnum = typeof LanguagePairResourceTypeEnum[keyof typeof LanguagePairResourceTypeEnum];
-
-/**
- * 
- * @export
- * @interface LanguagePrice
- */
-export interface LanguagePrice {
-    /**
-     * The source language code. For example: "en-US", "de-DE".
-     * @type {string}
-     * @memberof LanguagePrice
-     */
-    sourceLanguage: string;
-    /**
-     * The target language code. For example: "en-US", "de-DE".
-     * @type {string}
-     * @memberof LanguagePrice
-     */
-    targetLanguage: string;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of context matches.
-     * @type {number}
-     * @memberof LanguagePrice
-     */
-    contextMatch?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"> The price of exact matches.
-     * @type {number}
-     * @memberof LanguagePrice
-     */
-    exactMatch?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of new matches.
-     * @type {number}
-     * @memberof LanguagePrice
-     */
-    _new?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of perfect matches.
-     * @type {number}
-     * @memberof LanguagePrice
-     */
-    perfectMatch?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The price of repetition matches.
-     * @type {number}
-     * @memberof LanguagePrice
-     */
-    repetition?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"> The price of machine translation matches.
-     * @type {number}
-     * @memberof LanguagePrice
-     */
-    machineTranslation?: number;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">
-     * @type {string}
-     * @memberof LanguagePrice
-     */
-    pricingUnit?: LanguagePricePricingUnitEnum;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">
-     * @type {Array<FuzzyMatch>}
-     * @memberof LanguagePrice
-     */
-    fuzzyMatches?: Array<FuzzyMatch>;
-    /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">
-     * @type {Array<AdditionalCostLanguage>}
-     * @memberof LanguagePrice
-     */
-    additionalCosts?: Array<AdditionalCostLanguage>;
-}
-
-
-/**
- * @export
- */
-export const LanguagePricePricingUnitEnum = {
-    Words: 'words',
-    Characters: 'characters'
-} as const;
-export type LanguagePricePricingUnitEnum = typeof LanguagePricePricingUnitEnum[keyof typeof LanguagePricePricingUnitEnum];
 
 /**
  * 
@@ -2149,6 +2564,25 @@ export interface LanguageRequest {
      * @memberof LanguageRequest
      */
     languageCode: string;
+}
+/**
+ * A response for the List Applications endpoint.
+ * @export
+ * @interface ListApplicationsResponse
+ */
+export interface ListApplicationsResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof ListApplicationsResponse
+     */
+    itemCount: number;
+    /**
+     * 
+     * @type {Array<Application>}
+     * @memberof ListApplicationsResponse
+     */
+    items: Array<Application>;
 }
 /**
  * A response for the List Custom Field Definitions endpoint.
@@ -2303,6 +2737,25 @@ export interface ListLanguagesResponse {
     items: Array<Language>;
 }
 /**
+ * A response for the List LLM Configurations endpoint.
+ * @export
+ * @interface ListLlmConfigurationsResponse
+ */
+export interface ListLlmConfigurationsResponse {
+    /**
+     * The total item count.
+     * @type {number}
+     * @memberof ListLlmConfigurationsResponse
+     */
+    itemCount: number;
+    /**
+     * 
+     * @type {Array<LlmConfigurationResponse>}
+     * @memberof ListLlmConfigurationsResponse
+     */
+    items: Array<LlmConfigurationResponse>;
+}
+/**
  * A response for the List Machine Translations endpoint.
  * @export
  * @interface ListMachineTranslationsResponse
@@ -2339,6 +2792,25 @@ export interface ListMyAccountsResponse {
      * @memberof ListMyAccountsResponse
      */
     items: Array<Account>;
+}
+/**
+ * A response for the Get PerfectMatch Candidates endpoint.
+ * @export
+ * @interface ListPerfectMatchCandidatesResponse
+ */
+export interface ListPerfectMatchCandidatesResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof ListPerfectMatchCandidatesResponse
+     */
+    itemCount: number;
+    /**
+     * 
+     * @type {Array<PerfectMatchCandidate>}
+     * @memberof ListPerfectMatchCandidatesResponse
+     */
+    items: Array<PerfectMatchCandidate>;
 }
 /**
  * A response for the List Pricing Models endpoint.
@@ -2759,6 +3231,25 @@ export interface ListTranslationMemoryImportHistory {
     itemCount?: number;
 }
 /**
+ * A response for the List Translation Service Types endpoint.
+ * @export
+ * @interface ListTranslationServiceTypesResponse
+ */
+export interface ListTranslationServiceTypesResponse {
+    /**
+     * 
+     * @type {number}
+     * @memberof ListTranslationServiceTypesResponse
+     */
+    itemCount: number;
+    /**
+     * 
+     * @type {Array<TranslationServiceType>}
+     * @memberof ListTranslationServiceTypesResponse
+     */
+    items: Array<TranslationServiceType>;
+}
+/**
  * A response for the List Users endpoint.
  * @export
  * @interface ListUsersResponse
@@ -2796,6 +3287,60 @@ export interface ListWorkflowsResponse {
      */
     items: Array<Workflow>;
 }
+/**
+ * The LLM configuration details
+ * @export
+ * @interface LlmConfigurationResponse
+ */
+export interface LlmConfigurationResponse {
+    /**
+     * The LLM configuraiton identifier.
+     * @type {string}
+     * @memberof LlmConfigurationResponse
+     */
+    id: string;
+    /**
+     * The configuration description.
+     * @type {string}
+     * @memberof LlmConfigurationResponse
+     */
+    description?: string;
+    /**
+     * The model name.
+     * @type {string}
+     * @memberof LlmConfigurationResponse
+     */
+    model: string;
+    /**
+     * The LLM provider type.
+     * @type {string}
+     * @memberof LlmConfigurationResponse
+     */
+    type: LlmConfigurationResponseTypeEnum;
+    /**
+     * Flag representing whether the LLM configuration is default.
+     * @type {boolean}
+     * @memberof LlmConfigurationResponse
+     */
+    isDefault: boolean;
+    /**
+     * Flag representing whether the LLM configuration is active.
+     * @type {boolean}
+     * @memberof LlmConfigurationResponse
+     */
+    isActive: boolean;
+}
+
+
+/**
+ * @export
+ */
+export const LlmConfigurationResponseTypeEnum = {
+    AzureOpenAi: 'azureOpenAI',
+    AwsBedrock: 'awsBedrock'
+} as const;
+export type LlmConfigurationResponseTypeEnum = typeof LlmConfigurationResponseTypeEnum[keyof typeof LlmConfigurationResponseTypeEnum];
+
 /**
  * Machine translation resource.
  * @export
@@ -2880,6 +3425,461 @@ export interface ObjectIdRequest {
 /**
  * 
  * @export
+ * @interface PerfectMatchBatchMapping
+ */
+export interface PerfectMatchBatchMapping {
+    /**
+     * The identifier of this batch mapping.
+     * @type {string}
+     * @memberof PerfectMatchBatchMapping
+     */
+    id: string;
+    /**
+     * The project batch associated with this mapping.
+     * @type {number}
+     * @memberof PerfectMatchBatchMapping
+     */
+    batch?: number;
+    /**
+     * The status of the matching operation.
+     * 
+     * - `pending` - The matching background operation has not started yet.
+     * - `generating` - The system is currently matching candidates.
+     * - `generated` - The matching background operation has finished and any possible candidates have been found.
+     * @type {string}
+     * @memberof PerfectMatchBatchMapping
+     */
+    status?: PerfectMatchBatchMappingStatusEnum;
+    /**
+     * 
+     * @type {Array<Project>}
+     * @memberof PerfectMatchBatchMapping
+     */
+    matchingProjects?: Array<Project>;
+    /**
+     * The file matches identified based on this mapping. Matching files will be available when status is `generated`.
+     * @type {Array<PerfectMatchFileMapping>}
+     * @memberof PerfectMatchBatchMapping
+     */
+    matchingFiles?: Array<PerfectMatchFileMapping>;
+}
+
+
+/**
+ * @export
+ */
+export const PerfectMatchBatchMappingStatusEnum = {
+    Generating: 'generating',
+    Generated: 'generated',
+    Pending: 'pending'
+} as const;
+export type PerfectMatchBatchMappingStatusEnum = typeof PerfectMatchBatchMappingStatusEnum[keyof typeof PerfectMatchBatchMappingStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface PerfectMatchBatchMappingCreatedResponse
+ */
+export interface PerfectMatchBatchMappingCreatedResponse {
+    /**
+     * The identifier of this batch mapping.
+     * @type {string}
+     * @memberof PerfectMatchBatchMappingCreatedResponse
+     */
+    id: string;
+    /**
+     * The project batch associated with this mapping.
+     * @type {number}
+     * @memberof PerfectMatchBatchMappingCreatedResponse
+     */
+    batch?: number;
+    /**
+     * The status of the matching operation.
+     * 
+     * - `pending` - The matching background operation has not started yet.
+     * - `generating` - The system is currently matching candidates.
+     * - `generated` - The matching background operation has finished and any possible candidates have been found.
+     * @type {string}
+     * @memberof PerfectMatchBatchMappingCreatedResponse
+     */
+    status?: PerfectMatchBatchMappingCreatedResponseStatusEnum;
+    /**
+     * 
+     * @type {Array<Project>}
+     * @memberof PerfectMatchBatchMappingCreatedResponse
+     */
+    matchingProjects?: Array<Project>;
+}
+
+
+/**
+ * @export
+ */
+export const PerfectMatchBatchMappingCreatedResponseStatusEnum = {
+    Generating: 'generating',
+    Generated: 'generated',
+    Pending: 'pending'
+} as const;
+export type PerfectMatchBatchMappingCreatedResponseStatusEnum = typeof PerfectMatchBatchMappingCreatedResponseStatusEnum[keyof typeof PerfectMatchBatchMappingCreatedResponseStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface PerfectMatchBatchMappingUpdateRequest
+ */
+export interface PerfectMatchBatchMappingUpdateRequest {
+    /**
+     * 
+     * @type {Array<LanguageDirectionRequest>}
+     * @memberof PerfectMatchBatchMappingUpdateRequest
+     */
+    languageDirections: Array<LanguageDirectionRequest>;
+    /**
+     * 
+     * @type {Array<PerfectMatchFileMappingRequest>}
+     * @memberof PerfectMatchBatchMappingUpdateRequest
+     */
+    files: Array<PerfectMatchFileMappingRequest>;
+    /**
+     * A collection of project identifiers that will be used to find matches and candidates for PerfectMatch mapping.
+     * @type {Array<string>}
+     * @memberof PerfectMatchBatchMappingUpdateRequest
+     */
+    matchingProjects?: Array<string>;
+}
+/**
+ * A project file that can be used as a match for PerfectMatch
+ * @export
+ * @interface PerfectMatchCandidate
+ */
+export interface PerfectMatchCandidate {
+    /**
+     * The match score.
+     * @type {number}
+     * @memberof PerfectMatchCandidate
+     */
+    score: number;
+    /**
+     * The file identifier:
+     * - `targetFileId` if file is a project file
+     * - `fileId` if file is user provided
+     * @type {string}
+     * @memberof PerfectMatchCandidate
+     */
+    fileId: string;
+    /**
+     * 
+     * @type {Project}
+     * @memberof PerfectMatchCandidate
+     */
+    project?: Project;
+}
+/**
+ * Provide you own matching file.
+ * @export
+ * @interface PerfectMatchCustomFileMappingRequest
+ */
+export interface PerfectMatchCustomFileMappingRequest {
+    /**
+     * 
+     * @type {PerfectMatchCustomFileMappingRequestProperties}
+     * @memberof PerfectMatchCustomFileMappingRequest
+     */
+    properties: PerfectMatchCustomFileMappingRequestProperties;
+    /**
+     * The source file (binary string). Only SDLXLIFF files are accepted.
+     * @type {Blob}
+     * @memberof PerfectMatchCustomFileMappingRequest
+     */
+    file: Blob;
+}
+/**
+ * 
+ * @export
+ * @interface PerfectMatchCustomFileMappingRequestProperties
+ */
+export interface PerfectMatchCustomFileMappingRequestProperties {
+    /**
+     * The file name.
+     * @type {string}
+     * @memberof PerfectMatchCustomFileMappingRequestProperties
+     */
+    name: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PerfectMatchCustomFileMappingRequestProperties
+     */
+    targetLanguage: string;
+}
+/**
+ * 
+ * @export
+ * @interface PerfectMatchFileMapping
+ */
+export interface PerfectMatchFileMapping {
+    /**
+     * The identifier of this file mapping.
+     * @type {string}
+     * @memberof PerfectMatchFileMapping
+     */
+    fileMappingId: string;
+    /**
+     * The file identifier.
+     * @type {string}
+     * @memberof PerfectMatchFileMapping
+     */
+    fileId?: string;
+    /**
+     * The file name.
+     * @type {string}
+     * @memberof PerfectMatchFileMapping
+     */
+    fileName?: string;
+    /**
+     * File target languages.
+     * @type {Array<Language>}
+     * @memberof PerfectMatchFileMapping
+     */
+    targetLanguages: Array<Language>;
+    /**
+     * The file matches.
+     * @type {Array<PerfectMatchFileMatch>}
+     * @memberof PerfectMatchFileMapping
+     */
+    matches: Array<PerfectMatchFileMatch>;
+}
+/**
+ * 
+ * @export
+ * @interface PerfectMatchFileMappingRequest
+ */
+export interface PerfectMatchFileMappingRequest {
+    /**
+     * The source file identifier.
+     * @type {string}
+     * @memberof PerfectMatchFileMappingRequest
+     */
+    sourceFileId: string;
+    /**
+     * The file name.
+     * @type {string}
+     * @memberof PerfectMatchFileMappingRequest
+     */
+    fileName: string;
+    /**
+     * File target languages. If no languages are specified, all language directions from the batch mapping will be used.
+     * @type {Array<TargetLanguageRequest>}
+     * @memberof PerfectMatchFileMappingRequest
+     */
+    targetLanguages?: Array<TargetLanguageRequest>;
+}
+/**
+ * 
+ * @export
+ * @interface PerfectMatchFileMatch
+ */
+export interface PerfectMatchFileMatch {
+    /**
+     * The file name.
+     * @type {string}
+     * @memberof PerfectMatchFileMatch
+     */
+    fileName: string;
+    /**
+     * 
+     * @type {Language}
+     * @memberof PerfectMatchFileMatch
+     */
+    targetLanguage: Language;
+    /**
+     * 
+     * @type {PerfectMatchFileOrigin}
+     * @memberof PerfectMatchFileMatch
+     */
+    origin?: PerfectMatchFileOrigin;
+}
+/**
+ * 
+ * @export
+ * @interface PerfectMatchFileOrigin
+ */
+export interface PerfectMatchFileOrigin {
+    /**
+     * 
+     * @type {string}
+     * @memberof PerfectMatchFileOrigin
+     */
+    fileId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PerfectMatchFileOrigin
+     */
+    matchSource?: PerfectMatchFileOriginMatchSourceEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof PerfectMatchFileOrigin
+     */
+    projectId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PerfectMatchFileOrigin
+     */
+    type?: PerfectMatchFileOriginTypeEnum;
+}
+
+
+/**
+ * @export
+ */
+export const PerfectMatchFileOriginMatchSourceEnum = {
+    UserUpload: 'userUpload',
+    PerfectMatch: 'perfectMatch',
+    CandidateConfirm: 'candidateConfirm',
+    UserSelection: 'userSelection'
+} as const;
+export type PerfectMatchFileOriginMatchSourceEnum = typeof PerfectMatchFileOriginMatchSourceEnum[keyof typeof PerfectMatchFileOriginMatchSourceEnum];
+
+/**
+ * @export
+ */
+export const PerfectMatchFileOriginTypeEnum = {
+    Bcm: 'bcm',
+    SdlXliff: 'sdlXliff'
+} as const;
+export type PerfectMatchFileOriginTypeEnum = typeof PerfectMatchFileOriginTypeEnum[keyof typeof PerfectMatchFileOriginTypeEnum];
+
+/**
+ * A request to create a new PerfectMatch mapping.
+ * @export
+ * @interface PerfectMatchMappingCreateRequest
+ */
+export interface PerfectMatchMappingCreateRequest {
+    /**
+     * The project identifier this mapping will be used on.
+     * @type {string}
+     * @memberof PerfectMatchMappingCreateRequest
+     */
+    projectId: string;
+    /**
+     * A collection of projects that will be used to find matches and candidates for PerfectMatch mapping.
+     * @type {Array<string>}
+     * @memberof PerfectMatchMappingCreateRequest
+     */
+    matchingProjects?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface PerfectMatchMappingCreateResponse
+ */
+export interface PerfectMatchMappingCreateResponse {
+    /**
+     * The mapping identifier.
+     * @type {string}
+     * @memberof PerfectMatchMappingCreateResponse
+     */
+    id: string;
+    /**
+     * 
+     * @type {Project}
+     * @memberof PerfectMatchMappingCreateResponse
+     */
+    project?: Project;
+    /**
+     * 
+     * @type {User}
+     * @memberof PerfectMatchMappingCreateResponse
+     */
+    createdBy?: User;
+    /**
+     * A collection of mappings per project batches.
+     * @type {Array<PerfectMatchBatchMappingCreatedResponse>}
+     * @memberof PerfectMatchMappingCreateResponse
+     */
+    batchMappings?: Array<PerfectMatchBatchMappingCreatedResponse>;
+}
+/**
+ * 
+ * @export
+ * @interface PerfectMatchMappingResponse
+ */
+export interface PerfectMatchMappingResponse {
+    /**
+     * The mapping identifier.
+     * @type {string}
+     * @memberof PerfectMatchMappingResponse
+     */
+    id: string;
+    /**
+     * 
+     * @type {Project}
+     * @memberof PerfectMatchMappingResponse
+     */
+    project?: Project;
+    /**
+     * 
+     * @type {User}
+     * @memberof PerfectMatchMappingResponse
+     */
+    createdBy?: User;
+    /**
+     * A collection of mappings per project batches.
+     * @type {Array<PerfectMatchBatchMapping>}
+     * @memberof PerfectMatchMappingResponse
+     */
+    batchMappings?: Array<PerfectMatchBatchMapping>;
+}
+/**
+ * PerfectMatch Mapping (Not available for List Projects endpoint)
+ * @export
+ * @interface PerfectMatchMappingSimpleResponse
+ */
+export interface PerfectMatchMappingSimpleResponse {
+    /**
+     * The mapping identifier.
+     * @type {string}
+     * @memberof PerfectMatchMappingSimpleResponse
+     */
+    id: string;
+    /**
+     * 
+     * @type {User}
+     * @memberof PerfectMatchMappingSimpleResponse
+     */
+    createdBy?: User;
+    /**
+     * A collection of mappings per project batches.
+     * @type {Array<PerfectMatchBatchMapping>}
+     * @memberof PerfectMatchMappingSimpleResponse
+     */
+    batchMappings?: Array<PerfectMatchBatchMapping>;
+}
+/**
+ * Provide a matching file from an existing project.
+ * @export
+ * @interface PerfectMatchProjectFileMappingRequest
+ */
+export interface PerfectMatchProjectFileMappingRequest {
+    /**
+     * The `targetFileId` from the referenced project. Must be from a PerfectMatch Candidate.
+     * @type {string}
+     * @memberof PerfectMatchProjectFileMappingRequest
+     */
+    fileId: string;
+    /**
+     * Specifies which project the matching file belongs to. Must be from a PerfectMatch Candidate.
+     * @type {string}
+     * @memberof PerfectMatchProjectFileMappingRequest
+     */
+    projectId: string;
+}
+/**
+ * 
+ * @export
  * @interface PollQuoteReportExport200Response
  */
 export interface PollQuoteReportExport200Response {
@@ -2914,11 +3914,11 @@ export interface PricingModel {
      */
     id: string;
     /**
-     * The name of the Pricing Model. 
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The name of the Pricing Model.</div>
      * @type {string}
      * @memberof PricingModel
      */
-    name: string;
+    name?: string;
     /**
      * The description of the Pricing Model. 
      * @type {string}
@@ -2938,18 +3938,109 @@ export interface PricingModel {
      */
     location?: FolderV2;
     /**
-     * 
-     * @type {Array<LanguagePrice>}
+     * Costs applied for languages.
+     * @type {Array<LanguageDirectionCost>}
      * @memberof PricingModel
      */
-    languageDirectionPricing?: Array<LanguagePrice>;
+    languageDirectionPricing?: Array<LanguageDirectionCost>;
     /**
-     * 
-     * @type {Array<AdditionalCost>}
+     * Additional costs applied at project level.
+     * @type {Array<ProjectCost>}
      * @memberof PricingModel
      */
-    additionalCosts?: Array<AdditionalCost>;
+    additionalCosts?: Array<ProjectCost>;
 }
+/**
+ * 
+ * @export
+ * @interface PricingModelCreateRequest
+ */
+export interface PricingModelCreateRequest {
+    /**
+     * The name of the Pricing Model. 
+     * @type {string}
+     * @memberof PricingModelCreateRequest
+     */
+    name: string;
+    /**
+     * The description of the Pricing Model. 
+     * @type {string}
+     * @memberof PricingModelCreateRequest
+     */
+    description?: string;
+    /**
+     * The currency code (ISO 4217).
+     * @type {string}
+     * @memberof PricingModelCreateRequest
+     */
+    currencyCode: string;
+    /**
+     * The location of the pricing model.
+     * @type {string}
+     * @memberof PricingModelCreateRequest
+     */
+    location: string;
+    /**
+     * Costs applied for languages.
+     * @type {Array<LanguageDirectionCostRequest>}
+     * @memberof PricingModelCreateRequest
+     */
+    languageDirectionPricing: Array<LanguageDirectionCostRequest>;
+    /**
+     * Additional costs applied at project level.
+     * @type {Array<ProjectCostRequest>}
+     * @memberof PricingModelCreateRequest
+     */
+    additionalCosts?: Array<ProjectCostRequest>;
+}
+/**
+ * 
+ * @export
+ * @interface PricingModelUpdateRequest
+ */
+export interface PricingModelUpdateRequest {
+    /**
+     * The name of the Pricing Model. 
+     * @type {string}
+     * @memberof PricingModelUpdateRequest
+     */
+    name?: string;
+    /**
+     * The description of the Pricing Model. 
+     * @type {string}
+     * @memberof PricingModelUpdateRequest
+     */
+    description?: string;
+    /**
+     * The currency code (ISO 4217).
+     * @type {string}
+     * @memberof PricingModelUpdateRequest
+     */
+    currencyCode?: string;
+    /**
+     * Costs applied for languages.
+     * @type {Array<LanguageDirectionCostRequest>}
+     * @memberof PricingModelUpdateRequest
+     */
+    languageDirectionPricing?: Array<LanguageDirectionCostRequest>;
+    /**
+     * Additional costs applied at project level.
+     * @type {Array<ProjectCostRequest>}
+     * @memberof PricingModelUpdateRequest
+     */
+    additionalCosts?: Array<ProjectCostRequest>;
+}
+
+/**
+ * 
+ * @export
+ */
+export const PricingUnitType = {
+    Words: 'words',
+    Characters: 'characters'
+} as const;
+export type PricingUnitType = typeof PricingUnitType[keyof typeof PricingUnitType];
+
 /**
  * Project resource.
  * @export
@@ -2985,31 +4076,31 @@ export interface Project {
      * @type {Date}
      * @memberof Project
      */
-    dueBy?: Date;
+    dueBy?: Date | null;
     /**
      *  UTC Timezone <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ"
      * @type {Date}
      * @memberof Project
      */
-    deliveredBy?: Date;
+    deliveredBy?: Date | null;
     /**
      * The project's creation date and time. <br> UTC Timezone <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ"
      * @type {Date}
      * @memberof Project
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * The project's status.
      * @type {string}
      * @memberof Project
      */
-    status?: ProjectStatusEnum;
+    status?: ProjectStatusEnum | null;
     /**
      * The project's status history.
      * @type {Array<ProjectStatusHistory>}
      * @memberof Project
      */
-    statusHistory?: Array<ProjectStatusHistory>;
+    statusHistory?: Array<ProjectStatusHistory> | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The project's language directions.</div> 
      * @type {Array<LanguageDirection>}
@@ -3101,7 +4192,7 @@ export interface Project {
      */
     tqaProfile?: TqaProfile;
     /**
-     * This forces the project to be translated using the Language Cloud Online Editor exclusively.
+     * This forces the project to be translated using the Trados Cloud Platform Online Editor exclusively.
      * @type {boolean}
      * @memberof Project
      */
@@ -3130,6 +4221,12 @@ export interface Project {
      * @memberof Project
      */
     scheduleTemplate?: ScheduleTemplate;
+    /**
+     * 
+     * @type {PerfectMatchMappingSimpleResponse}
+     * @memberof Project
+     */
+    perfectMatchMapping?: PerfectMatchMappingSimpleResponse;
     /**
      * 
      * @type {ProjectSettingsResponse}
@@ -3187,7 +4284,193 @@ export interface ProjectConfigurationRequest {
      * @memberof ProjectConfigurationRequest
      */
     updateTranslationMemory?: UpdateTranslationMemory;
+    /**
+     * The PerfectMatch mapping to be associated with the project.
+     * @type {string}
+     * @memberof ProjectConfigurationRequest
+     */
+    perfectMatchMappingId?: string;
 }
+/**
+ * 
+ * @export
+ * @interface ProjectCost
+ */
+export interface ProjectCost {
+    /**
+     * The name of the additional cost. 
+     * @type {string}
+     * @memberof ProjectCost
+     */
+    name: string;
+    /**
+     * 
+     * @type {ProjectCostType}
+     * @memberof ProjectCost
+     */
+    type: ProjectCostType;
+    /**
+     * The number of the additional cost.
+     * @type {number}
+     * @memberof ProjectCost
+     */
+    index: number;
+    /**
+     * The cost of a unit.
+     * @type {number}
+     * @memberof ProjectCost
+     */
+    costPerUnit: number;
+    /**
+     * The number of units for which a cost is applied.
+     * @type {number}
+     * @memberof ProjectCost
+     */
+    unitCount: number;
+    /**
+     * 
+     * @type {VolumeUnitType}
+     * @memberof ProjectCost
+     */
+    volumeUnitType?: VolumeUnitType;
+    /**
+     * 
+     * @type {ConditionalCostType}
+     * @memberof ProjectCost
+     */
+    conditionalCostType?: ConditionalCostType;
+    /**
+     * 
+     * @type {ConditionalCostOperator}
+     * @memberof ProjectCost
+     */
+    costOperator?: ConditionalCostOperator;
+    /**
+     * 
+     * @type {ConditionalCostVariable}
+     * @memberof ProjectCost
+     */
+    costVariable?: ConditionalCostVariable;
+    /**
+     * Operand of the Conditional type cost.
+     * @type {number}
+     * @memberof ProjectCost
+     */
+    operand?: number;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div> Array of Service Type identifiers where this additional cost is applied. 
+     * @type {Array<string>}
+     * @memberof ProjectCost
+     */
+    serviceTypes?: Array<string>;
+    /**
+     * The name of the custom unit.
+     * @type {string}
+     * @memberof ProjectCost
+     */
+    customUnitName?: string;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface ProjectCostRequest
+ */
+export interface ProjectCostRequest {
+    /**
+     * The name of the additional cost. 
+     * @type {string}
+     * @memberof ProjectCostRequest
+     */
+    name: string;
+    /**
+     * 
+     * @type {ProjectCostType}
+     * @memberof ProjectCostRequest
+     */
+    type: ProjectCostType;
+    /**
+     * The number of the additional cost.
+     * @type {number}
+     * @memberof ProjectCostRequest
+     */
+    index?: number;
+    /**
+     * The cost of a unit.
+     * @type {number}
+     * @memberof ProjectCostRequest
+     */
+    costPerUnit?: number;
+    /**
+     * The number of units for which a cost is applied.
+     * @type {number}
+     * @memberof ProjectCostRequest
+     */
+    unitCount?: number;
+    /**
+     * 
+     * @type {VolumeUnitType}
+     * @memberof ProjectCostRequest
+     */
+    volumeUnitType?: VolumeUnitType;
+    /**
+     * 
+     * @type {ConditionalCostType}
+     * @memberof ProjectCostRequest
+     */
+    conditionalCostType?: ConditionalCostType;
+    /**
+     * 
+     * @type {ConditionalCostOperator}
+     * @memberof ProjectCostRequest
+     */
+    costOperator?: ConditionalCostOperator;
+    /**
+     * 
+     * @type {ConditionalCostVariable}
+     * @memberof ProjectCostRequest
+     */
+    costVariable?: ConditionalCostVariable;
+    /**
+     * Operand of the Conditional type cost.
+     * @type {number}
+     * @memberof ProjectCostRequest
+     */
+    operand?: number;
+    /**
+     * Array of Service Type identifiers where this additional cost is applied.
+     * @type {Array<string>}
+     * @memberof ProjectCostRequest
+     */
+    serviceTypes?: Array<string>;
+    /**
+     * The name of the custom unit. Required when `volumeUnitType` is `custom`.
+     * @type {string}
+     * @memberof ProjectCostRequest
+     */
+    customUnitName?: string;
+}
+
+
+
+/**
+ * 
+ * @export
+ */
+export const ProjectCostType = {
+    Volume: 'volume',
+    PerTargetLanguage: 'perTargetLanguage',
+    PerFile: 'perFile',
+    Hourly: 'hourly',
+    Percentage: 'percentage',
+    PerPage: 'perPage',
+    Conditional: 'conditional',
+    Adhoc: 'adhoc',
+    AdhocVolume: 'adhocVolume'
+} as const;
+export type ProjectCostType = typeof ProjectCostType[keyof typeof ProjectCostType];
+
 /**
  * Input for Project creation.
  * 
@@ -3272,7 +4555,7 @@ export interface ProjectCreateRequest {
      */
     tqaProfile?: ConfigurationResourceRequest;
     /**
-     * This forces the project to be translated using the Language Cloud Online Editor exclusively.
+     * This forces the project to be translated using the Trados Cloud Platform Online Editor exclusively.
      * @type {boolean}
      * @memberof ProjectCreateRequest
      */
@@ -3291,10 +4574,10 @@ export interface ProjectCreateRequest {
     scheduleTemplate?: ConfigurationResourceRequest;
     /**
      * 
-     * @type {ProjectSettingsRequest}
+     * @type {ProjectSettingsCreateRequest}
      * @memberof ProjectCreateRequest
      */
-    settings?: ProjectSettingsRequest;
+    settings?: ProjectSettingsCreateRequest;
 }
 /**
  * Project Group resource. (Not available for List Projects endpoint)
@@ -3614,7 +4897,11 @@ export const ProjectManagerResponseTypeEnum = {
 export type ProjectManagerResponseTypeEnum = typeof ProjectManagerResponseTypeEnum[keyof typeof ProjectManagerResponseTypeEnum];
 
 /**
- * The configurations of the tasks that will be created in the future. (Not available for List Projects endpoint)
+ * The configurations of the tasks that will be created in the future.
+ * 
+ * Available now directly after project creation, project does not need to be started to be populated. 
+ * 
+ * (Not available for List Projects endpoint)
  * @export
  * @interface ProjectPlan
  */
@@ -3687,13 +4974,13 @@ export interface ProjectPlanTaskConfiguration {
      * @type {boolean}
      * @memberof ProjectPlanTaskConfiguration
      */
-    isSkipped?: boolean;
+    isSkipped?: boolean | null;
     /**
      * The due date of the future task. <br> UTC Timezone <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ"
      * @type {Date}
      * @memberof ProjectPlanTaskConfiguration
      */
-    dueBy?: Date;
+    dueBy?: Date | null;
 }
 /**
  * A project plan task configuration request. Used to update a task that will be created in the future.
@@ -3733,7 +5020,7 @@ export interface ProjectPlanTaskConfigurationRequest {
      * @type {Date}
      * @memberof ProjectPlanTaskConfigurationRequest
      */
-    dueBy?: Date;
+    dueBy?: Date | null;
 }
 /**
  * Updates the configurations of the tasks that will be created in the future. 
@@ -3749,6 +5036,38 @@ export interface ProjectPlanUpdateRequest {
      */
     taskConfigurations: Array<ProjectPlanTaskConfigurationRequest>;
 }
+/**
+ * 
+ * @export
+ * @interface ProjectPricingModelUpdateRequest
+ */
+export interface ProjectPricingModelUpdateRequest {
+    /**
+     * The pricing model identifier.
+     * @type {string}
+     * @memberof ProjectPricingModelUpdateRequest
+     */
+    id: string;
+    /**
+     * "copy": A copy of the resource will be used for the project execution. This is the default strategy.
+     * 
+     * "use": The actual resource will be used for the project execution.
+     * @type {string}
+     * @memberof ProjectPricingModelUpdateRequest
+     */
+    strategy?: ProjectPricingModelUpdateRequestStrategyEnum;
+}
+
+
+/**
+ * @export
+ */
+export const ProjectPricingModelUpdateRequestStrategyEnum = {
+    Copy: 'copy',
+    Use: 'use'
+} as const;
+export type ProjectPricingModelUpdateRequestStrategyEnum = typeof ProjectPricingModelUpdateRequestStrategyEnum[keyof typeof ProjectPricingModelUpdateRequestStrategyEnum];
+
 /**
  * Project Quote Template resource.
  * @export
@@ -3814,6 +5133,19 @@ export interface ProjectQuoteTemplateDeprecated {
 /**
  * 
  * @export
+ * @interface ProjectSettingsCreateRequest
+ */
+export interface ProjectSettingsCreateRequest {
+    /**
+     * 
+     * @type {ProjectSettingsGeneralRequest}
+     * @memberof ProjectSettingsCreateRequest
+     */
+    general?: ProjectSettingsGeneralRequest;
+}
+/**
+ * 
+ * @export
  * @interface ProjectSettingsGeneralRequest
  */
 export interface ProjectSettingsGeneralRequest {
@@ -3840,19 +5172,6 @@ export interface ProjectSettingsGeneralResponse {
 /**
  * 
  * @export
- * @interface ProjectSettingsRequest
- */
-export interface ProjectSettingsRequest {
-    /**
-     * 
-     * @type {ProjectSettingsGeneralRequest}
-     * @memberof ProjectSettingsRequest
-     */
-    general?: ProjectSettingsGeneralRequest;
-}
-/**
- * 
- * @export
  * @interface ProjectSettingsResponse
  */
 export interface ProjectSettingsResponse {
@@ -3862,6 +5181,31 @@ export interface ProjectSettingsResponse {
      * @memberof ProjectSettingsResponse
      */
     general?: ProjectSettingsGeneralResponse;
+    /**
+     * 
+     * @type {ProjectTranslationMemorySettingsResponse}
+     * @memberof ProjectSettingsResponse
+     */
+    translationMemorySettings?: ProjectTranslationMemorySettingsResponse;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectSettingsUpdateRequest
+ */
+export interface ProjectSettingsUpdateRequest {
+    /**
+     * 
+     * @type {ProjectSettingsGeneralRequest}
+     * @memberof ProjectSettingsUpdateRequest
+     */
+    general?: ProjectSettingsGeneralRequest;
+    /**
+     * 
+     * @type {TranslationMemorySettingsRequest}
+     * @memberof ProjectSettingsUpdateRequest
+     */
+    translationMemorySettings?: TranslationMemorySettingsRequest;
 }
 /**
  * An Item which describes a change in the status of the project.
@@ -3892,7 +5236,7 @@ export interface ProjectStatusHistory {
      * @type {Date}
      * @memberof ProjectStatusHistory
      */
-    timestamp?: Date;
+    timestamp?: Date | null;
 }
 
 
@@ -3932,9 +5276,9 @@ export interface ProjectTemplateBatchTasksPreprocessingSettings {
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Options: 
      * - `keepExisting`: no segments are overwritten, existing segments are kept;
-     * - `overwriteIfBetter`: unlocked segments (including confirmed segments) are overwritten, while unlocked Perfect Match segments and locked segments are not overwritten; 
-     * - `overwriteAlways`: Perfect Match segments (both locked and unlocked) are overwritten, while other locked segments are not overwritten;
-     * - `overwriteExceptPerfectMatch`: unlocked segments (including confirmed segments) and locked segments are overwritten, while unlocked Perfect Match segments are not overwritten; </div> 
+     * - `overwriteIfBetter`: unlocked segments (including confirmed segments) are overwritten, while unlocked PerfectMatch segments and locked segments are not overwritten; 
+     * - `overwriteAlways`: PerfectMatch segments (both locked and unlocked) are overwritten, while other locked segments are not overwritten;
+     * - `overwriteExceptPerfectMatch`: unlocked segments (including confirmed segments) and locked segments are overwritten, while unlocked PerfectMatch segments are not overwritten; </div> 
      * @type {string}
      * @memberof ProjectTemplateBatchTasksPreprocessingSettings
      */
@@ -3984,7 +5328,10 @@ export const ProjectTemplateBatchTasksPreprocessingSettingsAfterApplyingTranslat
     ConfirmExactMatches: 'confirmExactMatches',
     ConfirmContextMatches: 'confirmContextMatches',
     LockExactMatches: 'lockExactMatches',
-    LockContextMatches: 'lockContextMatches'
+    LockContextMatches: 'lockContextMatches',
+    LockGreenSegments: 'lockGreenSegments',
+    LockAmberSegments: 'lockAmberSegments',
+    LockRedSegments: 'lockRedSegments'
 } as const;
 export type ProjectTemplateBatchTasksPreprocessingSettingsAfterApplyingTranslationsEnum = typeof ProjectTemplateBatchTasksPreprocessingSettingsAfterApplyingTranslationsEnum[keyof typeof ProjectTemplateBatchTasksPreprocessingSettingsAfterApplyingTranslationsEnum];
 
@@ -4104,7 +5451,7 @@ export interface ProjectTemplateCreateRequest {
  */
 export interface ProjectTemplateGeneralSettingsRequest {
     /**
-     * This forces the project to be translated using the Language Cloud Online Editor exclusively.
+     * This forces the project to be translated using the Trados Cloud Platform Online Editor exclusively.
      * @type {boolean}
      * @memberof ProjectTemplateGeneralSettingsRequest
      */
@@ -4172,7 +5519,7 @@ export interface ProjectTemplateGeneralSettingsResponse {
  */
 export interface ProjectTemplateGeneralSettingsUpdate {
     /**
-     * This forces the project to be translated using the Language Cloud Online Editor exclusively.
+     * This forces the project to be translated using the Trados Cloud Platform Online Editor exclusively.
      * @type {boolean}
      * @memberof ProjectTemplateGeneralSettingsUpdate
      */
@@ -4342,7 +5689,8 @@ export interface ProjectTemplateSettingsRequest {
 }
 /**
  * Project Template settings. See detailed description of options on the <a href="https://docs.rws.com/791595/1054430/trados-enterprise---accelerate/creating-project-templates/procedure">Official Documentation</a> page. 
- *  (Not available for List Projects/ProjectTemplates endpoint)
+ * 
+ *  (Not available for List Project Templates endpoint)
  * @export
  * @interface ProjectTemplateSettingsResponse
  */
@@ -4373,10 +5721,16 @@ export interface ProjectTemplateSettingsResponse {
     qualityManagement?: ProjectTemplateQualityManagementSettingsResponse;
     /**
      * 
-     * @type {ProjectTemplateTranslationMemorySettings}
+     * @type {ProjectTemplateTermbaseSettingsResponse}
      * @memberof ProjectTemplateSettingsResponse
      */
-    translationMemorySettings?: ProjectTemplateTranslationMemorySettings;
+    termbaseSettings?: ProjectTemplateTermbaseSettingsResponse;
+    /**
+     * 
+     * @type {ProjectTemplateTranslationMemorySettingsResponse}
+     * @memberof ProjectTemplateSettingsResponse
+     */
+    translationMemorySettings?: ProjectTemplateTranslationMemorySettingsResponse;
 }
 /**
  * Input for Project Template settings.
@@ -4396,6 +5750,12 @@ export interface ProjectTemplateSettingsUpdateRequest {
      * @memberof ProjectTemplateSettingsUpdateRequest
      */
     qualityManagement?: ProjectTemplateQualityManagementSettings;
+    /**
+     * 
+     * @type {TranslationMemorySettingsRequest}
+     * @memberof ProjectTemplateSettingsUpdateRequest
+     */
+    translationMemorySettings?: TranslationMemorySettingsRequest;
 }
 /**
  * Translation Memory Penalties
@@ -4515,17 +5875,79 @@ export interface ProjectTemplateTMTranslationUnitStatusPenalties {
     draft?: number;
 }
 /**
+ * 
+ * @export
+ * @interface ProjectTemplateTermbaseGeneralSettings
+ */
+export interface ProjectTemplateTermbaseGeneralSettings {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProjectTemplateTermbaseGeneralSettings
+     */
+    showRecognizedTermsWithNoTranslation?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProjectTemplateTermbaseGeneralSettings
+     */
+    enableRecognitionOfTwoLetterTerms?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProjectTemplateTermbaseGeneralSettings
+     */
+    allowOverlappingTerms?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectTemplateTermbaseGeneralSettings
+     */
+    minimumScore?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectTemplateTermbaseGeneralSettings
+     */
+    termLength?: number;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectTemplateTermbaseSettingsResponse
+ */
+export interface ProjectTemplateTermbaseSettingsResponse {
+    /**
+     * 
+     * @type {ProjectTemplateTermbaseGeneralSettings}
+     * @memberof ProjectTemplateTermbaseSettingsResponse
+     */
+    general?: ProjectTemplateTermbaseGeneralSettings;
+}
+/**
  * Translation Memory settings
  * @export
- * @interface ProjectTemplateTranslationMemorySettings
+ * @interface ProjectTemplateTranslationMemorySettingsResponse
  */
-export interface ProjectTemplateTranslationMemorySettings {
+export interface ProjectTemplateTranslationMemorySettingsResponse {
     /**
      * 
      * @type {ProjectTemplateTMPenalties}
-     * @memberof ProjectTemplateTranslationMemorySettings
+     * @memberof ProjectTemplateTranslationMemorySettingsResponse
      */
     penalties?: ProjectTemplateTMPenalties;
+    /**
+     * 
+     * @type {TranslationMemorySettingsFiltersResponse}
+     * @memberof ProjectTemplateTranslationMemorySettingsResponse
+     */
+    filters?: TranslationMemorySettingsFiltersResponse;
+    /**
+     * 
+     * @type {Array<TranslationMemorySettingsUpdateFieldResponse>}
+     * @memberof ProjectTemplateTranslationMemorySettingsResponse
+     */
+    updateTranslationMemoryFields?: Array<TranslationMemorySettingsUpdateFieldResponse>;
 }
 /**
  * Input for Project Template creation.
@@ -5781,6 +7203,25 @@ export const ProjectTemplateVerificationTagVerifierSettingsSpaceAroundTagsSeveri
 export type ProjectTemplateVerificationTagVerifierSettingsSpaceAroundTagsSeverityEnum = typeof ProjectTemplateVerificationTagVerifierSettingsSpaceAroundTagsSeverityEnum[keyof typeof ProjectTemplateVerificationTagVerifierSettingsSpaceAroundTagsSeverityEnum];
 
 /**
+ * Translation Memory settings
+ * @export
+ * @interface ProjectTranslationMemorySettingsResponse
+ */
+export interface ProjectTranslationMemorySettingsResponse {
+    /**
+     * 
+     * @type {TranslationMemorySettingsFiltersResponse}
+     * @memberof ProjectTranslationMemorySettingsResponse
+     */
+    filters?: TranslationMemorySettingsFiltersResponse;
+    /**
+     * 
+     * @type {Array<TranslationMemorySettingsUpdateFieldResponse>}
+     * @memberof ProjectTranslationMemorySettingsResponse
+     */
+    updateTranslationMemoryFields?: Array<TranslationMemorySettingsUpdateFieldResponse>;
+}
+/**
  * 
  * @export
  * @interface ProjectUpdateRequest
@@ -5804,13 +7245,13 @@ export interface ProjectUpdateRequest {
      * @type {Date}
      * @memberof ProjectUpdateRequest
      */
-    dueBy?: Date;
+    dueBy?: Date | null;
     /**
      * UTC Timezone  <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ"
      * @type {Date}
      * @memberof ProjectUpdateRequest
      */
-    deliveredBy?: Date;
+    deliveredBy?: Date | null;
     /**
      * 
      * @type {ConfigurationResourceRequest}
@@ -5867,10 +7308,10 @@ export interface ProjectUpdateRequest {
     projectManagers?: Array<ProjectManagerRequest>;
     /**
      * 
-     * @type {ProjectSettingsRequest}
+     * @type {ProjectSettingsUpdateRequest}
      * @memberof ProjectUpdateRequest
      */
-    settings?: ProjectSettingsRequest;
+    settings?: ProjectSettingsUpdateRequest;
 }
 /**
  * Project quote.
@@ -5883,7 +7324,7 @@ export interface Quote {
      * @type {number}
      * @memberof Quote
      */
-    totalAmount?: number;
+    totalAmount?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The currency code (ISO 4217).</div> 
      * @type {string}
@@ -5908,6 +7349,12 @@ export interface Quote {
      * @memberof Quote
      */
     additionalCosts?: Array<QuoteAdditionalCost>;
+    /**
+     * A message associated with the quote.
+     * @type {string}
+     * @memberof Quote
+     */
+    notes?: string;
 }
 /**
  * Other extra fees not captured by translationCosts and languageCosts.
@@ -5926,122 +7373,75 @@ export interface QuoteAdditionalCost {
      * @type {number}
      * @memberof QuoteAdditionalCost
      */
-    count?: number;
+    count?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The computed cost.</div> 
      * @type {number}
      * @memberof QuoteAdditionalCost
      */
-    total?: number;
+    total?: number | null;
     /**
      * The cost of a unit.
      * @type {number}
      * @memberof QuoteAdditionalCost
      */
-    cost?: number;
+    cost?: number | null;
     /**
-     * The type of the additional cost.
-     * @type {string}
+     * 
+     * @type {ProjectCostType}
      * @memberof QuoteAdditionalCost
      */
-    costType?: QuoteAdditionalCostCostTypeEnum;
+    costType?: ProjectCostType;
     /**
-     * The unit type of the 'volume' cost, used as a reference for the unit cost.
-     * @type {string}
+     * 
+     * @type {VolumeUnitType}
      * @memberof QuoteAdditionalCost
      */
-    volumeUnitType?: QuoteAdditionalCostVolumeUnitTypeEnum;
+    volumeUnitType?: VolumeUnitType;
     /**
      * Indicates the order in which the additional cost is computed.
      * @type {number}
      * @memberof QuoteAdditionalCost
      */
-    costOrder?: number;
+    costOrder?: number | null;
     /**
-     * Describes how the cost of type 'conditional' will be added to total cost.
-     * @type {string}
+     * 
+     * @type {ConditionalCostType}
      * @memberof QuoteAdditionalCost
      */
-    conditionalCostType?: QuoteAdditionalCostConditionalCostTypeEnum;
+    conditionalCostType?: ConditionalCostType;
     /**
-     * The operator applied between the 'costVariable' and 'operand'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostOperator}
      * @memberof QuoteAdditionalCost
      */
-    conditionalCostOperator?: QuoteAdditionalCostConditionalCostOperatorEnum;
+    conditionalCostOperator?: ConditionalCostOperator;
     /**
-     * The variable that is evaluated against the 'operand' based on the 'costOperator'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostVariable}
      * @memberof QuoteAdditionalCost
      */
-    conditionalCostVariable?: QuoteAdditionalCostConditionalCostVariableEnum;
+    conditionalCostVariable?: ConditionalCostVariable;
     /**
      * The value that is evaluated against the 'costVariable' based on the 'costOperator'.
      * @type {number}
      * @memberof QuoteAdditionalCost
      */
-    conditionalCostThreshold?: number;
+    conditionalCostThreshold?: number | null;
     /**
      * The sum of all the previously computed costs.
      * @type {number}
      * @memberof QuoteAdditionalCost
      */
-    runningTotal?: number;
+    runningTotal?: number | null;
+    /**
+     * The name of the custom unit.
+     * @type {string}
+     * @memberof QuoteAdditionalCost
+     */
+    customUnitName?: string;
 }
 
-
-/**
- * @export
- */
-export const QuoteAdditionalCostCostTypeEnum = {
-    Volume: 'volume',
-    PerTargetLanguage: 'perTargetLanguage',
-    PerFile: 'perFile',
-    Hourly: 'hourly',
-    Percentage: 'percentage',
-    PerPage: 'perPage',
-    Conditional: 'conditional'
-} as const;
-export type QuoteAdditionalCostCostTypeEnum = typeof QuoteAdditionalCostCostTypeEnum[keyof typeof QuoteAdditionalCostCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostVolumeUnitTypeEnum = {
-    Words: 'words',
-    Characters: 'characters'
-} as const;
-export type QuoteAdditionalCostVolumeUnitTypeEnum = typeof QuoteAdditionalCostVolumeUnitTypeEnum[keyof typeof QuoteAdditionalCostVolumeUnitTypeEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostConditionalCostTypeEnum = {
-    Absolute: 'absolute',
-    Relative: 'relative',
-    Percentage: 'percentage'
-} as const;
-export type QuoteAdditionalCostConditionalCostTypeEnum = typeof QuoteAdditionalCostConditionalCostTypeEnum[keyof typeof QuoteAdditionalCostConditionalCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostConditionalCostOperatorEnum = {
-    Less: 'less',
-    LessOrEqual: 'lessOrEqual',
-    Greater: 'greater',
-    GreaterOrEqual: 'greaterOrEqual'
-} as const;
-export type QuoteAdditionalCostConditionalCostOperatorEnum = typeof QuoteAdditionalCostConditionalCostOperatorEnum[keyof typeof QuoteAdditionalCostConditionalCostOperatorEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostConditionalCostVariableEnum = {
-    WordCount: 'wordCount',
-    RunningTotal: 'runningTotal'
-} as const;
-export type QuoteAdditionalCostConditionalCostVariableEnum = typeof QuoteAdditionalCostConditionalCostVariableEnum[keyof typeof QuoteAdditionalCostConditionalCostVariableEnum];
 
 /**
  * 
@@ -6068,17 +7468,17 @@ export interface QuoteAdditionalCostRequest {
      */
     cost: number;
     /**
-     * The type of the additional cost.
-     * @type {string}
+     * 
+     * @type {ProjectCostType}
      * @memberof QuoteAdditionalCostRequest
      */
-    costType?: QuoteAdditionalCostRequestCostTypeEnum;
+    costType?: ProjectCostType;
     /**
-     * The unit type of the 'volume' cost, used for counting the units.
-     * @type {string}
+     * 
+     * @type {VolumeUnitType}
      * @memberof QuoteAdditionalCostRequest
      */
-    volumeUnitType?: QuoteAdditionalCostRequestVolumeUnitTypeEnum;
+    volumeUnitType?: VolumeUnitType;
     /**
      * Indicates the order in which the additional cost is computed.
      * @type {number}
@@ -6086,23 +7486,23 @@ export interface QuoteAdditionalCostRequest {
      */
     costOrder: number;
     /**
-     * Describes how the cost of type 'conditional' will be added to total cost.
-     * @type {string}
+     * 
+     * @type {ConditionalCostType}
      * @memberof QuoteAdditionalCostRequest
      */
-    conditionalCostType?: QuoteAdditionalCostRequestConditionalCostTypeEnum;
+    conditionalCostType?: ConditionalCostType;
     /**
-     * The operator applied between the 'costVariable' and 'operand'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostOperator}
      * @memberof QuoteAdditionalCostRequest
      */
-    conditionalCostOperator?: QuoteAdditionalCostRequestConditionalCostOperatorEnum;
+    conditionalCostOperator?: ConditionalCostOperator;
     /**
-     * The variable that is evaluated against the 'operand' based on the 'costOperator'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostVariable}
      * @memberof QuoteAdditionalCostRequest
      */
-    conditionalCostVariable?: QuoteAdditionalCostRequestConditionalCostVariableEnum;
+    conditionalCostVariable?: ConditionalCostVariable;
     /**
      * The value that is evaluated against the 'costVariable' based on the 'costOperator'.
      * @type {number}
@@ -6111,59 +7511,6 @@ export interface QuoteAdditionalCostRequest {
     conditionalCostThreshold: number;
 }
 
-
-/**
- * @export
- */
-export const QuoteAdditionalCostRequestCostTypeEnum = {
-    Volume: 'volume',
-    PerTargetLanguage: 'perTargetLanguage',
-    PerFile: 'perFile',
-    Hourly: 'hourly',
-    Percentage: 'percentage',
-    PerPage: 'perPage',
-    Conditional: 'conditional'
-} as const;
-export type QuoteAdditionalCostRequestCostTypeEnum = typeof QuoteAdditionalCostRequestCostTypeEnum[keyof typeof QuoteAdditionalCostRequestCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostRequestVolumeUnitTypeEnum = {
-    Words: 'words',
-    Characters: 'characters'
-} as const;
-export type QuoteAdditionalCostRequestVolumeUnitTypeEnum = typeof QuoteAdditionalCostRequestVolumeUnitTypeEnum[keyof typeof QuoteAdditionalCostRequestVolumeUnitTypeEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostRequestConditionalCostTypeEnum = {
-    Absolute: 'absolute',
-    Relative: 'relative',
-    Percentage: 'percentage'
-} as const;
-export type QuoteAdditionalCostRequestConditionalCostTypeEnum = typeof QuoteAdditionalCostRequestConditionalCostTypeEnum[keyof typeof QuoteAdditionalCostRequestConditionalCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostRequestConditionalCostOperatorEnum = {
-    Less: 'less',
-    LessOrEqual: 'lessOrEqual',
-    Greater: 'greater',
-    GreaterOrEqual: 'greaterOrEqual'
-} as const;
-export type QuoteAdditionalCostRequestConditionalCostOperatorEnum = typeof QuoteAdditionalCostRequestConditionalCostOperatorEnum[keyof typeof QuoteAdditionalCostRequestConditionalCostOperatorEnum];
-
-/**
- * @export
- */
-export const QuoteAdditionalCostRequestConditionalCostVariableEnum = {
-    WordCount: 'wordCount',
-    RunningTotal: 'runningTotal'
-} as const;
-export type QuoteAdditionalCostRequestConditionalCostVariableEnum = typeof QuoteAdditionalCostRequestConditionalCostVariableEnum[keyof typeof QuoteAdditionalCostRequestConditionalCostVariableEnum];
 
 /**
  * Fees relevant for a specific target language.
@@ -6182,31 +7529,31 @@ export interface QuoteLanguageCost {
      * @type {number}
      * @memberof QuoteLanguageCost
      */
-    count?: number;
+    count?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The computed cost.</div> 
      * @type {number}
      * @memberof QuoteLanguageCost
      */
-    total?: number;
+    total?: number | null;
     /**
      * The cost of a unit.
      * @type {number}
      * @memberof QuoteLanguageCost
      */
-    cost?: number;
+    cost?: number | null;
     /**
-     * The type of the additional cost.
-     * @type {string}
+     * 
+     * @type {LanguageCostType}
      * @memberof QuoteLanguageCost
      */
-    costType?: QuoteLanguageCostCostTypeEnum;
+    costType?: LanguageCostType;
     /**
-     * The unit type of the 'volume' cost, used as a reference for the unit cost.
-     * @type {string}
+     * 
+     * @type {VolumeUnitType}
      * @memberof QuoteLanguageCost
      */
-    volumeUnitType?: QuoteLanguageCostVolumeUnitTypeEnum;
+    volumeUnitType?: VolumeUnitType;
     /**
      * 
      * @type {Language}
@@ -6218,92 +7565,45 @@ export interface QuoteLanguageCost {
      * @type {number}
      * @memberof QuoteLanguageCost
      */
-    costOrder?: number;
+    costOrder?: number | null;
     /**
-     * The condition type of the conditional cost.
-     * @type {string}
+     * 
+     * @type {ConditionalCostType}
      * @memberof QuoteLanguageCost
      */
-    conditionalCostType?: QuoteLanguageCostConditionalCostTypeEnum;
+    conditionalCostType?: ConditionalCostType;
     /**
-     * The operator applied between the 'costVariable' and 'operand'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostOperator}
      * @memberof QuoteLanguageCost
      */
-    conditionalCostOperator?: QuoteLanguageCostConditionalCostOperatorEnum;
+    conditionalCostOperator?: ConditionalCostOperator;
     /**
-     * The variable that is evaluated against the 'operand' based on the 'costOperator'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostVariable}
      * @memberof QuoteLanguageCost
      */
-    conditionalCostVariable?: QuoteLanguageCostConditionalCostVariableEnum;
+    conditionalCostVariable?: ConditionalCostVariable;
     /**
      * The value that is evaluated against the 'costVariable' based on the 'costOperator'.
      * @type {number}
      * @memberof QuoteLanguageCost
      */
-    conditionalCostThreshold?: number;
+    conditionalCostThreshold?: number | null;
     /**
      * The sum of all the previously computed costs.
      * @type {number}
      * @memberof QuoteLanguageCost
      */
-    runningTotal?: number;
+    runningTotal?: number | null;
+    /**
+     * The name of the custom unit.
+     * @type {string}
+     * @memberof QuoteLanguageCost
+     */
+    customUnitName?: string;
 }
 
-
-/**
- * @export
- */
-export const QuoteLanguageCostCostTypeEnum = {
-    Volume: 'volume',
-    PerTargetLanguage: 'perTargetLanguage',
-    PerFile: 'perFile',
-    Hourly: 'hourly',
-    Percentage: 'percentage',
-    PerPage: 'perPage',
-    Conditional: 'conditional'
-} as const;
-export type QuoteLanguageCostCostTypeEnum = typeof QuoteLanguageCostCostTypeEnum[keyof typeof QuoteLanguageCostCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostVolumeUnitTypeEnum = {
-    Words: 'words',
-    Characters: 'characters'
-} as const;
-export type QuoteLanguageCostVolumeUnitTypeEnum = typeof QuoteLanguageCostVolumeUnitTypeEnum[keyof typeof QuoteLanguageCostVolumeUnitTypeEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostConditionalCostTypeEnum = {
-    Absolute: 'absolute',
-    Relative: 'relative',
-    Percentage: 'percentage'
-} as const;
-export type QuoteLanguageCostConditionalCostTypeEnum = typeof QuoteLanguageCostConditionalCostTypeEnum[keyof typeof QuoteLanguageCostConditionalCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostConditionalCostOperatorEnum = {
-    Less: 'less',
-    LessOrEqual: 'lessOrEqual',
-    Greater: 'greater',
-    GreaterOrEqual: 'greaterOrEqual'
-} as const;
-export type QuoteLanguageCostConditionalCostOperatorEnum = typeof QuoteLanguageCostConditionalCostOperatorEnum[keyof typeof QuoteLanguageCostConditionalCostOperatorEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostConditionalCostVariableEnum = {
-    WordCount: 'wordCount',
-    RunningTotal: 'runningTotal'
-} as const;
-export type QuoteLanguageCostConditionalCostVariableEnum = typeof QuoteLanguageCostConditionalCostVariableEnum[keyof typeof QuoteLanguageCostConditionalCostVariableEnum];
 
 /**
  * 
@@ -6330,17 +7630,17 @@ export interface QuoteLanguageCostRequest {
      */
     cost: number;
     /**
-     * The type of the additional cost.
-     * @type {string}
+     * 
+     * @type {LanguageCostType}
      * @memberof QuoteLanguageCostRequest
      */
-    costType?: QuoteLanguageCostRequestCostTypeEnum;
+    costType?: LanguageCostType;
     /**
-     * The unit type of the 'volume' cost, used for counting the units.
-     * @type {string}
+     * 
+     * @type {VolumeUnitType}
      * @memberof QuoteLanguageCostRequest
      */
-    volumeUnitType?: QuoteLanguageCostRequestVolumeUnitTypeEnum;
+    volumeUnitType?: VolumeUnitType;
     /**
      * 
      * @type {TargetLanguageRequest}
@@ -6354,23 +7654,23 @@ export interface QuoteLanguageCostRequest {
      */
     costOrder: number;
     /**
-     * Describes how the cost of type 'conditional' will be added to total cost.
-     * @type {string}
+     * 
+     * @type {ConditionalCostType}
      * @memberof QuoteLanguageCostRequest
      */
-    conditionalCostType?: QuoteLanguageCostRequestConditionalCostTypeEnum;
+    conditionalCostType?: ConditionalCostType;
     /**
-     * The operator applied between the 'costVariable' and 'operand'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostOperator}
      * @memberof QuoteLanguageCostRequest
      */
-    conditionalCostOperator?: QuoteLanguageCostRequestConditionalCostOperatorEnum;
+    conditionalCostOperator?: ConditionalCostOperator;
     /**
-     * The variable that is evaluated against the 'operand' based on the 'costOperator'.
-     * @type {string}
+     * 
+     * @type {ConditionalCostVariable}
      * @memberof QuoteLanguageCostRequest
      */
-    conditionalCostVariable?: QuoteLanguageCostRequestConditionalCostVariableEnum;
+    conditionalCostVariable?: ConditionalCostVariable;
     /**
      * The value that is evaluated against the 'costVariable' based on the 'costOperator'.
      * @type {number}
@@ -6379,59 +7679,6 @@ export interface QuoteLanguageCostRequest {
     conditionalCostThreshold: number;
 }
 
-
-/**
- * @export
- */
-export const QuoteLanguageCostRequestCostTypeEnum = {
-    Volume: 'volume',
-    PerTargetLanguage: 'perTargetLanguage',
-    PerFile: 'perFile',
-    Hourly: 'hourly',
-    Percentage: 'percentage',
-    PerPage: 'perPage',
-    Conditional: 'conditional'
-} as const;
-export type QuoteLanguageCostRequestCostTypeEnum = typeof QuoteLanguageCostRequestCostTypeEnum[keyof typeof QuoteLanguageCostRequestCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostRequestVolumeUnitTypeEnum = {
-    Words: 'words',
-    Characters: 'characters'
-} as const;
-export type QuoteLanguageCostRequestVolumeUnitTypeEnum = typeof QuoteLanguageCostRequestVolumeUnitTypeEnum[keyof typeof QuoteLanguageCostRequestVolumeUnitTypeEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostRequestConditionalCostTypeEnum = {
-    Absolute: 'absolute',
-    Relative: 'relative',
-    Percentage: 'percentage'
-} as const;
-export type QuoteLanguageCostRequestConditionalCostTypeEnum = typeof QuoteLanguageCostRequestConditionalCostTypeEnum[keyof typeof QuoteLanguageCostRequestConditionalCostTypeEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostRequestConditionalCostOperatorEnum = {
-    Less: 'less',
-    LessOrEqual: 'lessOrEqual',
-    Greater: 'greater',
-    GreaterOrEqual: 'greaterOrEqual'
-} as const;
-export type QuoteLanguageCostRequestConditionalCostOperatorEnum = typeof QuoteLanguageCostRequestConditionalCostOperatorEnum[keyof typeof QuoteLanguageCostRequestConditionalCostOperatorEnum];
-
-/**
- * @export
- */
-export const QuoteLanguageCostRequestConditionalCostVariableEnum = {
-    WordCount: 'wordCount',
-    RunningTotal: 'runningTotal'
-} as const;
-export type QuoteLanguageCostRequestConditionalCostVariableEnum = typeof QuoteLanguageCostRequestConditionalCostVariableEnum[keyof typeof QuoteLanguageCostRequestConditionalCostVariableEnum];
 
 /**
  * Fees calculated based on segment status (new, translated, signed off) and previous leverage (100% match and identical context, 100% match, <100%match, cross-file repetitions).
@@ -6444,7 +7691,7 @@ export interface QuoteTranslationCost {
      * @type {number}
      * @memberof QuoteTranslationCost
      */
-    total?: number;
+    total?: number | null;
     /**
      * 
      * @type {Language}
@@ -6498,7 +7745,7 @@ export interface QuoteTranslationCost {
      * @type {number}
      * @memberof QuoteTranslationCost
      */
-    runningTotal?: number;
+    runningTotal?: number | null;
 }
 /**
  * 
@@ -6518,6 +7765,12 @@ export interface QuoteUpdateRequest {
      * @memberof QuoteUpdateRequest
      */
     additionalCosts?: Array<QuoteAdditionalCostRequest>;
+    /**
+     * A message associated with the quote.
+     * @type {string}
+     * @memberof QuoteUpdateRequest
+     */
+    notes?: string;
 }
 /**
  * Rate Limit entry
@@ -6551,6 +7804,37 @@ export interface RateLimit {
     remainingQuota: number;
 }
 /**
+ * Lists of IDs for Translation Memories, Termbases, Machine Translations and Large Language Models, in order of their use
+ * @export
+ * @interface RemoteTranslationEngineSequence
+ */
+export interface RemoteTranslationEngineSequence {
+    /**
+     * Translation Memories
+     * @type {Array<string>}
+     * @memberof RemoteTranslationEngineSequence
+     */
+    tm?: Array<string>;
+    /**
+     * Termbases
+     * @type {Array<string>}
+     * @memberof RemoteTranslationEngineSequence
+     */
+    tb?: Array<string>;
+    /**
+     * Machine Translations
+     * @type {Array<string>}
+     * @memberof RemoteTranslationEngineSequence
+     */
+    mt?: Array<string>;
+    /**
+     * Large Language Models
+     * @type {Array<string>}
+     * @memberof RemoteTranslationEngineSequence
+     */
+    llm?: Array<string>;
+}
+/**
  * Input for removing projects from group.
  * @export
  * @interface RemoveProjectsFromGroupRequest
@@ -6564,23 +7848,80 @@ export interface RemoveProjectsFromGroupRequest {
     projects: Array<ProjectGroupProjectRequest>;
 }
 /**
- * The resource folder.
+ * 
  * @export
- * @interface ResourceFolder
+ * @interface RequestFileAnalysisRequest
  */
-export interface ResourceFolder {
+export interface RequestFileAnalysisRequest {
+    /**
+     * The file identifiers for which the analysis will be performed.
+     * @type {Array<string>}
+     * @memberof RequestFileAnalysisRequest
+     */
+    fileIds: Array<string>;
     /**
      * 
-     * @type {string}
-     * @memberof ResourceFolder
+     * @type {SourceLanguageRequest}
+     * @memberof RequestFileAnalysisRequest
      */
-    id: string;
+    sourceLanguage: SourceLanguageRequest;
     /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The name of the folder.</div> 
+     * The identifier of the Language Processing Rule to be used when determining word count.
      * @type {string}
-     * @memberof ResourceFolder
+     * @memberof RequestFileAnalysisRequest
      */
-    name?: string;
+    languageProcessingRuleId: string;
+    /**
+     * The identifier of the File Processing Configuration to be used when converting a file for analysis.<br> 
+     * A default configuration will be used if not specified.
+     * @type {string}
+     * @memberof RequestFileAnalysisRequest
+     */
+    fileProcessingConfigurationId?: string;
+    /**
+     * 
+     * @type {RequestFileAnalysisRequestQuotingOptions}
+     * @memberof RequestFileAnalysisRequest
+     */
+    quotingOptions?: RequestFileAnalysisRequestQuotingOptions;
+}
+/**
+ * Set these resources to calculate an estimated translation cost.
+ * @export
+ * @interface RequestFileAnalysisRequestQuotingOptions
+ */
+export interface RequestFileAnalysisRequestQuotingOptions {
+    /**
+     * The identifier of the Pricing Model to be used when calculating the cost.
+     * @type {string}
+     * @memberof RequestFileAnalysisRequestQuotingOptions
+     */
+    pricingModelId: string;
+    /**
+     * The target languages for which the cost will be calculated.
+     * @type {Array<TargetLanguageRequest>}
+     * @memberof RequestFileAnalysisRequestQuotingOptions
+     */
+    targetLanguages: Array<TargetLanguageRequest>;
+}
+/**
+ * Reschedule tasks.
+ * @export
+ * @interface RescheduleTasksRequest
+ */
+export interface RescheduleTasksRequest {
+    /**
+     * The task due date. <br> UTC Timezone <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ"
+     * @type {Date}
+     * @memberof RescheduleTasksRequest
+     */
+    dueBy?: Date;
+    /**
+     * Identifiers of the tasks to be rescheduled.
+     * @type {Array<string>}
+     * @memberof RescheduleTasksRequest
+     */
+    taskIds?: Array<string>;
 }
 /**
  * Resource folder.
@@ -6860,6 +8201,25 @@ export interface ScheduleTemplateUpdateRequest {
     projectScheduleConfiguration?: ScheduleTemplateProjectConfiguration;
 }
 /**
+ * The account details. Provide these to create a Service User.
+ * @export
+ * @interface ServiceUserDetails
+ */
+export interface ServiceUserDetails {
+    /**
+     * The Service User name.
+     * @type {string}
+     * @memberof ServiceUserDetails
+     */
+    name: string;
+    /**
+     * The Service User description.
+     * @type {string}
+     * @memberof ServiceUserDetails
+     */
+    description?: string;
+}
+/**
  * A basic language direction.
  * @export
  * @interface SimpleLanguageDirection
@@ -6907,7 +8267,7 @@ export interface SourceFile {
      * @type {FileRole}
      * @memberof SourceFile
      */
-    role?: FileRole;
+    role?: FileRole | null;
     /**
      * 
      * @type {Language}
@@ -6932,7 +8292,19 @@ export interface SourceFile {
      * @memberof SourceFile
      */
     path?: Array<string>;
+    /**
+     * Word count in the source file. 
+     * </br>
+     * Available only for translatable source files, and only after the workflow task with Task Type `convert` (File Format Conversion) was executed on the source file.
+     * </br>
+     * Available only on the List Source Files endpoint.
+     * @type {number}
+     * @memberof SourceFile
+     */
+    totalWords?: number;
 }
+
+
 /**
  * 
  * @export
@@ -6953,7 +8325,7 @@ export interface SourceFileAttachmentRequest {
  */
 export interface SourceFileAttachmentRequestItem {
     /**
-     * The name of the source file.
+     * The name of the source file. For example `Finance_2021_dummy_EN.txt`. 
      * 
      * The character limit is calculated together with the `path` length.
      * @type {string}
@@ -6991,14 +8363,15 @@ export interface SourceFileAttachmentRequestItem {
      */
     targetLanguages?: Array<TargetLanguageRequest>;
     /**
-     * Path represents the hierarchy of the source file inside the zip. For example `/ZipWithFolders/Finance/2021/Finance_2021_dummy_EN.txt` would be sent as: 
+     * Path represents the hierarchy of the source file inside the project.
+     * 
+     * For example `/ZipWithFolders/Finance/2021/Finance_2021_dummy_EN.txt` would be sent as: 
      * 
      * ```json 
      * "path": [ 
      *   "ZipWithFolders", 
      *   "Finance", 
-     *   "2021", 
-     *   "Finance_2021_dummy_EN.txt" 
+     *   "2021" 
      * ]
      * ```
      * 
@@ -7131,7 +8504,7 @@ export interface SourceFileRenameRequest {
  */
 export interface SourceFileRequest {
     /**
-     * The name of the source file.
+     * The name of the source file. For example `Finance_2021_dummy_EN.txt`.
      * 
      * 
      * The character limit is calculated together with the `path` length.
@@ -7152,26 +8525,27 @@ export interface SourceFileRequest {
      */
     type: SourceFileRequestTypeEnum;
     /**
-     * The language of the file in code 5 (ex. en-US)
-     * @type {string}
+     * 
+     * @type {LanguageRequest}
      * @memberof SourceFileRequest
      */
-    language: string;
+    language: LanguageRequest;
     /**
      * A list of target languages in code 5 (ex. en-US)
-     * @type {Array<string>}
+     * @type {Array<LanguageRequest>}
      * @memberof SourceFileRequest
      */
-    targetLanguages?: Array<string>;
+    targetLanguages?: Array<LanguageRequest>;
     /**
-     * Path represents the hierarchy of the source file inside the zip. For example `/ZipWithFolders/Finance/2021/Finance_2021_dummy_EN.txt` would be sent as: 
+     * Path represents the hierarchy of the source file inside the project.
+     * 
+     * For example `/ZipWithFolders/Finance/2021/Finance_2021_dummy_EN.txt` would be sent as: 
      * 
      * ```json 
      * "path": [ 
      *   "ZipWithFolders", 
      *   "Finance", 
-     *   "2021", 
-     *   "Finance_2021_dummy_EN.txt" 
+     *   "2021"
      * ]
      * ```
      * 
@@ -7247,7 +8621,7 @@ export interface SourceFileVersion {
      * @type {string}
      * @memberof SourceFileVersion
      */
-    type?: SourceFileVersionTypeEnum;
+    type?: SourceFileVersionTypeEnum | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The file version name. This is a synthetic value, typically constructed from the version number and the originating task name.</div>
      * @type {string}
@@ -7411,7 +8785,7 @@ export interface TargetFile {
      * @type {string}
      * @memberof TargetFile
      */
-    status?: TargetFileStatusEnum;
+    status?: TargetFileStatusEnum | null;
 }
 
 
@@ -7442,7 +8816,7 @@ export interface TargetFileLatestVersion {
      * @type {string}
      * @memberof TargetFileLatestVersion
      */
-    type?: TargetFileLatestVersionTypeEnum;
+    type?: TargetFileLatestVersionTypeEnum | null;
     /**
      * A numeric value, incremented for each new version.
      * @type {number}
@@ -7514,7 +8888,7 @@ export interface TargetFileVersion {
      * @type {string}
      * @memberof TargetFileVersion
      */
-    type?: TargetFileVersionTypeEnum;
+    type?: TargetFileVersionTypeEnum | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The file version name. This is a synthetic value, typically constructed from the version number and the originating task name.</div>
      * @type {string}
@@ -7642,7 +9016,7 @@ export interface Task {
      * @type {string}
      * @memberof Task
      */
-    status?: TaskStatusEnum;
+    status?: TaskStatusEnum | null;
     /**
      * 
      * @type {TaskType}
@@ -7678,13 +9052,13 @@ export interface Task {
      * @type {Date}
      * @memberof Task
      */
-    dueBy?: Date;
+    dueBy?: Date | null;
     /**
      * The date and time when the task was created.  <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sssZ" 
      * @type {Date}
      * @memberof Task
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {Array<TaskOutcome>}
@@ -7720,7 +9094,7 @@ export interface Task {
      * @type {Date}
      * @memberof Task
      */
-    completedAt?: Date;
+    completedAt?: Date | null;
 }
 
 
@@ -8035,7 +9409,7 @@ export interface TaskInputFile {
      * @type {string}
      * @memberof TaskInputFile
      */
-    type?: TaskInputFileTypeEnum;
+    type?: TaskInputFileTypeEnum | null;
     /**
      * 
      * @type {SourceFile}
@@ -8110,7 +9484,7 @@ export interface TaskType {
      */
     name?: string;
     /**
-     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"> Unique identifier of custom task types. Null for default task types.
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"> Unique identifier of custom task types set in the workflow. If no custom id is set, it will return the default identifier for the custom task type.
      * @type {string}
      * @memberof TaskType
      */
@@ -8126,13 +9500,13 @@ export interface TaskType {
      * @type {boolean}
      * @memberof TaskType
      */
-    automatic?: boolean;
+    automatic?: boolean | null;
     /**
      * The resource type scope for the task.
      * @type {string}
      * @memberof TaskType
      */
-    scope?: TaskTypeScopeEnum;
+    scope?: TaskTypeScopeEnum | null;
     /**
      * 
      * @type {Array<TaskTypeOutcome>}
@@ -8183,7 +9557,7 @@ export interface TaskTypeOutcome {
      * @type {boolean}
      * @memberof TaskTypeOutcome
      */
-    _default?: boolean;
+    _default?: boolean | null;
 }
 /**
  * The termbase.
@@ -8208,13 +9582,13 @@ export interface Termbase {
      * @type {string}
      * @memberof Termbase
      */
-    description?: string;
+    description?: string | null;
     /**
      * The copyright of the termbase.
      * @type {string}
      * @memberof Termbase
      */
-    copyright?: string;
+    copyright?: string | null;
     /**
      * 
      * @type {FolderV2}
@@ -8282,13 +9656,13 @@ export interface TermbaseCreateRequest {
      * @type {string}
      * @memberof TermbaseCreateRequest
      */
-    description?: string;
+    description?: string | null;
     /**
      * The copyright of the termbase.
      * @type {string}
      * @memberof TermbaseCreateRequest
      */
-    copyright?: string;
+    copyright?: string | null;
     /**
      * The folder identifier where the termbase should be created. If not specified, it will be created in the Root folder. If the user does not have access in Root, the request will fail with forbidden error.
      * @type {string}
@@ -8321,7 +9695,7 @@ export interface TermbaseEntry {
      */
     id: string;
     /**
-     * An identifier that can be provided externally, or generated automatically by Language Cloud, used for creating cross-references. You can use it to set its value to be correlated to your system. The format of the generated value is not guaranteed.
+     * An identifier that can be provided externally, or generated automatically by the Trados Cloud Platform, used for creating cross-references. You can use it to set its value to be correlated to your system. The format of the generated value is not guaranteed.
      * @type {string}
      * @memberof TermbaseEntry
      */
@@ -8343,7 +9717,7 @@ export interface TermbaseEntry {
      * @type {Date}
      * @memberof TermbaseEntry
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -8355,7 +9729,7 @@ export interface TermbaseEntry {
      * @type {Date}
      * @memberof TermbaseEntry
      */
-    lastModifiedAt?: Date;
+    lastModifiedAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -8370,7 +9744,7 @@ export interface TermbaseEntry {
  */
 export interface TermbaseEntryCreateRequest {
     /**
-     * An identifier that can be provided externally, or generated automatically by Language Cloud, used for creating cross-references. You can use it to set its value to be correlated to your system.
+     * An identifier that can be provided externally, or generated automatically by the Trados Cloud Platform, used for creating cross-references. You can use it to set its value to be correlated to your system.
      * The format of the generated value is not guaranteed.
      * @type {string}
      * @memberof TermbaseEntryCreateRequest
@@ -8424,7 +9798,7 @@ export interface TermbaseEntryLanguage {
      * @type {Date}
      * @memberof TermbaseEntryLanguage
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -8436,7 +9810,7 @@ export interface TermbaseEntryLanguage {
      * @type {Date}
      * @memberof TermbaseEntryLanguage
      */
-    lastModifiedAt?: Date;
+    lastModifiedAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -8529,7 +9903,7 @@ export interface TermbaseEntryTerm {
      * @type {Date}
      * @memberof TermbaseEntryTerm
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -8541,14 +9915,58 @@ export interface TermbaseEntryTerm {
      * @type {Date}
      * @memberof TermbaseEntryTerm
      */
-    lastModifiedAt?: Date;
+    lastModifiedAt?: Date | null;
     /**
      * 
      * @type {User}
      * @memberof TermbaseEntryTerm
      */
     lastModifiedBy?: User;
+    /**
+     * 
+     * @type {TermbaseEntryTermSystemStatus}
+     * @memberof TermbaseEntryTerm
+     */
+    systemStatus?: TermbaseEntryTermSystemStatus | null;
 }
+
+
+
+/**
+ * 
+ * @export
+ */
+export const TermbaseEntryTermSystemStatus = {
+    Preferred: 'preferred',
+    Draft: 'draft',
+    InReview: 'inReview',
+    Deprecated: 'deprecated',
+    Recommended: 'recommended',
+    Admitted: 'admitted',
+    Forbidden: 'forbidden',
+    Rejected: 'rejected',
+    Superseded: 'superseded'
+} as const;
+export type TermbaseEntryTermSystemStatus = typeof TermbaseEntryTermSystemStatus[keyof typeof TermbaseEntryTermSystemStatus];
+
+
+/**
+ * 
+ * @export
+ */
+export const TermbaseEntryTermSystemStatusRequest = {
+    Preferred: 'preferred',
+    Draft: 'draft',
+    InReview: 'inReview',
+    Deprecated: 'deprecated',
+    Recommended: 'recommended',
+    Admitted: 'admitted',
+    Forbidden: 'forbidden',
+    Rejected: 'rejected',
+    Superseded: 'superseded'
+} as const;
+export type TermbaseEntryTermSystemStatusRequest = typeof TermbaseEntryTermSystemStatusRequest[keyof typeof TermbaseEntryTermSystemStatusRequest];
+
 /**
  * The termbase entry term update request.
  * @export
@@ -8569,11 +9987,19 @@ export interface TermbaseEntryTermUpdateRequest {
     text: string;
     /**
      * 
+     * @type {TermbaseEntryTermSystemStatusRequest}
+     * @memberof TermbaseEntryTermUpdateRequest
+     */
+    systemStatus?: TermbaseEntryTermSystemStatusRequest;
+    /**
+     * 
      * @type {Array<TermbaseFieldValueUpdateRequest>}
      * @memberof TermbaseEntryTermUpdateRequest
      */
     termbaseFieldValues?: Array<TermbaseFieldValueUpdateRequest>;
 }
+
+
 /**
  * The termbase entry update request.
  * @export
@@ -8581,7 +10007,7 @@ export interface TermbaseEntryTermUpdateRequest {
  */
 export interface TermbaseEntryUpdateRequest {
     /**
-     * An identifier that can be provided externally, or generated automatically by Language Cloud, used for creating cross-references. You can use it to set its value to be correlated to your system. The format of the generated value is not guaranteed.
+     * An identifier that can be provided externally, or generated automatically by the Trados Cloud Platform, used for creating cross-references. You can use it to set its value to be correlated to your system. The format of the generated value is not guaranteed.
      * @type {string}
      * @memberof TermbaseEntryUpdateRequest
      */
@@ -8629,7 +10055,7 @@ export interface TermbaseExportResponse {
      * `queued` - The export passed the structural validation and it's waiting to be processed.<br>
      * `processing` - The export is in progress.<br>
      * `done` - The export was successfully processed .<br>
-     * `cancelled` - The export process was interrupted.<br>
+     * `canceled` - The export process was interrupted.<br>
      * `error` - The export was unsuccessful due to an internal error.
      * @type {string}
      * @memberof TermbaseExportResponse
@@ -8685,13 +10111,13 @@ export interface TermbaseField {
      * @type {string}
      * @memberof TermbaseField
      */
-    description?: string;
+    description?: string | null;
     /**
      * The type of the termbase field - system or userDefined.
      * @type {string}
      * @memberof TermbaseField
      */
-    type: TermbaseFieldTypeEnum;
+    type?: TermbaseFieldTypeEnum;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The level of which this field applies.</div> 
      * @type {string}
@@ -8781,7 +10207,7 @@ export interface TermbaseFieldCreateRequest {
      * @type {string}
      * @memberof TermbaseFieldCreateRequest
      */
-    description?: string;
+    description?: string | null;
     /**
      * The level of which this field applies.
      * @type {string}
@@ -8868,7 +10294,7 @@ export interface TermbaseFieldUpdateRequest {
      * @type {string}
      * @memberof TermbaseFieldUpdateRequest
      */
-    description?: string;
+    description?: string | null;
     /**
      * The level of which this field applies.
      * @type {string}
@@ -8971,7 +10397,7 @@ export interface TermbaseFieldValue {
      * @type {Date}
      * @memberof TermbaseFieldValue
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -8983,7 +10409,7 @@ export interface TermbaseFieldValue {
      * @type {Date}
      * @memberof TermbaseFieldValue
      */
-    lastModifiedAt?: Date;
+    lastModifiedAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -9188,7 +10614,7 @@ export interface TermbaseImportHistoryResponse {
      * @type {Date}
      * @memberof TermbaseImportHistoryResponse
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * The last modified date of the import.
      * @type {number}
@@ -9212,6 +10638,19 @@ export const TermbaseImportHistoryResponseStatusEnum = {
 } as const;
 export type TermbaseImportHistoryResponseStatusEnum = typeof TermbaseImportHistoryResponseStatusEnum[keyof typeof TermbaseImportHistoryResponseStatusEnum];
 
+/**
+ * Properties required for system status mapping
+ * @export
+ * @interface TermbaseImportRequest
+ */
+export interface TermbaseImportRequest {
+    /**
+     * 
+     * @type {Array<TermbaseSystemStatusMapping>}
+     * @memberof TermbaseImportRequest
+     */
+    statusMapping?: Array<TermbaseSystemStatusMapping>;
+}
 /**
  * 
  * @export
@@ -9351,6 +10790,27 @@ export interface TermbaseStructureUpdateRequest {
     fields?: Array<TermbaseFieldUpdateRequest>;
 }
 /**
+ * A mapping between a termbase term system status and termbase statuses.
+ * @export
+ * @interface TermbaseSystemStatusMapping
+ */
+export interface TermbaseSystemStatusMapping {
+    /**
+     * 
+     * @type {TermbaseEntryTermSystemStatusRequest}
+     * @memberof TermbaseSystemStatusMapping
+     */
+    systemStatusValue: TermbaseEntryTermSystemStatusRequest;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof TermbaseSystemStatusMapping
+     */
+    statuses: Array<string>;
+}
+
+
+/**
  * The termbase template.
  * @export
  * @interface TermbaseTemplate
@@ -9373,13 +10833,13 @@ export interface TermbaseTemplate {
      * @type {string}
      * @memberof TermbaseTemplate
      */
-    description?: string;
+    description?: string | null;
     /**
      * The copyright of the termbase template.
      * @type {string}
      * @memberof TermbaseTemplate
      */
-    copyright?: string;
+    copyright?: string | null;
     /**
      * 
      * @type {FolderV2}
@@ -9445,13 +10905,13 @@ export interface TermbaseTemplateCreateRequest {
      * @type {string}
      * @memberof TermbaseTemplateCreateRequest
      */
-    description?: string;
+    description?: string | null;
     /**
      * The copyright of the termbase template.
      * @type {string}
      * @memberof TermbaseTemplateCreateRequest
      */
-    copyright?: string;
+    copyright?: string | null;
     /**
      * The folder identifier where the termbase template should be created. If not mentioned, it will be created in the Root folder. If the user does not have access in Root, the request will fail with forbidden error.
      * @type {string}
@@ -9488,13 +10948,13 @@ export interface TermbaseTemplateUpdateRequest {
      * @type {string}
      * @memberof TermbaseTemplateUpdateRequest
      */
-    description?: string;
+    description?: string | null;
     /**
      * The copyright of the Termbase template.
      * @type {string}
      * @memberof TermbaseTemplateUpdateRequest
      */
-    copyright?: string;
+    copyright?: string | null;
     /**
      * The languages of the termbase template.
      * @type {Array<LanguageRequest>}
@@ -9547,11 +11007,19 @@ export interface TermbaseTermCreateRequest {
     text: string;
     /**
      * 
+     * @type {TermbaseEntryTermSystemStatusRequest}
+     * @memberof TermbaseTermCreateRequest
+     */
+    systemStatus?: TermbaseEntryTermSystemStatusRequest;
+    /**
+     * 
      * @type {Array<TermbaseFieldValueCreateRequest>}
      * @memberof TermbaseTermCreateRequest
      */
     termbaseFieldValues?: Array<TermbaseFieldValueCreateRequest>;
 }
+
+
 /**
  * Termbase update request.
  * @export
@@ -9569,13 +11037,13 @@ export interface TermbaseUpdateRequest {
      * @type {string}
      * @memberof TermbaseUpdateRequest
      */
-    description?: string;
+    description?: string | null;
     /**
      * The copyright of the termbase.
      * @type {string}
      * @memberof TermbaseUpdateRequest
      */
-    copyright?: string;
+    copyright?: string | null;
     /**
      * The termbase template identifier.
      * @type {string}
@@ -9766,6 +11234,376 @@ export interface TqaProfileSeverity {
 /**
  * 
  * @export
+ * @interface Translation
+ */
+export interface Translation {
+    /**
+     * The translation content serialized as JSON. BCM fragment for `TM` and `MT`. BCM term for `TB`.
+     * @type {string}
+     * @memberof Translation
+     */
+    translationProposal: string;
+    /**
+     * 
+     * @type {TranslationResourceType}
+     * @memberof Translation
+     */
+    resourceType: TranslationResourceType;
+    /**
+     * 
+     * @type {Array<TranslationSourceLocation>}
+     * @memberof Translation
+     */
+    sourceLocation?: Array<TranslationSourceLocation>;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface TranslationAddRequest
+ */
+export interface TranslationAddRequest {
+    /**
+     * 
+     * @type {TranslationTuUpdateInputRequest}
+     * @memberof TranslationAddRequest
+     */
+    input: TranslationTuUpdateInputRequest;
+    /**
+     * 
+     * @type {TranslationUpdateDefinition}
+     * @memberof TranslationAddRequest
+     */
+    definition: TranslationUpdateDefinition;
+    /**
+     * 
+     * @type {TranslationAddSettings}
+     * @memberof TranslationAddRequest
+     */
+    settings?: TranslationAddSettings;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationAddSettings
+ */
+export interface TranslationAddSettings {
+    /**
+     * The Translation Unit fields to update. They are defined in the Field Template associated to your Translation Memory.
+     * @type {Array<TranslationUpdateField>}
+     * @memberof TranslationAddSettings
+     */
+    fields?: Array<TranslationUpdateField>;
+    /**
+     * Update behavior when the translation unit already exists but target differs.
+     * @type {string}
+     * @memberof TranslationAddSettings
+     */
+    ifTargetSegmentsDiffer?: TranslationAddSettingsIfTargetSegmentsDifferEnum;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationAddSettingsIfTargetSegmentsDifferEnum = {
+    AddNew: 'addNew',
+    Overwrite: 'overwrite',
+    LeaveUnchanged: 'leaveUnchanged',
+    KeepMostRecent: 'keepMostRecent',
+    Merge: 'merge'
+} as const;
+export type TranslationAddSettingsIfTargetSegmentsDifferEnum = typeof TranslationAddSettingsIfTargetSegmentsDifferEnum[keyof typeof TranslationAddSettingsIfTargetSegmentsDifferEnum];
+
+/**
+ * 
+ * @export
+ * @interface TranslationAppliedResourceStatus
+ */
+export interface TranslationAppliedResourceStatus {
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The resource identifier.
+     * @type {string}
+     * @memberof TranslationAppliedResourceStatus
+     */
+    resourceId?: string;
+    /**
+     * 
+     * @type {TranslationResourceType}
+     * @memberof TranslationAppliedResourceStatus
+     */
+    resourceType?: TranslationResourceType;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The status of the applied resource.
+     * @type {string}
+     * @memberof TranslationAppliedResourceStatus
+     */
+    status?: TranslationAppliedResourceStatusStatusEnum;
+    /**
+     * A message describing the applied resource.
+     * @type {string}
+     * @memberof TranslationAppliedResourceStatus
+     */
+    message?: string;
+    /**
+     * Details of possible errors.
+     * @type {Array<TranslationErrorDetailResponse>}
+     * @memberof TranslationAppliedResourceStatus
+     */
+    translationErrors?: Array<TranslationErrorDetailResponse>;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationAppliedResourceStatusStatusEnum = {
+    Successful: 'successful',
+    Unsuccessful: 'unsuccessful'
+} as const;
+export type TranslationAppliedResourceStatusStatusEnum = typeof TranslationAppliedResourceStatusStatusEnum[keyof typeof TranslationAppliedResourceStatusStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface TranslationConcordance
+ */
+export interface TranslationConcordance {
+    /**
+     * The translation content serialized as JSON. BCM fragment for `TM`.
+     * @type {string}
+     * @memberof TranslationConcordance
+     */
+    translationProposal: string;
+    /**
+     * 
+     * @type {TranslationConcordanceResourceType}
+     * @memberof TranslationConcordance
+     */
+    resourceType: TranslationConcordanceResourceType;
+}
+
+
+/**
+ * 
+ * @export
+ * @interface TranslationConcordanceInputRequest
+ */
+export interface TranslationConcordanceInputRequest {
+    /**
+     * Text to search for.
+     * @type {string}
+     * @memberof TranslationConcordanceInputRequest
+     */
+    content: string;
+}
+
+/**
+ * The translation resource type
+ * @export
+ */
+export const TranslationConcordanceResourceType = {
+    Tm: 'TM'
+} as const;
+export type TranslationConcordanceResourceType = typeof TranslationConcordanceResourceType[keyof typeof TranslationConcordanceResourceType];
+
+/**
+ * 
+ * @export
+ * @interface TranslationConcordanceSearchAppliedResourceStatus
+ */
+export interface TranslationConcordanceSearchAppliedResourceStatus {
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The resource identifier.
+     * @type {string}
+     * @memberof TranslationConcordanceSearchAppliedResourceStatus
+     */
+    resourceId?: string;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The type of resource applied.
+     * @type {string}
+     * @memberof TranslationConcordanceSearchAppliedResourceStatus
+     */
+    resourceType?: TranslationConcordanceSearchAppliedResourceStatusResourceTypeEnum;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div>The status of the applied resource.
+     * @type {string}
+     * @memberof TranslationConcordanceSearchAppliedResourceStatus
+     */
+    status?: TranslationConcordanceSearchAppliedResourceStatusStatusEnum;
+    /**
+     * A message describing the applied resource.
+     * @type {string}
+     * @memberof TranslationConcordanceSearchAppliedResourceStatus
+     */
+    message?: string;
+    /**
+     * Details of possible errors.
+     * @type {Array<TranslationErrorDetailResponse>}
+     * @memberof TranslationConcordanceSearchAppliedResourceStatus
+     */
+    translationErrors?: Array<TranslationErrorDetailResponse>;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationConcordanceSearchAppliedResourceStatusResourceTypeEnum = {
+    Tm: 'TM'
+} as const;
+export type TranslationConcordanceSearchAppliedResourceStatusResourceTypeEnum = typeof TranslationConcordanceSearchAppliedResourceStatusResourceTypeEnum[keyof typeof TranslationConcordanceSearchAppliedResourceStatusResourceTypeEnum];
+
+/**
+ * @export
+ */
+export const TranslationConcordanceSearchAppliedResourceStatusStatusEnum = {
+    Successful: 'successful',
+    Unsuccessful: 'unsuccessful'
+} as const;
+export type TranslationConcordanceSearchAppliedResourceStatusStatusEnum = typeof TranslationConcordanceSearchAppliedResourceStatusStatusEnum[keyof typeof TranslationConcordanceSearchAppliedResourceStatusStatusEnum];
+
+/**
+ * 
+ * @export
+ * @interface TranslationConcordanceSearchDefinition
+ */
+export interface TranslationConcordanceSearchDefinition {
+    /**
+     * The translation engine identifier.
+     * @type {string}
+     * @memberof TranslationConcordanceSearchDefinition
+     */
+    translationEngineId: string;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationConcordanceSearchRequest
+ */
+export interface TranslationConcordanceSearchRequest {
+    /**
+     * 
+     * @type {TranslationConcordanceInputRequest}
+     * @memberof TranslationConcordanceSearchRequest
+     */
+    input: TranslationConcordanceInputRequest;
+    /**
+     * 
+     * @type {LanguageDirectionGeneralRequest}
+     * @memberof TranslationConcordanceSearchRequest
+     */
+    languageDirection: LanguageDirectionGeneralRequest;
+    /**
+     * 
+     * @type {TranslationConcordanceSearchDefinition}
+     * @memberof TranslationConcordanceSearchRequest
+     */
+    definition: TranslationConcordanceSearchDefinition;
+    /**
+     * Indicates whether the search should be performed only in the target segments.
+     * @type {boolean}
+     * @memberof TranslationConcordanceSearchRequest
+     */
+    targetOnly?: boolean;
+    /**
+     * 
+     * @type {ConcordanceSearchSettings}
+     * @memberof TranslationConcordanceSearchRequest
+     */
+    settings?: ConcordanceSearchSettings;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationConcordanceSearchResponse
+ */
+export interface TranslationConcordanceSearchResponse {
+    /**
+     * Translations from different resource origins such as `TM`. The origin information is found in the BCM fragment. Only the top 5 matches are displayed
+     * @type {Array<TranslationConcordance>}
+     * @memberof TranslationConcordanceSearchResponse
+     */
+    translations: Array<TranslationConcordance>;
+    /**
+     * 
+     * @type {Array<TranslationConcordanceSearchAppliedResourceStatus>}
+     * @memberof TranslationConcordanceSearchResponse
+     */
+    appliedResourcesStatus?: Array<TranslationConcordanceSearchAppliedResourceStatus>;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationConcordanceSearchStandardPenalties
+ */
+export interface TranslationConcordanceSearchStandardPenalties {
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchStandardPenalties
+     */
+    alignment?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchStandardPenalties
+     */
+    characterWidthDifference?: number;
+}
+/**
+ * The penalties to apply depending on the status of the translation unit.
+ * @export
+ * @interface TranslationConcordanceSearchUnitStatusPenalties
+ */
+export interface TranslationConcordanceSearchUnitStatusPenalties {
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchUnitStatusPenalties
+     */
+    translated?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchUnitStatusPenalties
+     */
+    translationRejected?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchUnitStatusPenalties
+     */
+    translationApproved?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchUnitStatusPenalties
+     */
+    signOffRejected?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchUnitStatusPenalties
+     */
+    signOff?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchUnitStatusPenalties
+     */
+    notTranslated?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationConcordanceSearchUnitStatusPenalties
+     */
+    draft?: number;
+}
+/**
+ * 
+ * @export
  * @interface TranslationCostFuzzyItem
  */
 export interface TranslationCostFuzzyItem {
@@ -9774,25 +11612,25 @@ export interface TranslationCostFuzzyItem {
      * @type {number}
      * @memberof TranslationCostFuzzyItem
      */
-    count?: number;
+    count?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The cost of a unit.</div> 
      * @type {number}
      * @memberof TranslationCostFuzzyItem
      */
-    rate?: number;
+    rate?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The total cost for the current item.</div> 
      * @type {number}
      * @memberof TranslationCostFuzzyItem
      */
-    total?: number;
+    total?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The sum of all the previously computed costs.</div> 
      * @type {number}
      * @memberof TranslationCostFuzzyItem
      */
-    runningTotal?: number;
+    runningTotal?: number | null;
     /**
      * 
      * @type {FuzzyCategory}
@@ -9811,25 +11649,38 @@ export interface TranslationCostItem {
      * @type {number}
      * @memberof TranslationCostItem
      */
-    count?: number;
+    count?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The cost of a unit.</div> 
      * @type {number}
      * @memberof TranslationCostItem
      */
-    rate?: number;
+    rate?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The total cost for the current item.</div> 
      * @type {number}
      * @memberof TranslationCostItem
      */
-    total?: number;
+    total?: number | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The sum of all the previously computed costs.</div> 
      * @type {number}
      * @memberof TranslationCostItem
      */
-    runningTotal?: number;
+    runningTotal?: number | null;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationDefinition
+ */
+export interface TranslationDefinition {
+    /**
+     * The translation engine identifier.
+     * @type {string}
+     * @memberof TranslationDefinition
+     */
+    translationEngineId: string;
 }
 /**
  * Translation Engine resource. (Not available for List Projects endpoint)
@@ -9879,13 +11730,19 @@ export interface TranslationEngineDefinition {
      * @type {string}
      * @memberof TranslationEngineDefinition
      */
-    languageProcessingRuleId?: string;
+    languageProcessingRuleId: string;
     /**
      * 
      * @type {Array<TranslationEngineDefinitionLanguagePair>}
      * @memberof TranslationEngineDefinition
      */
     languagePairDefinitions?: Array<TranslationEngineDefinitionLanguagePair>;
+    /**
+     * 
+     * @type {RemoteTranslationEngineSequence}
+     * @memberof TranslationEngineDefinition
+     */
+    sequence?: RemoteTranslationEngineSequence;
 }
 /**
  * 
@@ -9931,6 +11788,61 @@ export interface TranslationEngineUpdateRequest {
      */
     definition?: TranslationEngineDefinition;
 }
+/**
+ * Translation error details response properties.
+ * @export
+ * @interface TranslationErrorDetailResponse
+ */
+export interface TranslationErrorDetailResponse {
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
+     * @type {string}
+     * @memberof TranslationErrorDetailResponse
+     */
+    name?: string;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
+     * @type {string}
+     * @memberof TranslationErrorDetailResponse
+     */
+    code?: string;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
+     * @type {string}
+     * @memberof TranslationErrorDetailResponse
+     */
+    value?: string;
+}
+/**
+ * The translation input.
+ * @export
+ * @interface TranslationLookupInputRequest
+ */
+export interface TranslationLookupInputRequest {
+    /**
+     * A plain text phrase or a BCM fragment with a single segment serialized as JSON string.
+     * @type {any}
+     * @memberof TranslationLookupInputRequest
+     */
+    content: any | null;
+    /**
+     * The content type.
+     * @type {string}
+     * @memberof TranslationLookupInputRequest
+     */
+    contentType: TranslationLookupInputRequestContentTypeEnum;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationLookupInputRequestContentTypeEnum = {
+    Text: 'text',
+    BcmFragment: 'bcmFragment'
+} as const;
+export type TranslationLookupInputRequestContentTypeEnum = typeof TranslationLookupInputRequestContentTypeEnum[keyof typeof TranslationLookupInputRequestContentTypeEnum];
+
 /**
  * 
  * @export
@@ -9990,7 +11902,7 @@ export interface TranslationMemory {
      * @type {Date}
      * @memberof TranslationMemory
      */
-    createdAt?: Date;
+    createdAt?: Date | null;
     /**
      * 
      * @type {User}
@@ -10002,13 +11914,13 @@ export interface TranslationMemory {
      * @type {Date}
      * @memberof TranslationMemory
      */
-    lastRecomputedAt?: Date;
+    lastRecomputedAt?: Date | null;
     /**
      * The `DateTime` when the translation memory reindexing was performed.  <br> UTC Timezone  <br> Allowed formats: <br> "YYYY-MM-DDThh:mmZ" <br> "YYYY-MM-DDThh:mm:ssZ" <br> "YYYY-MM-DDThh:mm:ss.sZ" <br> "YYYY-MM-DDThh:mm:ss.ssZ" <br> "YYYY-MM-DDThh:mm:ss.sss
      * @type {Date}
      * @memberof TranslationMemory
      */
-    lastReIndexedAt?: Date;
+    lastReIndexedAt?: Date | null;
 }
 /**
  * 
@@ -10069,7 +11981,7 @@ export interface TranslationMemoryBase {
      * @type {Date}
      * @memberof TranslationMemoryBase
      */
-    createdDateTime?: Date;
+    createdDateTime?: Date | null;
     /**
      * 
      * @type {User}
@@ -10171,14 +12083,15 @@ export interface TranslationMemoryExportResponse {
      */
     id: string;
     /**
-     * The translation memory export status.
-     * * `queued` - the export has been queued to be processed
-     * * `inProgress` - the export is being processed
-     * * `failed` - the export has failed due to internal errors
-     * * `done` - the export has finished successfully
-     * * `cancelled` - the export has been interrupted
+     * (Deprecated) The status of the import operation.
+     * * `queued` - the import has been queued and is waiting to be processed
+     * * `inProgress` - the import is being processed
+     * * `failed` - the import has failed due to internal errors
+     * * `done` - the import has finished successfully
+     * * `cancelled` - the import has been interrupted
      * @type {string}
      * @memberof TranslationMemoryExportResponse
+     * @deprecated
      */
     status: TranslationMemoryExportResponseStatusEnum;
 }
@@ -10352,6 +12265,8 @@ export interface TranslationMemoryFieldsSettings {
      */
     type: TranslationMemoryFieldUpdateType;
 }
+
+
 /**
  * 
  * @export
@@ -10377,6 +12292,8 @@ export interface TranslationMemoryFieldsSettingsRequest {
      */
     type: TranslationMemoryFieldUpdateType;
 }
+
+
 /**
  * 
  * @export
@@ -10389,6 +12306,32 @@ export interface TranslationMemoryFieldsUpdateRequest {
      * @memberof TranslationMemoryFieldsUpdateRequest
      */
     settings: Array<TranslationMemoryFieldsSettingsRequest>;
+}
+/**
+ * Translation Memory filter settings request
+ * @export
+ * @interface TranslationMemoryFiltersRequest
+ */
+export interface TranslationMemoryFiltersRequest {
+    /**
+     * 
+     * @type {TranslationMemoryHardFilterRequest}
+     * @memberof TranslationMemoryFiltersRequest
+     */
+    hardFilter?: TranslationMemoryHardFilterRequest;
+}
+/**
+ * Hard filter configuration for Translation Memory matching request
+ * @export
+ * @interface TranslationMemoryHardFilterRequest
+ */
+export interface TranslationMemoryHardFilterRequest {
+    /**
+     * The filter expression is a set of atomic expressions connected by logical operators. <br/>An atomic expression describes the relationship of a field to a value.
+     * @type {string}
+     * @memberof TranslationMemoryHardFilterRequest
+     */
+    expression: string;
 }
 /**
  * 
@@ -10459,6 +12402,44 @@ export const TranslationMemoryImportHistoryResponseStatusEnum = {
 export type TranslationMemoryImportHistoryResponseStatusEnum = typeof TranslationMemoryImportHistoryResponseStatusEnum[keyof typeof TranslationMemoryImportHistoryResponseStatusEnum];
 
 /**
+ * 
+ * @export
+ * @interface TranslationMemoryImportPollResponse
+ */
+export interface TranslationMemoryImportPollResponse {
+    /**
+     * The unique identifier of the import operation.
+     * @type {string}
+     * @memberof TranslationMemoryImportPollResponse
+     */
+    id: string;
+    /**
+     * The status of the import operation.
+     * * `queued` - the import has been queued and is waiting to be processed
+     * * `inProgress` - the import is being processed
+     * * `failed` - the import has failed due to internal errors
+     * * `done` - the import has finished successfully
+     * * `cancelled` - the import has been interrupted
+     * @type {string}
+     * @memberof TranslationMemoryImportPollResponse
+     */
+    status: TranslationMemoryImportPollResponseStatusEnum;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationMemoryImportPollResponseStatusEnum = {
+    Queued: 'queued',
+    InProgress: 'inProgress',
+    Failed: 'failed',
+    Done: 'done',
+    Cancelled: 'cancelled'
+} as const;
+export type TranslationMemoryImportPollResponseStatusEnum = typeof TranslationMemoryImportPollResponseStatusEnum[keyof typeof TranslationMemoryImportPollResponseStatusEnum];
+
+/**
  * Translation Memory Import properties sent as a JSON inside a text part.
  * @export
  * @interface TranslationMemoryImportRequest
@@ -10477,9 +12458,10 @@ export interface TranslationMemoryImportRequest {
      */
     targetLanguageCode: string;
     /**
-     * 
+     * (Deprecated) The default value is set for this field, as this property is set internally.
      * @type {boolean}
      * @memberof TranslationMemoryImportRequest
+     * @deprecated
      */
     importAsPlainText?: boolean;
     /**
@@ -10489,9 +12471,10 @@ export interface TranslationMemoryImportRequest {
      */
     exportInvalidTranslationUnits?: boolean;
     /**
-     * 
+     * (Deprecated) The default value is set for this field, as this property is set internally.
      * @type {boolean}
      * @memberof TranslationMemoryImportRequest
+     * @deprecated
      */
     triggerRecomputeStatistics?: boolean;
     /**
@@ -10563,7 +12546,7 @@ export interface TranslationMemoryImportResponse {
      */
     id: string;
     /**
-     * The status of the import operation.
+     * (Deprecated) The status of the import operation.
      * * `queued` - the import has been queued and is waiting to be processed
      * * `inProgress` - the import is being processed
      * * `failed` - the import has failed due to internal errors
@@ -10571,6 +12554,7 @@ export interface TranslationMemoryImportResponse {
      * * `cancelled` - the import has been interrupted
      * @type {string}
      * @memberof TranslationMemoryImportResponse
+     * @deprecated
      */
     status: TranslationMemoryImportResponseStatusEnum;
 }
@@ -10613,9 +12597,10 @@ export interface TranslationMemoryImportSettings {
      */
     targetSegmentsDifferOption: TranslationMemoryImportSettingsTargetSegmentsDifferOptionEnum;
     /**
-     * This option describes if the translation units were imported as plain text.
+     * (Deprecated) The default value is set for this field, as this property is set internally.
      * @type {boolean}
      * @memberof TranslationMemoryImportSettings
+     * @deprecated
      */
     importAsPlainText: boolean;
     /**
@@ -10625,9 +12610,10 @@ export interface TranslationMemoryImportSettings {
      */
     exportInvalidTranslationUnits: boolean;
     /**
-     * This option describes if fuzzy index statistics were  recomputed after the original import operation.
+     * (Deprecated) The default value is set for this field, as this property is set internally.
      * @type {boolean}
      * @memberof TranslationMemoryImportSettings
+     * @deprecated
      */
     triggerRecomputeStatistics: boolean;
     /**
@@ -10649,9 +12635,10 @@ export interface TranslationMemoryImportSettings {
      */
     targetLanguageCode: string;
     /**
-     * The trace identifier of the import operation.
+     * (Deprecated) The field will be completly remove in the future. For compatibily, until it will be removed a default value it is set: 0000-0000-0000-0000.
      * @type {string}
      * @memberof TranslationMemoryImportSettings
+     * @deprecated
      */
     traceId: string;
 }
@@ -10709,14 +12696,244 @@ export interface TranslationMemoryLanguageDirection {
      * @type {number}
      * @memberof TranslationMemoryLanguageDirection
      */
-    translationUnits?: number;
+    translationUnits?: number | null;
     /**
      * The number of translation units that are unaligned for this language pair. Sum up all language pairs to get the total for the translation memory.
      * @type {number}
      * @memberof TranslationMemoryLanguageDirection
      */
-    unalignedTranslationUnits?: number;
+    unalignedTranslationUnits?: number | null;
 }
+/**
+ * 
+ * @export
+ * @interface TranslationMemoryPollExportResponse
+ */
+export interface TranslationMemoryPollExportResponse {
+    /**
+     * The translation memory export identifier.
+     * @type {string}
+     * @memberof TranslationMemoryPollExportResponse
+     */
+    id: string;
+    /**
+     * The translation memory export status.
+     * * `queued` - the export has been queued to be processed
+     * * `inProgress` - the export is being processed
+     * * `failed` - the export has failed due to internal errors
+     * * `done` - the export has finished successfully
+     * * `cancelled` - the export has been interrupted
+     * @type {string}
+     * @memberof TranslationMemoryPollExportResponse
+     */
+    status: TranslationMemoryPollExportResponseStatusEnum;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationMemoryPollExportResponseStatusEnum = {
+    Queued: 'queued',
+    InProgress: 'inProgress',
+    Failed: 'failed',
+    Done: 'done',
+    Cancelled: 'cancelled'
+} as const;
+export type TranslationMemoryPollExportResponseStatusEnum = typeof TranslationMemoryPollExportResponseStatusEnum[keyof typeof TranslationMemoryPollExportResponseStatusEnum];
+
+/**
+ * Translation Memory Filter Field definition
+ * @export
+ * @interface TranslationMemorySettingsFilterFieldResponse
+ */
+export interface TranslationMemorySettingsFilterFieldResponse {
+    /**
+     * The field identifier. For system fields, use system field names. For custom fields, use the custom field identifier.
+     * @type {string}
+     * @memberof TranslationMemorySettingsFilterFieldResponse
+     */
+    fieldId: string;
+    /**
+     * `system` or identifier of the custom field template
+     * @type {string}
+     * @memberof TranslationMemorySettingsFilterFieldResponse
+     */
+    fieldTemplateId: string;
+    /**
+     * The name of the field template.
+     * @type {string}
+     * @memberof TranslationMemorySettingsFilterFieldResponse
+     */
+    fieldTemplateName: string;
+    /**
+     * The field name. For system fields, identical to fieldId. For custom fields, use the custom field name.
+     * @type {string}
+     * @memberof TranslationMemorySettingsFilterFieldResponse
+     */
+    name: string;
+    /**
+     * Type of the field.
+     * @type {string}
+     * @memberof TranslationMemorySettingsFilterFieldResponse
+     */
+    type: TranslationMemorySettingsFilterFieldResponseTypeEnum;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Available values for picklist fields. Only present for singlePicklist and multiplePicklist field types.</div>
+     * @type {Array<TranslationMemorySettingsFilterFieldResponseAllowedValuesInner>}
+     * @memberof TranslationMemorySettingsFilterFieldResponse
+     */
+    allowedValues?: Array<TranslationMemorySettingsFilterFieldResponseAllowedValuesInner>;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationMemorySettingsFilterFieldResponseTypeEnum = {
+    SingleString: 'singleString',
+    MultipleString: 'multipleString',
+    SinglePicklist: 'singlePicklist',
+    MultiplePicklist: 'multiplePicklist',
+    DateTime: 'dateTime',
+    Integer: 'integer'
+} as const;
+export type TranslationMemorySettingsFilterFieldResponseTypeEnum = typeof TranslationMemorySettingsFilterFieldResponseTypeEnum[keyof typeof TranslationMemorySettingsFilterFieldResponseTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface TranslationMemorySettingsFilterFieldResponseAllowedValuesInner
+ */
+export interface TranslationMemorySettingsFilterFieldResponseAllowedValuesInner {
+    /**
+     * The unique identifier of the allowed value.
+     * @type {string}
+     * @memberof TranslationMemorySettingsFilterFieldResponseAllowedValuesInner
+     */
+    id: string;
+    /**
+     * The display name of the allowed value.
+     * @type {string}
+     * @memberof TranslationMemorySettingsFilterFieldResponseAllowedValuesInner
+     */
+    name: string;
+}
+/**
+ * Translation Memory filter settings.
+ * @export
+ * @interface TranslationMemorySettingsFiltersResponse
+ */
+export interface TranslationMemorySettingsFiltersResponse {
+    /**
+     * 
+     * @type {TranslationMemorySettingsHardFilterResponse}
+     * @memberof TranslationMemorySettingsFiltersResponse
+     */
+    hardFilter?: TranslationMemorySettingsHardFilterResponse;
+}
+/**
+ * Hard filter configuration for Translation Memory matching.
+ * @export
+ * @interface TranslationMemorySettingsHardFilterResponse
+ */
+export interface TranslationMemorySettingsHardFilterResponse {
+    /**
+     * The filter expression is a set of atomic expressions connected by logical operators. An atomic expression describes the relationship of a field to a value.
+     * @type {string}
+     * @memberof TranslationMemorySettingsHardFilterResponse
+     */
+    expression: string;
+    /**
+     * 
+     * @type {Array<TranslationMemorySettingsFilterFieldResponse>}
+     * @memberof TranslationMemorySettingsHardFilterResponse
+     */
+    fields?: Array<TranslationMemorySettingsFilterFieldResponse>;
+}
+/**
+ * Translation Memory settings Request
+ * @export
+ * @interface TranslationMemorySettingsRequest
+ */
+export interface TranslationMemorySettingsRequest {
+    /**
+     * 
+     * @type {TranslationMemoryFiltersRequest}
+     * @memberof TranslationMemorySettingsRequest
+     */
+    filters?: TranslationMemoryFiltersRequest;
+    /**
+     * 
+     * @type {Array<TranslationMemoryUpdateTMFieldsRequest>}
+     * @memberof TranslationMemorySettingsRequest
+     */
+    updateTranslationMemoryFields?: Array<TranslationMemoryUpdateTMFieldsRequest>;
+}
+/**
+ * Translation Memory Field definition with values for field updates
+ * @export
+ * @interface TranslationMemorySettingsUpdateFieldResponse
+ */
+export interface TranslationMemorySettingsUpdateFieldResponse {
+    /**
+     * The field identifier. For system fields, use system field names. For custom fields, use the custom field identifier.
+     * @type {string}
+     * @memberof TranslationMemorySettingsUpdateFieldResponse
+     */
+    fieldId: string;
+    /**
+     * `system` or identifier of the custom field template
+     * @type {string}
+     * @memberof TranslationMemorySettingsUpdateFieldResponse
+     */
+    fieldTemplateId: string;
+    /**
+     * The name of the field template.
+     * @type {string}
+     * @memberof TranslationMemorySettingsUpdateFieldResponse
+     */
+    fieldTemplateName: string;
+    /**
+     * The field name. For system fields, identical to fieldId. For custom fields, use the custom field name.
+     * @type {string}
+     * @memberof TranslationMemorySettingsUpdateFieldResponse
+     */
+    name: string;
+    /**
+     * Type of the field.
+     * @type {string}
+     * @memberof TranslationMemorySettingsUpdateFieldResponse
+     */
+    type: TranslationMemorySettingsUpdateFieldResponseTypeEnum;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Available values for picklist fields. Only present for singlePicklist and multiplePicklist field types.</div>
+     * @type {Array<TranslationMemorySettingsFilterFieldResponseAllowedValuesInner>}
+     * @memberof TranslationMemorySettingsUpdateFieldResponse
+     */
+    allowedValues?: Array<TranslationMemorySettingsFilterFieldResponseAllowedValuesInner>;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The actual values assigned to this field.</div>
+     * @type {Array<string>}
+     * @memberof TranslationMemorySettingsUpdateFieldResponse
+     */
+    values?: Array<string>;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationMemorySettingsUpdateFieldResponseTypeEnum = {
+    SingleString: 'singleString',
+    MultipleString: 'multipleString',
+    SinglePicklist: 'singlePicklist',
+    MultiplePicklist: 'multiplePicklist',
+    DateTime: 'dateTime',
+    Integer: 'integer'
+} as const;
+export type TranslationMemorySettingsUpdateFieldResponseTypeEnum = typeof TranslationMemorySettingsUpdateFieldResponseTypeEnum[keyof typeof TranslationMemorySettingsUpdateFieldResponseTypeEnum];
+
 /**
  * 
  * @export
@@ -10759,6 +12976,424 @@ export interface TranslationMemoryUpdateRequest {
      * @memberof TranslationMemoryUpdateRequest
      */
     fieldTemplateId?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationMemoryUpdateTMFieldsRequest
+ */
+export interface TranslationMemoryUpdateTMFieldsRequest {
+    /**
+     * The identifier of the translation memory field.
+     * @type {string}
+     * @memberof TranslationMemoryUpdateTMFieldsRequest
+     */
+    fieldId: string;
+    /**
+     * A single value or a collection of values. Based on field type, can be of different formats for `singleString`, `multipleString`, `singlePicklist`, `multiplePicklist`, `dateTime`, `integer`.
+     * @type {Array<string>}
+     * @memberof TranslationMemoryUpdateTMFieldsRequest
+     */
+    values: Array<string>;
+}
+
+/**
+ * The translation resource type
+ * @export
+ */
+export const TranslationResourceType = {
+    Tm: 'TM',
+    Mt: 'MT',
+    Tb: 'TB'
+} as const;
+export type TranslationResourceType = typeof TranslationResourceType[keyof typeof TranslationResourceType];
+
+/**
+ * 
+ * @export
+ * @interface TranslationSearchRequest
+ */
+export interface TranslationSearchRequest {
+    /**
+     * 
+     * @type {TranslationLookupInputRequest}
+     * @memberof TranslationSearchRequest
+     */
+    input: TranslationLookupInputRequest;
+    /**
+     * 
+     * @type {LanguageDirectionGeneralRequest}
+     * @memberof TranslationSearchRequest
+     */
+    languageDirection: LanguageDirectionGeneralRequest;
+    /**
+     * 
+     * @type {TranslationDefinition}
+     * @memberof TranslationSearchRequest
+     */
+    definition: TranslationDefinition;
+    /**
+     * 
+     * @type {TranslationSearchSettings}
+     * @memberof TranslationSearchRequest
+     */
+    settings?: TranslationSearchSettings;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationSearchResponse
+ */
+export interface TranslationSearchResponse {
+    /**
+     * Translations from different resource origins such as `TM`. The origin information is found in the BCM fragment.
+     * @type {Array<Translation>}
+     * @memberof TranslationSearchResponse
+     */
+    translations: Array<Translation>;
+    /**
+     * 
+     * @type {Array<TranslationAppliedResourceStatus>}
+     * @memberof TranslationSearchResponse
+     */
+    appliedResourcesStatus?: Array<TranslationAppliedResourceStatus>;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationSearchSettings
+ */
+export interface TranslationSearchSettings {
+    /**
+     * 
+     * @type {TranslationSearchSettingsTm}
+     * @memberof TranslationSearchSettings
+     */
+    translationMemory?: TranslationSearchSettingsTm;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationSearchSettingsTm
+ */
+export interface TranslationSearchSettingsTm {
+    /**
+     * This is the degree of match that must exist between a source document segment and a translation memory segment in order for the segment translation to be offered as a match. The default is 70%, but you can set a value between 30% and 100%.
+     * 
+     * The selected value is inclusive, meaning that matches with your exact selected value are also included in translation results.
+     * @type {number}
+     * @memberof TranslationSearchSettingsTm
+     */
+    minimumMatchValue?: number;
+    /**
+     * 
+     * @type {TranslationSearchTMPenalties}
+     * @memberof TranslationSearchSettingsTm
+     */
+    penalties?: TranslationSearchTMPenalties;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationSearchStandardPenalties
+ */
+export interface TranslationSearchStandardPenalties {
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchStandardPenalties
+     */
+    missingFormatting?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchStandardPenalties
+     */
+    differentFormatting?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchStandardPenalties
+     */
+    multipleTranslations?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchStandardPenalties
+     */
+    autoLocalization?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchStandardPenalties
+     */
+    textReplacement?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchStandardPenalties
+     */
+    alignment?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchStandardPenalties
+     */
+    characterWidthDifference?: number;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationSearchTMPenalties
+ */
+export interface TranslationSearchTMPenalties {
+    /**
+     * 
+     * @type {TranslationSearchStandardPenalties}
+     * @memberof TranslationSearchTMPenalties
+     */
+    standardPenalties?: TranslationSearchStandardPenalties;
+    /**
+     * 
+     * @type {TranslationSearchUnitStatusPenalties}
+     * @memberof TranslationSearchTMPenalties
+     */
+    translationUnitStatusPenalties?: TranslationSearchUnitStatusPenalties;
+}
+/**
+ * The penalties to apply depending on the status of the translation unit.
+ * @export
+ * @interface TranslationSearchUnitStatusPenalties
+ */
+export interface TranslationSearchUnitStatusPenalties {
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchUnitStatusPenalties
+     */
+    translated?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchUnitStatusPenalties
+     */
+    translationRejected?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchUnitStatusPenalties
+     */
+    translationApproved?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchUnitStatusPenalties
+     */
+    signOffRejected?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchUnitStatusPenalties
+     */
+    signOff?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchUnitStatusPenalties
+     */
+    notTranslated?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSearchUnitStatusPenalties
+     */
+    draft?: number;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationServiceType
+ */
+export interface TranslationServiceType {
+    /**
+     * The Service Type identifier.
+     * @type {string}
+     * @memberof TranslationServiceType
+     */
+    id: string;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The Service Type name.</div> 
+     * @type {string}
+     * @memberof TranslationServiceType
+     */
+    name?: string;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationSourceLocation
+ */
+export interface TranslationSourceLocation {
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSourceLocation
+     */
+    start?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof TranslationSourceLocation
+     */
+    length?: number;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationTuUpdateInputRequest
+ */
+export interface TranslationTuUpdateInputRequest {
+    /**
+     * The Translation Unit update content as a BCM fragment serialized in JSON string.
+     * @type {string}
+     * @memberof TranslationTuUpdateInputRequest
+     */
+    content: string;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationUnitAddUpdateResponse
+ */
+export interface TranslationUnitAddUpdateResponse {
+    /**
+     * A flag indicating whether the overall operation was successful executed
+     * @type {boolean}
+     * @memberof TranslationUnitAddUpdateResponse
+     */
+    success: boolean;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The operation insights.</div> 
+     * @type {Array<TranslationUnitInsightModel>}
+     * @memberof TranslationUnitAddUpdateResponse
+     */
+    insights?: Array<TranslationUnitInsightModel>;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The operation error insights.</div> 
+     * @type {Array<TranslationErrorDetailResponse>}
+     * @memberof TranslationUnitAddUpdateResponse
+     */
+    errorInsights?: Array<TranslationErrorDetailResponse>;
+}
+/**
+ * Detailed insight information about the processed translation unit.
+ * @export
+ * @interface TranslationUnitInsightModel
+ */
+export interface TranslationUnitInsightModel {
+    /**
+     * The translation memory identifier.
+     * @type {string}
+     * @memberof TranslationUnitInsightModel
+     */
+    resourceId: string;
+    /**
+     * The translation unit hash code.
+     * @type {string}
+     * @memberof TranslationUnitInsightModel
+     */
+    translationHash: string;
+    /**
+     * The action performed
+     * @type {string}
+     * @memberof TranslationUnitInsightModel
+     */
+    action: TranslationUnitInsightModelActionEnum;
+}
+
+
+/**
+ * @export
+ */
+export const TranslationUnitInsightModelActionEnum = {
+    Discard: 'discard',
+    Add: 'add',
+    Merge: 'merge',
+    Overwrite: 'overwrite',
+    Error: 'error',
+    Delete: 'delete'
+} as const;
+export type TranslationUnitInsightModelActionEnum = typeof TranslationUnitInsightModelActionEnum[keyof typeof TranslationUnitInsightModelActionEnum];
+
+/**
+ * 
+ * @export
+ * @interface TranslationUpdateDefinition
+ */
+export interface TranslationUpdateDefinition {
+    /**
+     * The translation engine id. The translation engine must have a `TM` resource.
+     * @type {string}
+     * @memberof TranslationUpdateDefinition
+     */
+    translationEngineId: string;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationUpdateField
+ */
+export interface TranslationUpdateField {
+    /**
+     * Field name
+     * @type {string}
+     * @memberof TranslationUpdateField
+     */
+    name: string;
+    /**
+     * Field values
+     * @type {Array<string>}
+     * @memberof TranslationUpdateField
+     */
+    values: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationUpdateRequest
+ */
+export interface TranslationUpdateRequest {
+    /**
+     * 
+     * @type {TranslationTuUpdateInputRequest}
+     * @memberof TranslationUpdateRequest
+     */
+    input: TranslationTuUpdateInputRequest;
+    /**
+     * 
+     * @type {TranslationUpdateDefinition}
+     * @memberof TranslationUpdateRequest
+     */
+    definition: TranslationUpdateDefinition;
+    /**
+     * 
+     * @type {TranslationUpdateSettings}
+     * @memberof TranslationUpdateRequest
+     */
+    settings?: TranslationUpdateSettings;
+}
+/**
+ * 
+ * @export
+ * @interface TranslationUpdateSettings
+ */
+export interface TranslationUpdateSettings {
+    /**
+     * The Translation Unit fields to update. They are defined in the Field Template associated to your Translation Memory.
+     * @type {Array<TranslationUpdateField>}
+     * @memberof TranslationUpdateSettings
+     */
+    fields?: Array<TranslationUpdateField>;
 }
 /**
  * 
@@ -10840,11 +13475,23 @@ export interface User {
      */
     id: string;
     /**
+     * Description of this account user. For Service account users only.
+     * @type {string}
+     * @memberof User
+     */
+    description?: string;
+    /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The user's email address. Retrieved only for RWS ID (formerly SDL ID) users (not service users) that the authenticated entity is authorized to read.</div> 
      * @type {string}
      * @memberof User
      */
     email?: string;
+    /**
+     * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The user's name. Retrieved only for Service users (not RWS ID users) that the authenticated entity is authorized to read.</div> 
+     * @type {string}
+     * @memberof User
+     */
+    name?: string;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">The user's first name. Retrieved only for RWS ID (formerly SDL ID) users (not service users) that the authenticated entity is authorized to read.</div> 
      * @type {string}
@@ -10862,13 +13509,19 @@ export interface User {
      * @type {boolean}
      * @memberof User
      */
-    anonymized?: boolean;
+    anonymized?: boolean | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;">Retrieved if the authenticated entity does not have access to read the User.</div> 
      * @type {string}
      * @memberof User
      */
     anonymizedUserName?: string;
+    /**
+     * 
+     * @type {Account}
+     * @memberof User
+     */
+    account?: Account;
     /**
      * 
      * @type {FolderV2}
@@ -10881,7 +13534,115 @@ export interface User {
      * @memberof User
      */
     groups?: Array<Group>;
+    /**
+     * 
+     * @type {UserType}
+     * @memberof User
+     */
+    userType?: UserType;
+    /**
+     * 
+     * @type {UserStatus}
+     * @memberof User
+     */
+    status?: UserStatus;
+    /**
+     * The user's invitation link. Retrieved only for RWS ID (formerly SDL ID) users—not service users. It is available only if the user has not yet accepted the invitation (status is `inactive`).
+     * @type {string}
+     * @memberof User
+     */
+    invitationLink?: string;
+    /**
+     * 
+     * @type {AccountMembershipType}
+     * @memberof User
+     */
+    membership?: AccountMembershipType;
 }
+
+
+/**
+ * If you need to create a Service User, send only the `serviceUserDetails` object and omit the `userDetails`object, vice-versa for a normal user. 
+ * @export
+ * @interface UserCreateRequest
+ */
+export interface UserCreateRequest {
+    /**
+     * The identifiers for the user groups. At least one valid group must be provided.
+     * @type {Array<ObjectId>}
+     * @memberof UserCreateRequest
+     */
+    groups: Array<ObjectId>;
+    /**
+     * The identifier of the parent folder for the account user. If it isn't mentioned, it will be created in the Root folder.
+     * @type {string}
+     * @memberof UserCreateRequest
+     */
+    location?: string;
+    /**
+     * 
+     * @type {ServiceUserDetails}
+     * @memberof UserCreateRequest
+     */
+    serviceUserDetails?: ServiceUserDetails;
+    /**
+     * 
+     * @type {UserDetails}
+     * @memberof UserCreateRequest
+     */
+    userDetails?: UserDetails;
+}
+/**
+ * The account details. Provide these to invite a user.
+ * @export
+ * @interface UserDetails
+ */
+export interface UserDetails {
+    /**
+     * 
+     * @type {AccountMembershipType}
+     * @memberof UserDetails
+     */
+    membership: AccountMembershipType;
+    /**
+     * The user email.
+     * @type {string}
+     * @memberof UserDetails
+     */
+    email: string;
+    /**
+     * The First Name of the account user.
+     * @type {string}
+     * @memberof UserDetails
+     */
+    firstName: string;
+    /**
+     * The Last Name of the account user.
+     * @type {string}
+     * @memberof UserDetails
+     */
+    lastName: string;
+    /**
+     * A personalized message that will be included in the invitation.
+     * @type {string}
+     * @memberof UserDetails
+     */
+    invitationMessage?: string;
+    /**
+     * If enabled, the user will receive an email at the specified address containing the invitation details.
+     * @type {boolean}
+     * @memberof UserDetails
+     */
+    sendInvitationEmail?: boolean;
+    /**
+     * Enable this if the invited user is meant to be a Customer Reviewer or Customer Requester. When enabled, the user will always be redirected to the Customer Portal.
+     * @type {boolean}
+     * @memberof UserDetails
+     */
+    inviteInCustomerPortal?: boolean;
+}
+
+
 /**
  * User in the account.
  * @export
@@ -10929,13 +13690,76 @@ export interface UserRequest {
      * @type {boolean}
      * @memberof UserRequest
      */
-    anonymized?: boolean;
+    anonymized?: boolean | null;
     /**
      * Retrieved if the authenticated entity does not have access to read the User.
      * @type {string}
      * @memberof UserRequest
      */
     anonymizedUserName?: string;
+}
+
+/**
+ * Status of this account user.
+ * @export
+ */
+export const UserStatus = {
+    Inactive: 'inactive',
+    Active: 'active',
+    Deleted: 'deleted',
+    Provisioned: 'provisioned'
+} as const;
+export type UserStatus = typeof UserStatus[keyof typeof UserStatus];
+
+
+/**
+ * The type of the account user.
+ * @export
+ */
+export const UserType = {
+    User: 'user',
+    ServiceUser: 'serviceUser'
+} as const;
+export type UserType = typeof UserType[keyof typeof UserType];
+
+/**
+ * 
+ * @export
+ * @interface UserUpdateRequest
+ */
+export interface UserUpdateRequest {
+    /**
+     * The account user name. For Service users only.
+     * @type {string}
+     * @memberof UserUpdateRequest
+     */
+    name?: string;
+    /**
+     * Description of this account user. For Service account users only.
+     * @type {string}
+     * @memberof UserUpdateRequest
+     */
+    description?: string;
+    /**
+     * The First Name of this account user. For RWSID account users only.
+     * @type {string}
+     * @memberof UserUpdateRequest
+     */
+    firstName?: string;
+    /**
+     * The Last Name of this account user. For RWSID account users only.
+     * @type {string}
+     * @memberof UserUpdateRequest
+     */
+    lastName?: string;
+    /**
+     * The identifiers for the user groups. 
+     * 
+     * When updating a user, observe the rules of [JSON Merge Patch Semantics](https://tools.ietf.org/html/rfc7386) to prevent accidentally removing a user from groups. If provided it must contain at least one valid group id.
+     * @type {Array<ObjectId>}
+     * @memberof UserUpdateRequest
+     */
+    groups?: Array<ObjectId>;
 }
 /**
  * A vendor order resource.
@@ -10981,6 +13805,31 @@ export interface VendorOrderTemplateRequest {
      * @memberof VendorOrderTemplateRequest
      */
     id: string;
+}
+
+/**
+ * 
+ * @export
+ */
+export const VolumeUnitType = {
+    Words: 'words',
+    Characters: 'characters',
+    Custom: 'custom'
+} as const;
+export type VolumeUnitType = typeof VolumeUnitType[keyof typeof VolumeUnitType];
+
+/**
+ * 
+ * @export
+ * @interface WellKnownJwksResponse
+ */
+export interface WellKnownJwksResponse {
+    /**
+     * 
+     * @type {Array<Jwk>}
+     * @memberof WellKnownJwksResponse
+     */
+    keys?: Array<Jwk>;
 }
 /**
  * The steps a project goes through. (Not available for List Projects endpoint)
@@ -11163,7 +14012,7 @@ export interface WorkflowTaskConfiguration {
      * @type {boolean}
      * @memberof WorkflowTaskConfiguration
      */
-    isSkipped?: boolean;
+    isSkipped?: boolean | null;
     /**
      * 
      * @type {WorkflowTaskTemplate}
@@ -11240,13 +14089,13 @@ export interface WorkflowTaskTemplate {
      * @type {boolean}
      * @memberof WorkflowTaskTemplate
      */
-    canSkip?: boolean;
+    canSkip?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof WorkflowTaskTemplate
      */
-    requiresAssignment?: boolean;
+    requiresAssignment?: boolean | null;
     /**
      * 
      * @type {TaskType}
@@ -11339,7 +14188,7 @@ export interface WorkflowTemplateTransitionCondition {
      * @type {string}
      * @memberof WorkflowTemplateTransitionCondition
      */
-    type?: WorkflowTemplateTransitionConditionTypeEnum;
+    type?: WorkflowTemplateTransitionConditionTypeEnum | null;
     /**
      * <div style="display:inline; float:right; color:#008080; margin-top:-23px; font-size:11px">default</div><div style="display: inline;"></div> 
      * @type {string}
@@ -11414,3 +14263,104 @@ export interface WorkflowUpdateRequest {
      */
     taskConfigurations?: Array<WorkflowTaskConfigurationRequest>;
 }
+/**
+ * Reference files associated with the project.
+ * @export
+ * @interface ZipFileExportReferenceFilesRequest
+ */
+export interface ZipFileExportReferenceFilesRequest {
+    /**
+     * Add reference files to the export package.
+     * @type {boolean}
+     * @memberof ZipFileExportReferenceFilesRequest
+     */
+    include?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface ZipFileExportRequest
+ */
+export interface ZipFileExportRequest {
+    /**
+     * 
+     * @type {ZipFileExportReferenceFilesRequest}
+     * @memberof ZipFileExportRequest
+     */
+    referenceFiles?: ZipFileExportReferenceFilesRequest;
+    /**
+     * 
+     * @type {ZipFileExportTargetFilesRequest}
+     * @memberof ZipFileExportRequest
+     */
+    targetFiles?: ZipFileExportTargetFilesRequest;
+}
+/**
+ * 
+ * @export
+ * @interface ZipFileExportResponse
+ */
+export interface ZipFileExportResponse {
+    /**
+     * The identifier of the export operation
+     * @type {string}
+     * @memberof ZipFileExportResponse
+     */
+    exportId: string;
+    /**
+     * The status of the export
+     * @type {string}
+     * @memberof ZipFileExportResponse
+     */
+    state: ZipFileExportResponseStateEnum;
+}
+
+
+/**
+ * @export
+ */
+export const ZipFileExportResponseStateEnum = {
+    Created: 'created',
+    Processing: 'processing',
+    Done: 'done',
+    Error: 'error'
+} as const;
+export type ZipFileExportResponseStateEnum = typeof ZipFileExportResponseStateEnum[keyof typeof ZipFileExportResponseStateEnum];
+
+/**
+ * Target files associated with the project.
+ * @export
+ * @interface ZipFileExportTargetFilesRequest
+ */
+export interface ZipFileExportTargetFilesRequest {
+    /**
+     * Include target files with these versions into the export.
+     * @type {string}
+     * @memberof ZipFileExportTargetFilesRequest
+     */
+    includeVersions?: ZipFileExportTargetFilesRequestIncludeVersionsEnum;
+    /**
+     * Include target files for the specified languages (e.g., 'en-US', 'de-DE'). Only one target language is supported when `downloadFlat` is set to `true`.
+     * @type {Array<string>}
+     * @memberof ZipFileExportTargetFilesRequest
+     */
+    targetLanguages?: Array<string>;
+    /**
+     * If this flag is set to `true`, folder structure will reflect exactly the file paths. If the flag is set to `false`, a ZIP folder will be generated with a structure similar to the one provided by Trados.
+     * @type {boolean}
+     * @memberof ZipFileExportTargetFilesRequest
+     */
+    downloadFlat?: boolean;
+}
+
+
+/**
+ * @export
+ */
+export const ZipFileExportTargetFilesRequestIncludeVersionsEnum = {
+    CurrentVersion: 'currentVersion',
+    None: 'none',
+    NativeVersion: 'nativeVersion'
+} as const;
+export type ZipFileExportTargetFilesRequestIncludeVersionsEnum = typeof ZipFileExportTargetFilesRequestIncludeVersionsEnum[keyof typeof ZipFileExportTargetFilesRequestIncludeVersionsEnum];
+

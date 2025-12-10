@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -15,14 +15,30 @@
 
 import * as runtime from '../runtime';
 import type {
+  FileAnalysisOperationResponse,
+  FileAnalysisResponse,
   FileMetadataResponse,
   FileUploadResponse,
+  RequestFileAnalysisRequest,
 } from '../models/index';
+
+export interface PollFileAnalysisRequest {
+    operationId: string;
+    authorization: string;
+    xLCTenant: string;
+    fields?: string;
+}
 
 export interface PollUploadZipFileRequest {
     fileId: string;
     authorization: string;
     xLCTenant: string;
+}
+
+export interface RequestFileAnalysisOperationRequest {
+    authorization: string;
+    xLCTenant: string;
+    requestFileAnalysisRequest?: RequestFileAnalysisRequest;
 }
 
 export interface UploadZipFileRequest {
@@ -37,7 +53,68 @@ export interface UploadZipFileRequest {
 export class FileApi extends runtime.BaseAPI {
 
     /**
-     * Monitors the unzipping operation for a previously uploaded archive and gets details on the extracted files.
+     * Monitor the [File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis/post) operation and receive the analysis results.    > File analysis results will be available for 24 hours after generation.
+     * Poll File Analysis
+     */
+    async pollFileAnalysisRaw(requestParameters: PollFileAnalysisRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileAnalysisResponse>> {
+        if (requestParameters['operationId'] == null) {
+            throw new runtime.RequiredError(
+                'operationId',
+                'Required parameter "operationId" was null or undefined when calling pollFileAnalysis().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling pollFileAnalysis().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling pollFileAnalysis().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['fields'] != null) {
+            queryParameters['fields'] = requestParameters['fields'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/files/analysis/{operationId}`.replace(`{${"operationId"}}`, encodeURIComponent(String(requestParameters['operationId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     * Monitor the [File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis/post) operation and receive the analysis results.    > File analysis results will be available for 24 hours after generation.
+     * Poll File Analysis
+     */
+    async pollFileAnalysis(requestParameters: PollFileAnalysisRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileAnalysisResponse> {
+        const response = await this.pollFileAnalysisRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Monitors the unzipping operation for a previously uploaded archive and retrieves details about the extracted files.    Once the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) operation has finished extracting the files, they can be added to the desired project using the [Attach Source Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1source-files~1attach-files/post) endpoint.   Alternatively, they can be used to [Request File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis/post) details like word counts and estimated costs.  
      * Poll Upload Zip File
      */
     async pollUploadZipFileRaw(requestParameters: PollUploadZipFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileMetadataResponse>> {
@@ -85,7 +162,7 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Monitors the unzipping operation for a previously uploaded archive and gets details on the extracted files.
+     * Monitors the unzipping operation for a previously uploaded archive and retrieves details about the extracted files.    Once the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) operation has finished extracting the files, they can be added to the desired project using the [Attach Source Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1source-files~1attach-files/post) endpoint.   Alternatively, they can be used to [Request File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis/post) details like word counts and estimated costs.  
      * Poll Upload Zip File
      */
     async pollUploadZipFile(requestParameters: PollUploadZipFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileMetadataResponse> {
@@ -94,7 +171,60 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Uploads an archive with source files in a .zip format, to be extracted and used at project creation.  Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.
+     * This endpoint allows you to request the word count and an estimated cost for your files.     Use the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) / [Poll Upload Zip File](../reference/Public-API.v1.json/paths/~1files~1{fileId}/get) endpoints to upload your files and get the `fileIds`. Send these `fileIds` together with the `languageProcessingRuleId` and `sourceLanguage` to receive the word count.    Optionally, send the `quotingOptions` object to receive the `estimatedCosts`.    Use the [Poll File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis~1{operationId}/get) endpoint to monitor the operation and receive the analysis results.    > File analysis results will be available for 24 hours after generation.
+     * Request File Analysis
+     */
+    async requestFileAnalysisRaw(requestParameters: RequestFileAnalysisOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileAnalysisOperationResponse>> {
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling requestFileAnalysis().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling requestFileAnalysis().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/files/analysis`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['requestFileAnalysisRequest'],
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     * This endpoint allows you to request the word count and an estimated cost for your files.     Use the [Upload Zip File](../reference/Public-API.v1.json/paths/~1files/post) / [Poll Upload Zip File](../reference/Public-API.v1.json/paths/~1files~1{fileId}/get) endpoints to upload your files and get the `fileIds`. Send these `fileIds` together with the `languageProcessingRuleId` and `sourceLanguage` to receive the word count.    Optionally, send the `quotingOptions` object to receive the `estimatedCosts`.    Use the [Poll File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis~1{operationId}/get) endpoint to monitor the operation and receive the analysis results.    > File analysis results will be available for 24 hours after generation.
+     * Request File Analysis
+     */
+    async requestFileAnalysis(requestParameters: RequestFileAnalysisOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileAnalysisOperationResponse> {
+        const response = await this.requestFileAnalysisRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Uploads an archive containing source files in `.zip` format, which will be extracted and used during project creation.  Status of the upload operation can be tracked using the [Poll Upload Zip File](../reference/Public-API.v1.json/paths/~1files~1{fileId}/get) endpoint.  Once this Upload Zip File operation has finished extracting the files, they can be added to the desired project using the [Attach Source Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1source-files~1attach-files/post) endpoint. Alternatively, they can be used to [Request File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis/post) details like word counts and estimated costs.   Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.
      * Upload Zip File
      */
     async uploadZipFileRaw(requestParameters: UploadZipFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FileUploadResponse>> {
@@ -163,7 +293,7 @@ export class FileApi extends runtime.BaseAPI {
     }
 
     /**
-     * Uploads an archive with source files in a .zip format, to be extracted and used at project creation.  Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.
+     * Uploads an archive containing source files in `.zip` format, which will be extracted and used during project creation.  Status of the upload operation can be tracked using the [Poll Upload Zip File](../reference/Public-API.v1.json/paths/~1files~1{fileId}/get) endpoint.  Once this Upload Zip File operation has finished extracting the files, they can be added to the desired project using the [Attach Source Files](../reference/Public-API.v1.json/paths/~1projects~1{projectId}~1source-files~1attach-files/post) endpoint. Alternatively, they can be used to [Request File Analysis](../reference/Public-API.v1.json/paths/~1files~1analysis/post) details like word counts and estimated costs.   Consider the [file and project size limit](https://docs.rws.com/791595/815967/trados-enterprise---accelerate/file-and-project-size-limit) when uploading files.
      * Upload Zip File
      */
     async uploadZipFile(requestParameters: UploadZipFileRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FileUploadResponse> {

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -17,7 +17,22 @@ import * as runtime from '../runtime';
 import type {
   ListPricingModelsResponse,
   PricingModel,
+  PricingModelCreateRequest,
+  PricingModelUpdateRequest,
 } from '../models/index';
+
+export interface CreatePricingModelRequest {
+    authorization: string;
+    xLCTenant: string;
+    fields?: string;
+    pricingModelCreateRequest?: PricingModelCreateRequest;
+}
+
+export interface DeletePricingModelRequest {
+    pricingModelId: string;
+    authorization: string;
+    xLCTenant: string;
+}
 
 export interface GetPricingModelRequest {
     pricingModelId: string;
@@ -37,10 +52,130 @@ export interface ListPricingModelsRequest {
     fields?: string;
 }
 
+export interface UpdatePricingModelRequest {
+    pricingModelId: string;
+    authorization: string;
+    xLCTenant: string;
+    pricingModelUpdateRequest?: PricingModelUpdateRequest;
+}
+
 /**
  * 
  */
 export class PricingModelApi extends runtime.BaseAPI {
+
+    /**
+     * Creates a new pricing model.
+     * Create Pricing Model
+     */
+    async createPricingModelRaw(requestParameters: CreatePricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PricingModel>> {
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling createPricingModel().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling createPricingModel().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['fields'] != null) {
+            queryParameters['fields'] = requestParameters['fields'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/pricing-models`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['pricingModelCreateRequest'],
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response);
+    }
+
+    /**
+     * Creates a new pricing model.
+     * Create Pricing Model
+     */
+    async createPricingModel(requestParameters: CreatePricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PricingModel> {
+        const response = await this.createPricingModelRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Deletes a pricing model.
+     * Delete Pricing Model
+     */
+    async deletePricingModelRaw(requestParameters: DeletePricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['pricingModelId'] == null) {
+            throw new runtime.RequiredError(
+                'pricingModelId',
+                'Required parameter "pricingModelId" was null or undefined when calling deletePricingModel().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling deletePricingModel().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling deletePricingModel().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/pricing-models/{pricingModelId}`.replace(`{${"pricingModelId"}}`, encodeURIComponent(String(requestParameters['pricingModelId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Deletes a pricing model.
+     * Delete Pricing Model
+     */
+    async deletePricingModel(requestParameters: DeletePricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deletePricingModelRaw(requestParameters, initOverrides);
+    }
 
     /**
      * Retrieves a pricing model by identifier.
@@ -104,7 +239,7 @@ export class PricingModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves a list of all the pricing models in an account.
+     * Retrieves a list of all the pricing models in an account.    Sorting is supported for the following fields: `name`, `description`, `currencyCode` and `location`.
      * List Pricing Models
      */
     async listPricingModelsRaw(requestParameters: ListPricingModelsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ListPricingModelsResponse>> {
@@ -169,12 +304,71 @@ export class PricingModelApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves a list of all the pricing models in an account.
+     * Retrieves a list of all the pricing models in an account.    Sorting is supported for the following fields: `name`, `description`, `currencyCode` and `location`.
      * List Pricing Models
      */
     async listPricingModels(requestParameters: ListPricingModelsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ListPricingModelsResponse> {
         const response = await this.listPricingModelsRaw(requestParameters, initOverrides);
         return await response.value();
+    }
+
+    /**
+     * Updates a pricing model.
+     * Update Pricing Model
+     */
+    async updatePricingModelRaw(requestParameters: UpdatePricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['pricingModelId'] == null) {
+            throw new runtime.RequiredError(
+                'pricingModelId',
+                'Required parameter "pricingModelId" was null or undefined when calling updatePricingModel().'
+            );
+        }
+
+        if (requestParameters['authorization'] == null) {
+            throw new runtime.RequiredError(
+                'authorization',
+                'Required parameter "authorization" was null or undefined when calling updatePricingModel().'
+            );
+        }
+
+        if (requestParameters['xLCTenant'] == null) {
+            throw new runtime.RequiredError(
+                'xLCTenant',
+                'Required parameter "xLCTenant" was null or undefined when calling updatePricingModel().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (requestParameters['authorization'] != null) {
+            headerParameters['Authorization'] = String(requestParameters['authorization']);
+        }
+
+        if (requestParameters['xLCTenant'] != null) {
+            headerParameters['X-LC-Tenant'] = String(requestParameters['xLCTenant']);
+        }
+
+        const response = await this.request({
+            path: `/pricing-models/{pricingModelId}`.replace(`{${"pricingModelId"}}`, encodeURIComponent(String(requestParameters['pricingModelId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: requestParameters['pricingModelUpdateRequest'],
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Updates a pricing model.
+     * Update Pricing Model
+     */
+    async updatePricingModel(requestParameters: UpdatePricingModelRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.updatePricingModelRaw(requestParameters, initOverrides);
     }
 
 }

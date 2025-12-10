@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -186,7 +186,7 @@ export class ProjectTemplateApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves a project template by identifier.
+     * Retrieves a project template by identifier.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Get Project Template
      */
     async getProjectTemplateRaw(requestParameters: GetProjectTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ProjectTemplateResponse>> {
@@ -238,7 +238,7 @@ export class ProjectTemplateApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieves a project template by identifier.
+     * Retrieves a project template by identifier.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Get Project Template
      */
     async getProjectTemplate(requestParameters: GetProjectTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ProjectTemplateResponse> {
@@ -325,7 +325,7 @@ export class ProjectTemplateApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a project template by id.
+     * Updates a project template by id.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Update Project Template
      */
     async updateProjectTemplateRaw(requestParameters: UpdateProjectTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -383,7 +383,7 @@ export class ProjectTemplateApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a project template by id.
+     * Updates a project template by id.  For detailed information about Translation Memory advanced configuration including filters and field updates, see [Translation Memory Advanced Configuration](../docs/translation-memory/Translation-memory-advanced-configuration.md).
      * Update Project Template
      */
     async updateProjectTemplate(requestParameters: UpdateProjectTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {

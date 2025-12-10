@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -186,7 +186,7 @@ export class TranslationEngineApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a translation engine.   It can be used to update a stand-alone translation engine or a project\'s translation engine.  The identifier of a project\'s translation engine can be retrieved only by calling [Get Project endpoint](https://sdl-language-tech.stoplight.io/docs/lcpublicapi/fd9ee0beb37ca-get-project).  Pay special attention that some properties can not be changed for a project\'s translation engine. These include: name, description, definition.languageProcessingId, and language pairs can not be added/removed from definition.languagePairDefinitions.   Pay special attention to how [updating works](https://languagecloud.sdl.com/lc/api-docs/updating-data-with-put).
+     * Updates a translation engine.   It can be used to update a stand-alone translation engine or a project\'s translation engine.  The identifier of a project\'s translation engine can be retrieved only by calling [Get Project](https://sdl-language-tech.stoplight.io/docs/lcpublicapi/fd9ee0beb37ca-get-project) endpoint.  Pay special attention that some properties can not be changed for a project\'s translation engine. These include: name, description, definition.languageProcessingId, and language pairs can not be added/removed from definition.languagePairDefinitions.   Pay special attention to how [updating](https://languagecloud.sdl.com/lc/api-docs/updating-data-with-put) works.
      * Update Translation Engine
      */
     async updateTranslationEngineRaw(requestParameters: UpdateTranslationEngineRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
@@ -237,7 +237,7 @@ export class TranslationEngineApi extends runtime.BaseAPI {
     }
 
     /**
-     * Updates a translation engine.   It can be used to update a stand-alone translation engine or a project\'s translation engine.  The identifier of a project\'s translation engine can be retrieved only by calling [Get Project endpoint](https://sdl-language-tech.stoplight.io/docs/lcpublicapi/fd9ee0beb37ca-get-project).  Pay special attention that some properties can not be changed for a project\'s translation engine. These include: name, description, definition.languageProcessingId, and language pairs can not be added/removed from definition.languagePairDefinitions.   Pay special attention to how [updating works](https://languagecloud.sdl.com/lc/api-docs/updating-data-with-put).
+     * Updates a translation engine.   It can be used to update a stand-alone translation engine or a project\'s translation engine.  The identifier of a project\'s translation engine can be retrieved only by calling [Get Project](https://sdl-language-tech.stoplight.io/docs/lcpublicapi/fd9ee0beb37ca-get-project) endpoint.  Pay special attention that some properties can not be changed for a project\'s translation engine. These include: name, description, definition.languageProcessingId, and language pairs can not be added/removed from definition.languagePairDefinitions.   Pay special attention to how [updating](https://languagecloud.sdl.com/lc/api-docs/updating-data-with-put) works.
      * Update Translation Engine
      */
     async updateTranslationEngine(requestParameters: UpdateTranslationEngineRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {

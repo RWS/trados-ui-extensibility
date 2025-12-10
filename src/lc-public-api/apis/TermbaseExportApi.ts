@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -173,7 +173,7 @@ export class TermbaseExportApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous export operation.<br> Use the Poll Export Termbase endpoint to poll until the export status is `done`.
+     * Generates an asynchronous export operation.<br> Use the [Poll Export Termbase](../reference/Public-API.v1.json/paths/~1termbases~1{termbaseId}~1exports~1{exportId}/get) endpoint to poll until the export status is `done`.
      * Export Termbase
      */
     async exportTermbaseRaw(requestParameters: ExportTermbaseOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TermbaseExportResponse>> {
@@ -224,7 +224,7 @@ export class TermbaseExportApi extends runtime.BaseAPI {
     }
 
     /**
-     * Generates an asynchronous export operation.<br> Use the Poll Export Termbase endpoint to poll until the export status is `done`.
+     * Generates an asynchronous export operation.<br> Use the [Poll Export Termbase](../reference/Public-API.v1.json/paths/~1termbases~1{termbaseId}~1exports~1{exportId}/get) endpoint to poll until the export status is `done`.
      * Export Termbase
      */
     async exportTermbase(requestParameters: ExportTermbaseOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TermbaseExportResponse> {

@@ -1,14 +1,17 @@
 .openapi-generator-ignore
 apis/AccountApi.ts
+apis/ConnectedAIApi.ts
 apis/CustomFieldApi.ts
 apis/CustomerApi.ts
 apis/FileApi.ts
 apis/FileProcessingConfigurationApi.ts
 apis/FolderApi.ts
 apis/GroupApi.ts
+apis/IntegrationApi.ts
 apis/LanguageApi.ts
 apis/LanguageProcessingApi.ts
 apis/MachineTranslationApi.ts
+apis/PerfectMatchMappingApi.ts
 apis/PricingModelApi.ts
 apis/ProjectApi.ts
 apis/ProjectGroupApi.ts
@@ -26,6 +29,8 @@ apis/TermbaseApi.ts
 apis/TermbaseExportApi.ts
 apis/TermbaseImportApi.ts
 apis/TermbaseTemplateApi.ts
+apis/TranslationApi.ts
+apis/TranslationDomainApi.ts
 apis/TranslationEngineApi.ts
 apis/TranslationMemoryApi.ts
 apis/TranslationMemoryExportApi.ts

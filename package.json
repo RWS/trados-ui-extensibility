@@ -47,16 +47,16 @@
     "build-dev": "npm run generate-3.0.1-withStringEnums && npm run build-dev-js"
   },
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "2.20.2",
-    "axios": "1.8.2",
-    "rimraf": "5.0.7",
-    "ts-loader": "9.5.1",
-    "typedoc": "0.25.13",
-    "typedoc-github-wiki-theme": "2.0.0",
-    "typedoc-plugin-markdown": "4.0.2",
-    "typescript": "5.0.2",
-    "webpack": "5.94.0",
-    "webpack-cli": "5.1.4",
-    "webpack-merge": "5.8.0"
+    "@openapitools/openapi-generator-cli": "2.25.2",
+    "axios": "1.13.2",
+    "rimraf": "6.1.2",
+    "ts-loader": "9.5.4",
+    "typedoc": "0.28.15",
+    "typedoc-github-wiki-theme": "2.1.0",
+    "typedoc-plugin-markdown": "4.9.0",
+    "typescript": "5.9.3",
+    "webpack": "5.103.0",
+    "webpack-cli": "6.0.1",
+    "webpack-merge": "6.0.1"
   }
 }

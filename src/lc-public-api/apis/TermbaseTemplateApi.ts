@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * RWS Language Cloud API
- * The RWS Language Cloud public API.
+ * Trados Cloud Platform API
+ * The Trados Cloud Platform API
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -72,7 +72,7 @@ export interface UpdateTermbaseTemplateRequest {
 export class TermbaseTemplateApi extends runtime.BaseAPI {
 
     /**
-     * Converts a termbase definition (XDT file) to a termbase structure that will be returned in the response.<br> The structure will not be stored in Language Cloud.
+     * Converts a termbase definition (XDT file) to a termbase structure that will be returned in the response.<br> The structure will not be stored in the Trados Cloud Platform.
      * Convert XDT to Termbase Structure
      */
     async convertTermbaseTemplateRaw(requestParameters: ConvertTermbaseTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<TermbaseStructure>> {
@@ -145,7 +145,7 @@ export class TermbaseTemplateApi extends runtime.BaseAPI {
     }
 
     /**
-     * Converts a termbase definition (XDT file) to a termbase structure that will be returned in the response.<br> The structure will not be stored in Language Cloud.
+     * Converts a termbase definition (XDT file) to a termbase structure that will be returned in the response.<br> The structure will not be stored in the Trados Cloud Platform.
      * Convert XDT to Termbase Structure
      */
     async convertTermbaseTemplate(requestParameters: ConvertTermbaseTemplateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<TermbaseStructure> {

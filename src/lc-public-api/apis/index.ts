@@ -1,15 +1,18 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './AccountApi';
+export * from './ConnectedAIApi';
 export * from './CustomFieldApi';
 export * from './CustomerApi';
 export * from './FileApi';
 export * from './FileProcessingConfigurationApi';
 export * from './FolderApi';
 export * from './GroupApi';
+export * from './IntegrationApi';
 export * from './LanguageApi';
 export * from './LanguageProcessingApi';
 export * from './MachineTranslationApi';
+export * from './PerfectMatchMappingApi';
 export * from './PricingModelApi';
 export * from './ProjectApi';
 export * from './ProjectGroupApi';
@@ -27,6 +30,8 @@ export * from './TermbaseApi';
 export * from './TermbaseExportApi';
 export * from './TermbaseImportApi';
 export * from './TermbaseTemplateApi';
+export * from './TranslationApi';
+export * from './TranslationDomainApi';
 export * from './TranslationEngineApi';
 export * from './TranslationMemoryApi';
 export * from './TranslationMemoryExportApi';
