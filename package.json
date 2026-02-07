@@ -55,7 +55,7 @@
     "typedoc-github-wiki-theme": "2.1.0",
     "typedoc-plugin-markdown": "4.9.0",
     "typescript": "5.9.3",
-    "webpack": "5.103.0",
+    "webpack": "5.105.0",
     "webpack-cli": "6.0.1",
     "webpack-merge": "6.0.1"
   }
