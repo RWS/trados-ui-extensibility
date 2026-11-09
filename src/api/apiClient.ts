@@ -43,7 +43,9 @@ import {
   WorkflowApi
 } from "../lc-public-api";
 import { RegistrationResult } from "../models";
-//import { ApiMiddleware } from "./apiMiddleware";
+import { AuthorizationMiddleware } from "./apiMiddleware";
+
+const authorizationMiddleware = new AuthorizationMiddleware();
 
 const getApiConfig = () => {
   const registrationResult: RegistrationResult = getRegistrationResult();
@@ -54,8 +56,8 @@ const getApiConfig = () => {
   }
 
   const configParams: ConfigurationParameters = {
-    basePath: registrationResult.publicApiUrl
-    //middleware: [new ApiMiddleware()]
+    basePath: registrationResult.publicApiUrl,
+    middleware: [authorizationMiddleware]
   };
 
   return new Configuration(configParams);

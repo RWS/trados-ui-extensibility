@@ -132,7 +132,9 @@ type RestRequest = {
 export type RegisterEventDetail = {
   /** The custom elements array */
   elements: ExtensionElement[];
-  /** The function to be called once registration is complete. */
+  /** The function to be called once registration is complete.
+   * @remark The host calls it again with a new registration result when the user's authorization changes (e.g. after a token refresh); the SDK then only updates the authorization used by Public API calls.
+   */
   callback: (result: RegistrationResult) => void;
 };
 

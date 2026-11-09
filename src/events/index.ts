@@ -50,10 +50,23 @@ export function onReady(elements: ExtensionElement[], callback: () => void) {
   publish("register", {
     elements,
     callback: (registrationResult: RegistrationResult) => {
-      currentRegistrationResult = registrationResult;
+      // the host calls this again with a new registration result when the user's token is refreshed
+      if (currentRegistrationResult) {
+        if (registrationResult?.authorization !== currentRegistrationResult.authorization) {
+          updateAuthorization(registrationResult?.authorization);
+        }
+        return;
+      }
+      // keep a private copy so the stored authorization can be updated without mutating the host's object
+      currentRegistrationResult = { ...registrationResult };
       callback();
     }
   });
+}
+
+// internal: replaces the authorization used by subsequent Public API calls (not exported from the package)
+function updateAuthorization(authorization: string) {
+  currentRegistrationResult.authorization = authorization;
 }
 
 /**

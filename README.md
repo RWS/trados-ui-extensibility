@@ -36,6 +36,23 @@ trados.onReady(elements, () => {
 });
 ```
 
+## Authorization refresh
+
+Public API clients (e.g. `tradosProjectApi()`) always send the latest authorization value received from the host, including clients created before a refresh.
+
+When the user's token is refreshed, the host calls the `register` callback again with the new registration result. The first call completes registration and runs the extension's `onReady` callback; later calls only update the authorization when it changed, otherwise they are ignored.
+
+```javascript
+// host page
+window.addEventListener("register", event => {
+  const { callback } = event.detail;
+  const registrationResult = () => ({ key, xLCTenant, publicApiUrl, authorization: `Bearer ${authService.accessToken}` });
+
+  callback(registrationResult());
+  authService.onTokenRefreshed(() => callback(registrationResult()));
+});
+```
+
 ## License
 
 The functionality is available with a [MIT license](https://choosealicense.com/licenses/mit/).
